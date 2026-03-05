@@ -113,3 +113,13 @@ addons_path/
 *.swp
 *.swo
 *~
+
+audio
+fonts
+icon
+img
+movies
+save
+Game.*
+index.html
+package.json
