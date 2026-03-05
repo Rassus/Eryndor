@@ -1,0 +1,18 @@
+[
+	null,
+	{"material_id":1,"item_id":604,"min":1,"max":1,"chance":100.00,"item_name":"Tronco de Pino","exp":10},
+	{"material_id":2,"item_id":605,"min":1,"max":1,"chance":100.00,"item_name":"Tronco de Albura","exp":18},
+	{"material_id":3,"item_id":606,"min":1,"max":1,"chance":100.00,"item_name":"Tronco de Roble","exp":10},
+	{"material_id":4,"item_id":607,"min":1,"max":1,"chance":100.00,"item_name":"Tronco de Cedro","exp":10},
+	{"material_id":5,"item_id":608,"min":1,"max":1,"chance":100.00,"item_name":"Tronco de Nogal","exp":10},
+	{"material_id":6,"item_id":609,"min":1,"max":1,"chance":100.00,"item_name":"Tronco de Ebano","exp":10},
+	{"material_id":7,"item_id":610,"min":1,"max":1,"chance":100.00,"item_name":"Tronco de Hierroforestal","exp":10},
+	{"material_id":8,"item_id":611,"min":1,"max":1,"chance":100.00,"item_name":"Tronco de Drakáltico","exp":10},
+	{"material_id":9,"item_id":612,"min":1,"max":1,"chance":100.00,"item_name":"Tronco de Lunálmo","exp":10},
+	{"material_id":10,"item_id":613,"min":1,"max":1,"chance":100.00,"item_name":"Tronco de Sylvarion","exp":10},
+	{"material_id":11,"item_id":614,"min":1,"max":1,"chance":100.00,"item_name":"Tronco de Astralbark","exp":10},
+	{"material_id":12,"item_id":615,"min":1,"max":1,"chance":100.00,"item_name":"Tronco de Omegared","exp":10},
+	{"material_id":13,"item_id":616,"min":1,"max":1,"chance":8.50,"item_name":"Nido Vacio", "exp":0},
+	{"material_id":14,"item_id":617,"min":1,"max":1,"chance":0.75,"item_name":"Nido Con Huevo","exp":0},
+	{"material_id":15,"item_id":618,"min":1,"max":1,"chance":0.000026,"item_name":"Nido con Tesoro","exp":0}
+]

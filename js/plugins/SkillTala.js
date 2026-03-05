@@ -1,0 +1,454 @@
+/*:
+ * @plugindesc (Onyx) Skill: Tala - variables, constantes y EXP por tabla (RPG Maker MV)
+ * @name SkillTala
+ * @author Onyx
+ *
+ * @param varSkillLevel
+ * @text Variable: Nivel de Skill
+ * @type variable
+ * @default 1
+ *
+ * @param varExpActual
+ * @text Variable: EXP actual (dentro del nivel)
+ * @type variable
+ * @default 2
+ *
+ * @param varExpSiguiente
+ * @text Variable: EXP siguiente (total del nivel actual)
+ * @type variable
+ * @default 3
+ * @desc Según ExpTable: EXP total para estar en este nivel (nivel 1=0, 2=83, 3=174, 4=276...).
+ *
+ * @param varMaterialId
+ * @text Variable: material_id (para addExpFromMaterialVar)
+ * @type variable
+ * @default 38
+ *
+ * @help
+ * Requiere:
+ *  - $dataCustom.ExpTable    (ExpTable.json)
+ *  - $dataCustom.SkillList   (SkillList.json)
+ *  - $dataCustom.MaterialRewards (MaterialRewards.json)
+ *
+ * Variables de juego (configurables): el plugin actualiza automáticamente
+ * las variables cuando usas addExp(), setLevel() o reset(). Usa 0 para desactivar.
+ *
+ * Importante: los eventos [SYSTEM] Var Init y [SKILL] Level Up copian Var 43 = Var 37.
+ * SkillTala también escribe Var 37 para que esa copia no sobrescriba con 0.
+ *
+ * API:
+ *   Onyx.Skill.Tala.state()        -> { lvl, totalExp, expIntoLevel, nextLevelTotalExp, remaining, cap }
+ *   Onyx.Skill.Tala.addExp(10)     -> { ok, added, levelUps, leveledUp, state } + actualiza variables
+ *   Onyx.Skill.Tala.addExpFromMaterial(materialId) -> busca exp en MaterialRewards, llama addExp
+ *   Onyx.Skill.Tala.addExpFromMaterialVar() -> usa variable configurada (varMaterialId) como material_id
+ *   Onyx.Skill.Tala.setLevel(5)    -> fuerza nivel + actualiza variables
+ *   Onyx.Skill.Tala.reset()        -> reset + actualiza variables
+ *   Onyx.Skill.Tala.init()         -> inicializa la skill (nivel 1, 0 EXP, actualiza variables). Llámalo cuando el jugador aprende Talar.
+ */
+
+(function() {
+  "use strict";
+
+  // Parámetros del plugin (Variables de juego)
+  var PARAMS = PluginManager.parameters("SkillTala");
+  var VAR_SKILL_LEVEL = Number(PARAMS["varSkillLevel"] || 1);
+  var VAR_EXP_ACTUAL = Number(PARAMS["varExpActual"] || 2);
+  var VAR_EXP_SIGUIENTE = Number(PARAMS["varExpSiguiente"] || 3);
+  var VAR_MATERIAL_ID = Number(PARAMS["varMaterialId"] || 38);
+
+  // Namespace
+  window.Onyx = window.Onyx || {};
+  Onyx.Skill = Onyx.Skill || {};
+  Onyx.Skill.Tala = Onyx.Skill.Tala || {};
+
+  // ============================================================
+  // 1) CONSTANTES (TU DATA)
+  // ============================================================
+  var C = {
+    ID: 1,
+    NAME: "Tala",
+
+    // Valores Base de la Skill
+    doble_reward_min_lvl: 5,
+    bird_nest_reward_min_lvl: 5,
+    bird_nest_egg_reward_min_lvl: 35,
+    bird_nest_treasure_reward_min_lvl: 70,
+
+    has_doble_reward: false,
+    doble_reward_chance_base: 15,
+
+    // Recoleccion
+    tree_seed_reward_min_lvl_drop: 5,
+    tree_root_reward_min_lvl_drop: 25,
+    tree_crust_reward_min_lvl_drop: 60,
+    tree_sap_reward_min_lvl_drop: 40,
+
+    tree_seed_reward_base_chance: 2,
+    tree_root_reward_base_chance: 10,
+    tree_crust_reward_base_chance: 1.45,
+    tree_sap_reward_base_chance: 2.9,  
+
+    // Entomologia
+    buggy_reward_min_lvl: 5,
+    buggy_egg_reward_min_lvl: 55,
+    buggy_combat_min_lvl: 20,
+    buggy_reward_base_chance: 4,
+    buggy_combat_base_chance: 8,
+    buggy_egg_reward_base_chance: 0.018,
+
+    // Micologia
+    mushroom_reward_min_lvl: 25,
+    mushroom_spore_reward_min_lvl: 40,
+    mushroom_reward_base_chance: 5,
+    mushroom_to_sick_base_chance: 65,
+    mushroom_combat_base_chance: 12,
+    mushroom_spore_reward_base_chance: 1.15,
+
+    // Combate
+    combat_random_monster_lvl_min: 0.01,
+    combat_bird_monster_base_chance: 0.125,
+    combat_evil_tree_event_base_chance: 0.00025,
+
+    // Eventos al talar un arbol
+    break_hatche_base_chance: 0.25,
+    wise_old_tree_base_chance: 0.00065,
+    nature_spirit_base_chance: 0.044,
+    sap_rain_base_chance: 0.16,
+    living_root_base_chance: 0.0000036,
+    termites_war_base_chance: 0.00465
+  };
+
+  // ============================================================
+  // 2) Helpers: acceso a tablas
+  // ============================================================
+  function getExpTable() {
+    // Esperado: $dataCustom.ExpTable (obj con keys "1","2",.. o numbers)
+    return window.$dataCustom && window.$dataCustom.ExpTable;
+  }
+
+  var _expTableWarned = false;
+  function expTotalForLevel(level) {
+    var n = Math.floor(Number(level)) || 1;
+    if (n < 1) return 0;
+    var t = getExpTable();
+    if (!t) {
+      if (!_expTableWarned) {
+        _expTableWarned = true;
+        console.warn("[SkillTala] ExpTable no cargado aún ($dataCustom.ExpTable). Usando fallback para nivel 1–5.");
+      }
+      return expTotalForLevelFallback(n);
+    }
+    // Array: índice 0 = null, índice 1 = nivel 1, ... o índice 0 = nivel 1 (sin null)
+    var row = t[n];
+    if (row == null) row = t[String(n)];
+    if (row == null) row = t[n - 1];
+    if (row == null) return null;
+    if (typeof row === "object" && row !== null && !Array.isArray(row)) {
+      var v = row[n];
+      if (v == null) v = row[String(n)];
+      if (v == null && typeof row.n !== "undefined") v = row.n;
+      if (v == null) {
+        var keys = Object.keys(row);
+        if (keys.length > 0) v = row[keys[0]];
+      }
+      if (v == null) return null;
+      return Number(v) || 0;
+    }
+    return Number(row) || 0;
+  }
+
+  function expTotalForLevelFallback(level) {
+    var fallback = { 1: 0, 2: 83, 3: 174, 4: 276, 5: 388 };
+    var val = fallback[level];
+    if (val != null) return val;
+    if (level < 1) return 0;
+    return 83 * level;
+  }
+
+  function getSkillCapFromList(skillId) {
+    var list = window.$dataCustom && window.$dataCustom.SkillList;
+    if (!list) return null;
+
+    // SkillList.json viene como array con objetos {skill_id,...}
+    for (var i = 0; i < list.length; i++) {
+      var row = list[i];
+      if (row && Number(row.skill_id) === Number(skillId)) {
+        return Number(row.skill_max_level) || null;
+      }
+    }
+    return null;
+  }
+
+  function getCap() {
+    return getSkillCapFromList(C.ID) || 99; // fallback
+  }
+
+  // ============================================================
+  // 3) STORAGE (persistente en save)
+  // ============================================================
+  function ensureStore() {
+    if (!$gameSystem) return null;
+
+    $gameSystem._onyxSkills = $gameSystem._onyxSkills || {};
+    $gameSystem._onyxSkills[C.ID] = $gameSystem._onyxSkills[C.ID] || {
+      skill_lvl: 1,
+      skill_total_exp: 0,
+      skill_exp_mul: 1,
+      skill_lvl_virtual: 0,
+
+      //Bonus
+      bonus: {
+        doble_reward_chance: 0,
+        bird_nest_chance: 0,
+        bird_nest_egg_chance: 0,
+        bird_nest_treasure_chance: 0,
+        mushroom_reward_chance: 0,
+        tree_seed_reward_chance: 0,
+        tree_root_reward_chance: 0,
+        tree_crust_reward_chance: 0,
+        tree_sap_reward_chance: 0,
+        buggy_reward_chance: 0,
+        buggy_combat_chance: 0,
+        combat_evil_tree_chance: 0,
+
+        break_hatche_chance: 0,
+        wise_old_tree_chance: 0,
+        nature_spirit_chance: 0,
+        sap_rain_chance: 0,
+        living_root_chance: 0,
+        termites_war_chance: 0
+      },
+
+      // (Opcional) estadísticas del grupo
+      stats: {
+        trees_cut: 0,
+        hatchets_broken: 0,
+        nest_drop: 0,
+        buggy_combat: 0,
+        mushroom_combat: 0,
+        termite_war: 0
+      }
+
+    };
+    return $gameSystem._onyxSkills[C.ID];
+  }
+
+  // Recalcula lvl a partir de totalExp usando la tabla (sube mientras alcance el total del siguiente lvl)
+  function recalcLevelFromTotalExp(totalExp, currentLvl) {
+    var cap = getCap();
+    var lvl = Math.max(1, Number(currentLvl) || 1);
+    var total = Math.max(0, Number(totalExp) || 0);
+
+    while (lvl < cap) {
+      var nextTotal = expTotalForLevel(lvl + 1);
+      if (nextTotal == null) break;
+      if (total < nextTotal) break;
+      lvl += 1;
+    }
+    return lvl;
+  }
+
+  function syncVariablesToGame() {
+    if (!$gameVariables) return;
+    var st = Onyx.Skill.Tala.state();
+    if (VAR_SKILL_LEVEL > 0) $gameVariables.setValue(VAR_SKILL_LEVEL, st.lvl);
+    if (VAR_EXP_ACTUAL > 0) {
+      var expAct = st.expIntoLevel;
+      if (expAct == null) expAct = 0;
+      $gameVariables.setValue(VAR_EXP_ACTUAL, expAct);
+    }
+    if (VAR_EXP_SIGUIENTE > 0) {
+      var nextVal = st.nextLevelTotalExp != null ? st.nextLevelTotalExp : st.curLvlTotal;
+      if (nextVal == null) nextVal = 0;
+      $gameVariables.setValue(VAR_EXP_SIGUIENTE, nextVal);
+    }
+    // Var 37 y 43 = EXP total del siguiente nivel (umbral, ej. 83 para subir a nivel 2)
+    var nextVal = st.nextLevelTotalExp != null ? st.nextLevelTotalExp : st.curLvlTotal;
+    if (nextVal == null) nextVal = 0;
+    $gameVariables.setValue(37, nextVal);
+    $gameVariables.setValue(43, nextVal);
+  }
+
+  // ============================================================
+  // 4) API
+  // ============================================================
+  Onyx.Skill.Tala.constants = function() {
+    return JSON.parse(JSON.stringify(C));
+  };
+
+  Onyx.Skill.Tala.state = function() {
+    var st = ensureStore();
+    var cap = getCap();
+
+    if (!st) {
+      return { id: C.ID, name: C.NAME, lvl: 1, totalExp: 0, cap: cap };
+    }
+
+    var lvl = Math.max(1, Number(st.skill_lvl) || 1);
+    var total = Math.max(0, Number(st.skill_total_exp) || 0);
+
+    // asegurar coherencia por si tocaste exp manual
+    lvl = recalcLevelFromTotalExp(total, lvl);
+    st.skill_lvl = lvl;
+
+    var curLvlTotal = expTotalForLevel(lvl) || 0;
+    var nextLvlTotal = null;
+    if (lvl < cap) nextLvlTotal = expTotalForLevel(lvl + 1);
+
+    var expIntoLevel = Math.max(0, total - curLvlTotal);
+    var remaining = 0;
+    if (nextLvlTotal != null) remaining = Math.max(0, nextLvlTotal - total);
+
+    return {
+      id: C.ID,
+      name: C.NAME,
+      lvl: lvl,
+      cap: cap,
+      totalExp: total,
+      curLvlTotal: curLvlTotal,
+      expIntoLevel: expIntoLevel,
+      nextLevelTotalExp: nextLvlTotal,
+      remaining: remaining
+    };
+  };
+
+  Onyx.Skill.Tala.addExp = function(amount) {
+    var st = ensureStore();
+    if (!st) return { ok: false, reason: "no_gamesystem", leveledUp: false };
+
+    var add = Number(amount) || 0;
+    if (add <= 0) return { ok: true, added: 0, levelUps: 0, leveledUp: false, state: Onyx.Skill.Tala.state() };
+
+    var cap = getCap();
+    var beforeLvl = Math.max(1, Number(st.skill_lvl) || 1);
+
+    st.skill_total_exp = Math.max(0, Number(st.skill_total_exp) || 0) + add;
+
+    // recalcular nivel
+    var afterLvl = recalcLevelFromTotalExp(st.skill_total_exp, beforeLvl);
+    if (afterLvl > cap) afterLvl = cap;
+    st.skill_lvl = afterLvl;
+
+    syncVariablesToGame();
+    var levelUps = Math.max(0, afterLvl - beforeLvl);
+    return {
+      ok: true,
+      added: add,
+      levelUps: levelUps,
+      leveledUp: levelUps > 0,
+      state: Onyx.Skill.Tala.state()
+    };
+  };
+
+  function getMaterialEntry(materialId) {
+    var list = window.$dataCustom && window.$dataCustom.MaterialRewards;
+    console.log("[SkillTala] getMaterialEntry(materialId=" + materialId + ") list=" + (list ? "ok len=" + (list.length || 0) : "null"));
+    if (!list || !Array.isArray(list)) return null;
+    for (var i = 0; i < list.length; i++) {
+      var row = list[i];
+      if (row && Number(row.material_id) === Number(materialId)) {
+        console.log("[SkillTala] getMaterialEntry encontrado row:", row);
+        return row;
+      }
+    }
+    console.log("[SkillTala] getMaterialEntry no encontrado material_id=" + materialId);
+    return null;
+  }
+
+  Onyx.Skill.Tala.addExpFromMaterial = function(materialId) {
+    var entry = getMaterialEntry(materialId);
+    if (!entry || (entry.exp == null || Number(entry.exp) <= 0)) {
+      return { ok: true, added: 0, levelUps: 0, leveledUp: false, state: Onyx.Skill.Tala.state() };
+    }
+    return Onyx.Skill.Tala.addExp(Number(entry.exp) || 0);
+  };
+
+  Onyx.Skill.Tala.addExpFromMaterialVar = function() {
+    var materialId = 0;
+    if ($gameVariables) materialId = $gameVariables.value(VAR_MATERIAL_ID);
+    return Onyx.Skill.Tala.addExpFromMaterial(materialId);
+  };
+
+  Onyx.Skill.Tala.setLevel = function(level) {
+    var st = ensureStore();
+    if (!st) return false;
+
+    var cap = getCap();
+    var lvl = Math.floor(Number(level) || 1);
+    if (lvl < 1) lvl = 1;
+    if (lvl > cap) lvl = cap;
+
+    var minTotal = expTotalForLevel(lvl);
+    if (minTotal == null) minTotal = 0;
+
+    st.skill_lvl = lvl;
+    // dejamos la exp total al mínimo del lvl (y no inventamos números)
+    st.skill_total_exp = Number(minTotal) || 0;
+    syncVariablesToGame();
+    return true;
+  };
+
+  Onyx.Skill.Tala.reset = function() {
+    var st = ensureStore();
+    if (!st) return false;
+    st.skill_lvl = 1;
+    st.skill_total_exp = 0;
+    syncVariablesToGame();
+    return true;
+  };
+
+  Onyx.Skill.Tala.init = function() {
+    console.log("[SkillTala] init() llamado");
+    var ok = Onyx.Skill.Tala.reset();
+    if (!ok) {
+      console.log("[SkillTala] init() falló: ensureStore() devolvió null (¿$gameSystem existe?)");
+      return false;
+    }
+    // Asegurar nivel 1 en store (por si state() recalc devolviera otra cosa) y en variable de juego
+    var st = ensureStore();
+    if (st) {
+      st.skill_lvl = 1;
+      st.skill_total_exp = 0;
+    }
+    if ($gameVariables && VAR_SKILL_LEVEL > 0) {
+      $gameVariables.setValue(VAR_SKILL_LEVEL, 1);
+    }
+    syncVariablesToGame();
+    st = Onyx.Skill.Tala.state();
+    var expAct = st.expIntoLevel;
+    if (expAct == null) expAct = 0;
+    var nextExp = st.nextLevelTotalExp != null ? st.nextLevelTotalExp : st.curLvlTotal;
+    if (nextExp == null) nextExp = 0;
+    console.log("[SkillTala] Variables usadas: Var " + VAR_SKILL_LEVEL + " (nivel) = " + st.lvl + ", Var " + VAR_EXP_ACTUAL + " (exp actual) = " + expAct + ", Var " + VAR_EXP_SIGUIENTE + " (exp siguiente) = " + nextExp);
+    console.log("[SkillTala] Estado: totalExp=" + st.totalExp + ", cap=" + st.cap + ", nextLevelTotalExp=" + (st.nextLevelTotalExp != null ? st.nextLevelTotalExp : "null") + ", remaining=" + (st.remaining != null ? st.remaining : 0));
+    return true;
+  };
+
+  // ============================================================
+  // 5) Hooks
+  // ============================================================
+  var _Game_System_initialize = Game_System.prototype.initialize;
+  Game_System.prototype.initialize = function() {
+    _Game_System_initialize.call(this);
+    ensureStore();
+    syncVariablesToGame();
+  };
+
+  var _DataManager_extractSaveContents = DataManager.extractSaveContents;
+  DataManager.extractSaveContents = function(contents) {
+    _DataManager_extractSaveContents.call(this, contents);
+    ensureStore();
+    syncVariablesToGame();
+  };
+
+  // [SKILL] Exp Calculator sobrescribe Var 37 cada frame; los eventos copian Var 43 = Var 37.
+  // Cuando la skill activa es Tala (Var 33 = 1), mantenemos Var 37 y 43 con los valores de SkillTala.
+  var _Scene_Map_update = Scene_Map.prototype.update;
+  Scene_Map.prototype.update = function() {
+    _Scene_Map_update.call(this);
+    if ($gameVariables && Number($gameVariables.value(33)) === C.ID) {
+      syncVariablesToGame();
+    }
+  };
+
+})();
