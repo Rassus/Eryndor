@@ -6,23 +6,28 @@
  * @param varSkillLevel
  * @text Variable: Nivel de Skill
  * @type variable
- * @default 1
+ * @default 21
  *
  * @param varExpActual
  * @text Variable: EXP actual (dentro del nivel)
  * @type variable
- * @default 2
+ * @default 25
  *
  * @param varExpSiguiente
  * @text Variable: EXP siguiente (total del nivel actual)
  * @type variable
- * @default 3
+ * @default 43
  * @desc Según ExpTable: EXP total para estar en este nivel (nivel 1=0, 2=83, 3=174, 4=276...).
  *
  * @param varMaterialId
  * @text Variable: material_id (para addExpFromMaterialVar)
  * @type variable
  * @default 38
+ *
+ * @param varMaxSkillLevel
+ * @text Variable: Nivel máximo de Skill
+ * @type variable
+ * @default 29
  *
  * @help
  * Requiere:
@@ -51,10 +56,11 @@
 
   // Parámetros del plugin (Variables de juego)
   var PARAMS = PluginManager.parameters("SkillTala");
-  var VAR_SKILL_LEVEL = Number(PARAMS["varSkillLevel"] || 1);
-  var VAR_EXP_ACTUAL = Number(PARAMS["varExpActual"] || 2);
-  var VAR_EXP_SIGUIENTE = Number(PARAMS["varExpSiguiente"] || 3);
+  var VAR_SKILL_LEVEL = Number(PARAMS["varSkillLevel"] || 21);
+  var VAR_EXP_ACTUAL = Number(PARAMS["varExpActual"] || 25);
+  var VAR_EXP_SIGUIENTE = Number(PARAMS["varExpSiguiente"] || 43);
   var VAR_MATERIAL_ID = Number(PARAMS["varMaterialId"] || 38);
+  var VAR_MAX_SKILL_LEVEL = Number(PARAMS["varMaxSkillLevel"] || 29);
 
   // Namespace
   window.Onyx = window.Onyx || {};
@@ -249,24 +255,127 @@
   }
 
   function syncVariablesToGame() {
-    if (!$gameVariables) return;
+    if (!$gameVariables) {
+      console.log("[TALA][syncVariablesToGame] $gameVariables no existe, se cancela.");
+      return;
+    }
+  
     var st = Onyx.Skill.Tala.state();
-    if (VAR_SKILL_LEVEL > 0) $gameVariables.setValue(VAR_SKILL_LEVEL, st.lvl);
+  
+    console.log("[TALA][syncVariablesToGame][START] state =", JSON.stringify(st));
+  
+    if (VAR_SKILL_LEVEL > 0) {
+      var skillLevelValue;
+      var skillLevelSource;
+  
+      if (st.lvl > 0) {
+        skillLevelValue = st.lvl;
+        skillLevelSource = "st.lvl";
+      } else {
+        skillLevelValue = 1;
+        skillLevelSource = "fallback -> 1 porque st.lvl <= 0";
+      }
+  
+      console.log(
+        "[TALA][syncVariablesToGame] setValue -> varId:",
+        VAR_SKILL_LEVEL,
+        "value:",
+        skillLevelValue,
+        "source:",
+        skillLevelSource
+      );
+  
+      $gameVariables.setValue(VAR_SKILL_LEVEL, skillLevelValue);
+    }
+  
     if (VAR_EXP_ACTUAL > 0) {
       var expAct = st.expIntoLevel;
-      if (expAct == null) expAct = 0;
+      var expActSource = "st.expIntoLevel";
+  
+      if (expAct == null) {
+        expAct = 0;
+        expActSource = "fallback -> 0 porque st.expIntoLevel es null/undefined";
+      }
+  
+      console.log(
+        "[TALA][syncVariablesToGame] setValue -> varId:",
+        VAR_EXP_ACTUAL,
+        "value:",
+        expAct,
+        "source:",
+        expActSource
+      );
+  
       $gameVariables.setValue(VAR_EXP_ACTUAL, expAct);
     }
+  
     if (VAR_EXP_SIGUIENTE > 0) {
-      var nextVal = st.nextLevelTotalExp != null ? st.nextLevelTotalExp : st.curLvlTotal;
-      if (nextVal == null) nextVal = 0;
-      $gameVariables.setValue(VAR_EXP_SIGUIENTE, nextVal);
+      var nextValForConfiguredVar;
+      var nextValForConfiguredVarSource;
+  
+      if (st.nextLevelTotalExp != null) {
+        nextValForConfiguredVar = st.nextLevelTotalExp;
+        nextValForConfiguredVarSource = "st.nextLevelTotalExp";
+      } else {
+        nextValForConfiguredVar = st.curLvlTotal;
+        nextValForConfiguredVarSource = "fallback -> st.curLvlTotal porque st.nextLevelTotalExp es null/undefined";
+      }
+  
+      if (nextValForConfiguredVar == null) {
+        nextValForConfiguredVar = 0;
+        nextValForConfiguredVarSource += " -> fallback final 0 porque el resultado era null/undefined";
+      }
+  
+      console.log(
+        "[TALA][syncVariablesToGame] setValue -> varId:",
+        VAR_EXP_SIGUIENTE,
+        "value:",
+        nextValForConfiguredVar,
+        "source:",
+        nextValForConfiguredVarSource
+      );
+  
+      $gameVariables.setValue(VAR_EXP_SIGUIENTE, nextValForConfiguredVar);
     }
+  
     // Var 37 y 43 = EXP total del siguiente nivel (umbral, ej. 83 para subir a nivel 2)
-    var nextVal = st.nextLevelTotalExp != null ? st.nextLevelTotalExp : st.curLvlTotal;
-    if (nextVal == null) nextVal = 0;
+    var nextVal = null;
+    var nextValSource = "";
+  
+    if (st.nextLevelTotalExp != null) {
+      nextVal = st.nextLevelTotalExp;
+      nextValSource = "st.nextLevelTotalExp";
+    } else {
+      nextVal = st.curLvlTotal;
+      nextValSource = "fallback -> st.curLvlTotal porque st.nextLevelTotalExp es null/undefined";
+    }
+  
+    if (nextVal == null) {
+      nextVal = 0;
+      nextValSource += " -> fallback final 0 porque el resultado era null/undefined";
+    }
+  
+    console.log(
+      "[TALA][syncVariablesToGame] setValue -> varId:",
+      37,
+      "value:",
+      nextVal,
+      "source:",
+      nextValSource
+    );
     $gameVariables.setValue(37, nextVal);
+  
+    console.log(
+      "[TALA][syncVariablesToGame] setValue -> varId:",
+      43,
+      "value:",
+      nextVal,
+      "source:",
+      nextValSource
+    );
     $gameVariables.setValue(43, nextVal);
+  
+    console.log("[TALA][syncVariablesToGame][END]");
   }
 
   // ============================================================
@@ -342,16 +451,13 @@
 
   function getMaterialEntry(materialId) {
     var list = window.$dataCustom && window.$dataCustom.MaterialRewards;
-    console.log("[SkillTala] getMaterialEntry(materialId=" + materialId + ") list=" + (list ? "ok len=" + (list.length || 0) : "null"));
     if (!list || !Array.isArray(list)) return null;
     for (var i = 0; i < list.length; i++) {
       var row = list[i];
       if (row && Number(row.material_id) === Number(materialId)) {
-        console.log("[SkillTala] getMaterialEntry encontrado row:", row);
         return row;
       }
     }
-    console.log("[SkillTala] getMaterialEntry no encontrado material_id=" + materialId);
     return null;
   }
 
@@ -398,10 +504,22 @@
   };
 
   Onyx.Skill.Tala.init = function() {
-    console.log("[SkillTala] init() llamado");
+    var skill_list = window.$dataCustom && window.$dataCustom.SkillList;
+    var max_lvl = 0;
+    if (!skill_list) {
+      console.warn("[SkillTala] init() falló: skill_list no existe");
+      return false;
+    }
+    for (var i = 0; i < skill_list.length; i++) {
+      var row = skill_list[i];
+      if (row && Number(row.skill_id) === Number(C.ID)) {
+        max_lvl = Number(row.skill_max_level) || 99;
+        break;
+      }
+    }
     var ok = Onyx.Skill.Tala.reset();
     if (!ok) {
-      console.log("[SkillTala] init() falló: ensureStore() devolvió null (¿$gameSystem existe?)");
+      console.warn("[SkillTala] init() falló: ensureStore() devolvió null (¿$gameSystem existe?)");
       return false;
     }
     // Asegurar nivel 1 en store (por si state() recalc devolviera otra cosa) y en variable de juego
@@ -417,10 +535,16 @@
     st = Onyx.Skill.Tala.state();
     var expAct = st.expIntoLevel;
     if (expAct == null) expAct = 0;
-    var nextExp = st.nextLevelTotalExp != null ? st.nextLevelTotalExp : st.curLvlTotal;
+      var nextExp;
+    if (st.nextLevelTotalExp != null) {
+      nextExp = st.nextLevelTotalExp;
+    } else {
+      nextExp = st.curLvlTotal;
+    }
     if (nextExp == null) nextExp = 0;
-    console.log("[SkillTala] Variables usadas: Var " + VAR_SKILL_LEVEL + " (nivel) = " + st.lvl + ", Var " + VAR_EXP_ACTUAL + " (exp actual) = " + expAct + ", Var " + VAR_EXP_SIGUIENTE + " (exp siguiente) = " + nextExp);
-    console.log("[SkillTala] Estado: totalExp=" + st.totalExp + ", cap=" + st.cap + ", nextLevelTotalExp=" + (st.nextLevelTotalExp != null ? st.nextLevelTotalExp : "null") + ", remaining=" + (st.remaining != null ? st.remaining : 0));
+    if ($gameVariables && VAR_MAX_SKILL_LEVEL > 0) {
+      $gameVariables.setValue(VAR_MAX_SKILL_LEVEL, max_lvl);
+    }
     return true;
   };
 

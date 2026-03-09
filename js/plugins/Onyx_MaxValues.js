@@ -1,5 +1,5 @@
 /*:
- * @plugindesc (Onyx) Permite configurar los máximos de nivel, ítems y parámetros (RPG Maker MV)
+ * @plugindesc (Onyx) Permite configurar los máximos de nivel, ítems, oro y parámetros (RPG Maker MV)
  * @name Onyx_MaxValues
  * @author Onyx
  *
@@ -15,9 +15,25 @@
  * @text Máx. ítems por pila
  * @type number
  * @min 1
- * @max 9999
+ * @max 999999
  * @default 99
  * @desc Cantidad máxima de un mismo ítem que puede tener el grupo (por tipo).
+ *
+ * @param maxBankItems
+ * @text Máx. ítems en banco
+ * @type number
+ * @min 1
+ * @max 999999
+ * @default 999
+ * @desc Cantidad máxima de un mismo ítem que podrá almacenarse en el banco (por tipo).
+ *
+ * @param maxGold
+ * @text Máx. oro
+ * @type number
+ * @min 1
+ * @max 999999999
+ * @default 99999999
+ * @desc Cantidad máxima de oro que puede tener el grupo.
  *
  * @param maxMHP
  * @text Máx. HP
@@ -48,9 +64,14 @@
  *
  *   - Nivel de personajes (global)
  *   - Cantidad de ítems por tipo en el inventario
+ *   - Cantidad máxima de ítems por tipo en el banco
+ *   - Oro máximo del grupo
  *   - HP máximo (actores)
  *   - MP máximo
  *   - Ataque, Defensa, Matk, Mdef, Agilidad, Suerte
+ *
+ * Nota:
+ * El valor del banco queda como referencia para tu futuro sistema de banco.
  *
  * Los skills (Tala, Minería, etc.) siguen usando su máximo en data/custom/SkillList.json.
  */
@@ -59,11 +80,13 @@
   "use strict";
 
   var PARAMS = PluginManager.parameters("Onyx_MaxValues");
-  var MAX_ACTOR_LEVEL = Math.max(1, parseInt(PARAMS["maxActorLevel"], 10) || 99);
+  var MAX_ACTOR_LEVEL    = Math.max(1, parseInt(PARAMS["maxActorLevel"], 10) || 99);
   var MAX_ITEMS_PER_STACK = Math.max(1, parseInt(PARAMS["maxItemsPerStack"], 10) || 99);
-  var MAX_MHP = Math.max(1, parseInt(PARAMS["maxMHP"], 10) || 9999);
-  var MAX_MMP = Math.max(1, parseInt(PARAMS["maxMMP"], 10) || 9999);
-  var MAX_OTHER_PARAM = Math.max(1, parseInt(PARAMS["maxOtherParam"], 10) || 999);
+  var MAX_BANK_ITEMS     = Math.max(1, parseInt(PARAMS["maxBankItems"], 10) || 999);
+  var MAX_GOLD           = Math.max(1, parseInt(PARAMS["maxGold"], 10) || 99999999);
+  var MAX_MHP            = Math.max(1, parseInt(PARAMS["maxMHP"], 10) || 9999);
+  var MAX_MMP            = Math.max(1, parseInt(PARAMS["maxMMP"], 10) || 9999);
+  var MAX_OTHER_PARAM    = Math.max(1, parseInt(PARAMS["maxOtherParam"], 10) || 999);
 
   // --- Nivel máximo actores ---
   var _Game_Actor_maxLevel = Game_Actor.prototype.maxLevel;
@@ -75,6 +98,11 @@
   // --- Cantidad máxima de ítems por tipo ---
   Game_Party.prototype.maxItems = function(item) {
     return MAX_ITEMS_PER_STACK;
+  };
+
+  // --- Oro máximo ---
+  Game_Party.prototype.maxGold = function() {
+    return MAX_GOLD;
   };
 
   // --- Parámetros máximos (HP, MP, Atk, Def, etc.) ---
@@ -89,6 +117,15 @@
   Game_Actor.prototype.paramMax = function(paramId) {
     if (paramId === 0) return MAX_MHP;
     return _Game_BattlerBase_paramMax.call(this, paramId);
+  };
+
+  // --- API global opcional para otros plugins ---
+  window.OnyxMaxValues = window.OnyxMaxValues || {};
+  window.OnyxMaxValues.maxBankItems = function() {
+    return MAX_BANK_ITEMS;
+  };
+  window.OnyxMaxValues.maxGold = function() {
+    return MAX_GOLD;
   };
 
 })();

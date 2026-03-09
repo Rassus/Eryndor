@@ -22,6 +22,7 @@
     { key: "SkillList", file: "SkillList.json" },
     { key: "SkillNodeLevelNeed", file: "SkillNodeLevelNeed.json" },
     { key: "ToolLevelList", file: "ToolLevelList.json" },
+    { key: "ExpTable", file: "ExpTable.json" },
 
     // Ejemplos para futuro:
     // { key: "Recipes", file: "Recipes.json" },
