@@ -256,126 +256,59 @@
 
   function syncVariablesToGame() {
     if (!$gameVariables) {
-      console.log("[TALA][syncVariablesToGame] $gameVariables no existe, se cancela.");
       return;
     }
   
     var st = Onyx.Skill.Tala.state();
   
-    console.log("[TALA][syncVariablesToGame][START] state =", JSON.stringify(st));
-  
     if (VAR_SKILL_LEVEL > 0) {
       var skillLevelValue;
-      var skillLevelSource;
-  
       if (st.lvl > 0) {
         skillLevelValue = st.lvl;
-        skillLevelSource = "st.lvl";
       } else {
         skillLevelValue = 1;
-        skillLevelSource = "fallback -> 1 porque st.lvl <= 0";
       }
-  
-      console.log(
-        "[TALA][syncVariablesToGame] setValue -> varId:",
-        VAR_SKILL_LEVEL,
-        "value:",
-        skillLevelValue,
-        "source:",
-        skillLevelSource
-      );
-  
       $gameVariables.setValue(VAR_SKILL_LEVEL, skillLevelValue);
     }
   
     if (VAR_EXP_ACTUAL > 0) {
       var expAct = st.expIntoLevel;
-      var expActSource = "st.expIntoLevel";
-  
       if (expAct == null) {
         expAct = 0;
-        expActSource = "fallback -> 0 porque st.expIntoLevel es null/undefined";
       }
-  
-      console.log(
-        "[TALA][syncVariablesToGame] setValue -> varId:",
-        VAR_EXP_ACTUAL,
-        "value:",
-        expAct,
-        "source:",
-        expActSource
-      );
-  
       $gameVariables.setValue(VAR_EXP_ACTUAL, expAct);
     }
   
     if (VAR_EXP_SIGUIENTE > 0) {
       var nextValForConfiguredVar;
-      var nextValForConfiguredVarSource;
-  
       if (st.nextLevelTotalExp != null) {
         nextValForConfiguredVar = st.nextLevelTotalExp;
-        nextValForConfiguredVarSource = "st.nextLevelTotalExp";
       } else {
         nextValForConfiguredVar = st.curLvlTotal;
-        nextValForConfiguredVarSource = "fallback -> st.curLvlTotal porque st.nextLevelTotalExp es null/undefined";
       }
   
       if (nextValForConfiguredVar == null) {
         nextValForConfiguredVar = 0;
-        nextValForConfiguredVarSource += " -> fallback final 0 porque el resultado era null/undefined";
       }
-  
-      console.log(
-        "[TALA][syncVariablesToGame] setValue -> varId:",
-        VAR_EXP_SIGUIENTE,
-        "value:",
-        nextValForConfiguredVar,
-        "source:",
-        nextValForConfiguredVarSource
-      );
   
       $gameVariables.setValue(VAR_EXP_SIGUIENTE, nextValForConfiguredVar);
     }
   
     // Var 37 y 43 = EXP total del siguiente nivel (umbral, ej. 83 para subir a nivel 2)
     var nextVal = null;
-    var nextValSource = "";
   
     if (st.nextLevelTotalExp != null) {
       nextVal = st.nextLevelTotalExp;
-      nextValSource = "st.nextLevelTotalExp";
     } else {
       nextVal = st.curLvlTotal;
-      nextValSource = "fallback -> st.curLvlTotal porque st.nextLevelTotalExp es null/undefined";
     }
   
     if (nextVal == null) {
       nextVal = 0;
-      nextValSource += " -> fallback final 0 porque el resultado era null/undefined";
     }
   
-    console.log(
-      "[TALA][syncVariablesToGame] setValue -> varId:",
-      37,
-      "value:",
-      nextVal,
-      "source:",
-      nextValSource
-    );
     $gameVariables.setValue(37, nextVal);
-  
-    console.log(
-      "[TALA][syncVariablesToGame] setValue -> varId:",
-      43,
-      "value:",
-      nextVal,
-      "source:",
-      nextValSource
-    );
     $gameVariables.setValue(43, nextVal);
-  
-    console.log("[TALA][syncVariablesToGame][END]");
   }
 
   // ============================================================

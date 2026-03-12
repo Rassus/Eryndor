@@ -435,78 +435,54 @@
   window.onyxCanUseToolsOnNode = function(tableVarId, nodeId, toolIds) {
     tableVarId = Number(tableVarId) || 0;
     nodeId = Number(nodeId) || 0;
-
-    if (!tableVarId || !nodeId) {
-      return false;
-    }
-
-    if (!toolIds) {
-      return false;
-    }
-    if (!toolIds.length) {
-      return false;
-    }
-
+  
+    if (!tableVarId || !nodeId) return false;
+    if (!toolIds || !toolIds.length) return false;
+  
     var table = null;
     if ($gameVariables) table = $gameVariables.value(tableVarId);
-    if (!table) {
-      return false;
-    }
-
+    if (!table) return false;
+  
     var node = table[nodeId];
-
-    if (!node) {
-      return false;
-    }
-    if (!node.active) {
-      return false;
-    }
-
+    if (!node) return false;
+    if (!node.active) return false;
+  
     var need = Number(node.tool_lvl) || 0;
-
+    var skillId = Number($gameVariables.value(33)) || 0;
+    if (!skillId) return false;
+  
     var toolList = null;
-    if (window.$dataCustom && $dataCustom.ToolLevelList) toolList = $dataCustom.ToolLevelList;
-
-    if (!toolList) {
-      return false;
+    if (window.$dataCustom && $dataCustom.ToolLevelList) {
+      toolList = $dataCustom.ToolLevelList;
     }
-    if (!toolList.length) {
-      return false;
-    }
-
+    if (!toolList || !toolList.length) return false;
+  
     var best = 0;
-    var bestId = 0;
-    var i, j, id, row, lvl, foundRow;
-
+    var i, j, id, row, lvl;
+  
     for (i = 0; i < toolIds.length; i++) {
       id = Number(toolIds[i]) || 0;
-      if (!id) {
-        continue;
-      }
-
+      if (!id) continue;
+  
       lvl = 0;
-      foundRow = 0;
-
+  
       for (j = 0; j < toolList.length; j++) {
         row = toolList[j];
-        if (row && row.tool_id == id) {
+        if (!row) continue;
+  
+        // misma herramienta + mismo skill
+        if (Number(row.tool_id) === id && Number(row.skill_id) === skillId) {
           lvl = Number(row.tool_lvl) || 0;
-          foundRow = 1;
           break;
         }
       }
-
+  
       if (lvl > best) {
         best = lvl;
-        bestId = id;
       }
     }
-
-    if (best >= need) {
-      return true;
-    }
-
-    return false;
+  
+    return best >= need;
   };
 
 
