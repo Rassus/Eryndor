@@ -124,3 +124,5 @@ Game.*
 index.html
 package.json
 Map*
+CommonEvents.json
+System.json
