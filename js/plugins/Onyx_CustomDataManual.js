@@ -380,6 +380,308 @@
     }
   };
 
+  window.ONYX_SKILL_DEBUG = window.ONYX_SKILL_DEBUG || true;
+
+  /**
+   * Retorna el daño del hacha/tool equipada para el skill dado.
+   * Usa ToolLevelList.damage. Retorna 1 si no hay tool o fallo.
+   */
+  window.getEquippedToolDamage = function(skillId) {
+    skillId = Number(skillId) || 0;
+    const toolList = window.$dataCustom && $dataCustom.ToolLevelList;
+    if (!toolList || !toolList.length) return 1;
+    const actor = $gameParty.leader();
+    if (!actor || !actor.equips) return 1;
+    const equips = actor.equips();
+    if (!equips || equips.length <= 9) return 1;
+    const equip = equips[9]; // slot herramienta
+    if (!equip) return 1;
+    const toolId = Number(equip.id) || 0;
+    if (!toolId) return 1;
+    for (let i = 0; i < toolList.length; i++) {
+      const row = toolList[i];
+      if (row && Number(row.tool_id) === toolId && Number(row.skill_id) === skillId) {
+        const dmg = Math.max(1, Number(row.damage) || 1);
+        if (window.ONYX_SKILL_DEBUG) console.log("[Skill] getEquippedToolDamage: tool_id=" + toolId + ", damage=" + dmg + " (" + (row.name || "?") + ")");
+        return dmg;
+      }
+    }
+    if (window.ONYX_SKILL_DEBUG) console.log("[Skill] getEquippedToolDamage: tool_id=" + toolId + " no encontrada, damage=1");
+    return 1;
+  };
+
+  /**
+   * Da troncos extra por cada 1 HP de daño (roll tree_extra_log_chance%).
+   * materialId: material_id del tronco (ej. 1=Pino). Retorna { given: N, totalRolls: M }.
+   */
+  window.giveTreeExtraLogs = function(damage, materialId) {
+    if (!window.$dataCustom || !$dataCustom.MaterialRewards) return { given: 0, totalRolls: 0 };
+    const row = $dataCustom.MaterialRewards.find(r => r && r.material_id === materialId);
+    if (!row) return { given: 0, totalRolls: 0 };
+    const item = $dataItems[Number(row.item_id)];
+    if (!item) return { given: 0, totalRolls: 0 };
+    const chance = (window.Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.getTreeExtraLogChance)
+      ? Onyx.Skill.Tala.getTreeExtraLogChance()
+      : 15;
+    const rolls = Math.max(0, Math.floor(Number(damage) || 0));
+    let given = 0;
+    const results = [];
+    for (let i = 0; i < rolls; i++) {
+      const r = Math.random() * 100;
+      const won = r < chance;
+      if (won) {
+        $gameParty.gainItem(item, 1);
+        given++;
+      }
+      if (window.ONYX_SKILL_DEBUG) results.push("roll" + (i + 1) + "=" + r.toFixed(2) + "% " + (won ? "OK" : "no"));
+    }
+    if (window.ONYX_SKILL_DEBUG) console.log("[Skill] giveTreeExtraLogs: damage=" + damage + ", rolls=" + rolls + " (cada 1 HP), chance=" + chance + "%, given=" + given, results.length ? results : "");
+    return { given: given, totalRolls: rolls };
+  };
+
+  /**
+   * [ENDPOINT] get_node_info
+   * Obtiene datos del nodo y los escribe en vars 38 (no_lvl), 60 (ma_id), 90 (c_hp).
+   * @param {number} nodeId - ID del nodo (ej. $gameVariables.value(89))
+   * @param {number} [tableVarId=1000] - Variable con la tabla de nodos
+   * @param {object} [outVars] - { noLvl: 38, maId: 60, cHp: 90 } ids de salida
+   */
+  window.onyxGetNodeInfo = function(nodeId, tableVarId, outVars) {
+    tableVarId = Number(tableVarId) || 1000;
+    outVars = outVars || { noLvl: 38, maId: 60, cHp: 90 };
+    const table = $gameVariables.value(tableVarId) || {};
+    const data = table[nodeId] || {};
+    const noLvl = data.no_lvl || 0;
+    const maId = data.ma_id || 0;
+    const cHp = data.c_hp || 0;
+    $gameVariables.setValue(outVars.noLvl, noLvl);
+    $gameVariables.setValue(outVars.maId, maId);
+    $gameVariables.setValue(outVars.cHp, cHp);
+    if (window.ONYX_SKILL_DEBUG) console.log("[Skill] get_node_info: nodeId=" + nodeId + ", no_lvl=" + noLvl + ", ma_id=" + maId + ", c_hp=" + cHp);
+  };
+
+  /**
+   * [ENDPOINT] set_node_hp
+   * Resta damage al c_hp del nodo y guarda la tabla.
+   * @param {number} nodeId
+   * @param {number} damage
+   * @param {number} [tableVarId=1000]
+   */
+  window.onyxSetNodeHp = function(nodeId, damage, tableVarId) {
+    tableVarId = Number(tableVarId) || 1000;
+    const dict = $gameVariables.value(tableVarId) || {};
+    const data = dict[nodeId] || {};
+    const prev = data.c_hp || 0;
+    const dmg = Number(damage) || 0;
+    data.c_hp = prev - dmg;
+    dict[nodeId] = data;
+    $gameVariables.setValue(tableVarId, dict);
+    if (window.ONYX_SKILL_DEBUG) console.log("[Skill] set_node_hp: nodeId=" + nodeId + ", c_hp " + prev + " - " + dmg + " = " + data.c_hp);
+  };
+
+  /**
+   * [ENDPOINT] get_current_node_hp
+   * Escribe el c_hp actual del nodo en la var 90 (o outCHpVarId).
+   * @param {number} nodeId
+   * @param {number} [tableVarId=1000]
+   * @param {number} [outCHpVarId=90]
+   */
+  window.onyxGetCurrentNodeHp = function(nodeId, tableVarId, outCHpVarId) {
+    tableVarId = Number(tableVarId) || 1000;
+    outCHpVarId = Number(outCHpVarId) || 90;
+    const dict = $gameVariables.value(tableVarId) || {};
+    const data = dict[nodeId] || {};
+    $gameVariables.setValue(outCHpVarId, data.c_hp || 0);
+  };
+
+  /**
+   * [ENDPOINT] set_node_off
+   * Marca el nodo como inactivo (active = 0).
+   * @param {number} nodeId
+   * @param {number} [tableVarId=1000]
+   */
+  window.onyxSetNodeOff = function(nodeId, tableVarId) {
+    tableVarId = Number(tableVarId) || 1000;
+    const dict = $gameVariables.value(tableVarId) || {};
+    const data = dict[nodeId] || {};
+    data.active = 0;
+    dict[nodeId] = data;
+    $gameVariables.setValue(tableVarId, dict);
+  };
+
+  /**
+   * Hit Buff Calculator: usa wood_hit_chance (base + bonus) de SkillTala.
+   * Var 40 = hit_chance + buff. Compara tool_lvl del hacha equipada vs tool_lvl del nodo.
+   * Requiere Var 89 (nodeId), table 1000, skillId 1 para woodcutting.
+   */
+  window.onyxHitBuffCalculator = function(skillId, nodeId, tableVarId) {
+    skillId = Number(skillId) || 1;
+    tableVarId = Number(tableVarId) || 1000;
+    nodeId = nodeId != null ? nodeId : $gameVariables.value(89);
+
+    let toolLvl = 0;
+    const actor = $gameParty.leader();
+    const toolList = $dataCustom && $dataCustom.ToolLevelList;
+    if (actor && toolList) {
+      const equips = actor.equips();
+      const equip = equips && equips[9] ? equips[9] : null;
+      const toolId = equip ? Number(equip.id) : 0;
+      for (let i = 0; i < toolList.length; i++) {
+        const row = toolList[i];
+        if (row && Number(row.tool_id) === toolId && Number(row.skill_id) === skillId) {
+          toolLvl = Number(row.tool_lvl) || 0;
+          break;
+        }
+      }
+    }
+
+    const table = $gameVariables.value(tableVarId) || {};
+    const nodeData = table[nodeId] || {};
+    const nodeToolLvl = Number(nodeData.tool_lvl) || 0;
+
+    let buff = 0;
+    if (toolLvl === nodeToolLvl) buff = -3;
+    else if (toolLvl > nodeToolLvl) buff = (toolLvl - nodeToolLvl) * 3;
+
+    const hitBase = (Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.getWoodHitChance)
+      ? Onyx.Skill.Tala.getWoodHitChance() : 75;
+    const final = Math.min(100, Math.max(0, hitBase + buff));
+    $gameVariables.setValue(40, final);
+    if (window.ONYX_SKILL_DEBUG) console.log("[Skill] HitBuffCalculator: tool_lvl=" + toolLvl + ", node_tool_lvl=" + nodeToolLvl + ", buff=" + buff + ", hitBase=" + hitBase + " -> Var40=" + final);
+  };
+
+  /**
+   * Lógica de Hit Chance: usa Var 40 (wood-hit-chance) y getWoodCritChance() de SkillTala.
+   * Requiere onyxHitBuffCalculator antes.
+   * Var 59: 1=crit, 2=slash, 3=miss.
+   * @returns {number} 59 value
+   */
+  window.onyxHitChance = function(showMessages, eventId) {
+    const hitChance = Number($gameVariables.value(40)) || 0;
+    let roll = Math.floor(Math.random() * 100) + 1;
+    $gameVariables.setValue(20, roll);
+    let hitType = 3; // miss
+
+    if (window.ONYX_SKILL_DEBUG) console.log("[Skill] HitChance roll1: hitChance=" + hitChance + ", roll=" + roll + " -> " + (hitChance > roll ? "HIT" : "MISS"));
+
+    if (hitChance > roll) {
+      roll = Math.floor(Math.random() * 100) + 1;
+      $gameVariables.setValue(20, roll);
+      const critChance = (Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.getWoodCritChance)
+        ? Onyx.Skill.Tala.getWoodCritChance() : 10;
+      if (critChance > roll) {
+        if (window.ONYX_SKILL_DEBUG) console.log("[Skill] HitChance roll2 (crit): critChance=" + critChance + ", roll=" + roll + " -> CRITICO (59=1)");
+        hitType = 1;
+        if (showMessages && typeof showFloatingMessage === "function") {
+          const eid = eventId != null ? eventId : $gameVariables.value(4);
+          showFloatingMessage("Critico", 40, eid, "arriba", true);
+        }
+      } else {
+        if (window.ONYX_SKILL_DEBUG) console.log("[Skill] HitChance roll2 (crit): critChance=" + critChance + ", roll=" + roll + " -> SLASH (59=2)");
+        hitType = 2;
+        if (showMessages && typeof showFloatingMessage === "function") {
+          const eid = eventId != null ? eventId : $gameVariables.value(4);
+          showFloatingMessage("Slash", 120, eid, "arriba", true);
+        }
+      }
+    } else {
+      if (showMessages && typeof showFloatingMessage === "function") {
+        const eid = eventId != null ? eventId : $gameVariables.value(4);
+        showFloatingMessage("Miss", 120, eid, "arriba", true);
+      }
+    }
+
+    $gameVariables.setValue(59, hitType);
+    return hitType;
+  };
+
+  /**
+   * Procesa un golpe de Woodcutting (skill 1). Reemplaza el bloque Si skill-id=1 del evento.
+   * Hace: get_node_info, hit chance, si hit: anim, damage, set_node_hp, drop logs, add exp.
+   * Siempre enciende Switch 21 (SKILL-wait-action). Si c_hp<1 desactiva el nodo.
+   * @param {object} [opts]
+   * @param {number} [opts.skillId=1]
+   * @param {number} [opts.nodeId] - default $gameVariables.value(89)
+   * @param {number} [opts.tableVarId=1000]
+   * @param {number} [opts.slashAnimId=127]
+   * @param {number} [opts.waitSwitchId=21]
+   * @param {number} [opts.eventId] - para animación "este evento", default Var 4
+   * @param {boolean} [opts.showHitMessages=true]
+   */
+  window.onyxProcessWoodcuttingHit = function(opts) {
+    opts = opts || {};
+    const skillId = Number(opts.skillId) || 1;
+    const nodeId = opts.nodeId != null ? opts.nodeId : $gameVariables.value(89);
+    const tableVarId = Number(opts.tableVarId) || 1000;
+    const slashAnimId = Number(opts.slashAnimId) || 127;
+    const waitSwitchId = Number(opts.waitSwitchId) || 21;
+    const eventId = opts.eventId != null ? opts.eventId : $gameVariables.value(4);
+    const showHitMessages = opts.showHitMessages !== false;
+
+    window.onyxGetNodeInfo(nodeId, tableVarId);
+    window.onyxHitBuffCalculator();
+    const hitType = window.onyxHitChance(showHitMessages, eventId);
+
+    if (hitType === 1 || hitType === 2) {
+      const target = eventId && $gameMap ? $gameMap.event(eventId) : $gamePlayer;
+      if (target) target.requestAnimation(slashAnimId);
+      $gameVariables.setValue(59, hitType);
+      const baseDmg = window.getEquippedToolDamage(skillId);
+      const dmg = hitType === 1 ? baseDmg * 2 : baseDmg;
+      $gameVariables.setValue(91, dmg);
+      if (window.ONYX_SKILL_DEBUG) console.log("[Skill] ProcessHit: hitType=" + hitType + " (" + (hitType === 1 ? "CRIT" : "SLASH") + "), baseDmg=" + baseDmg + ", finalDmg=" + dmg + ", nodeId=" + nodeId);
+      window.onyxSetNodeHp(nodeId, dmg, tableVarId);
+      const table = $gameVariables.value(tableVarId) || {};
+      const nodeData = table[nodeId] || {};
+      const materialId = Number(nodeData.ma_id || 0);
+      const res = window.giveTreeExtraLogs($gameVariables.value(91), materialId);
+      if (res.given > 0 && $dataCustom && $dataCustom.MaterialRewards) {
+        const row = $dataCustom.MaterialRewards.find(function(r) { return r && r.material_id === materialId; });
+        const name = row ? row.item_name : "Tronco";
+        if (typeof showFloatingMessage === "function") showFloatingMessage("!Has obtenido " + name + " x" + res.given, 120);
+      }
+      if (Onyx && Onyx.Skill && Onyx.Skill.Tala) {
+        $gameVariables.setValue(38, materialId);
+        const result = Onyx.Skill.Tala.addExpFromMaterialVar();
+        if (result && result.leveledUp && $gamePlayer) $gamePlayer.requestAnimation(131);
+        if (result && result.added > 0 && typeof showFloatingMessage === "function") {
+          showFloatingMessage("Exp +" + result.added, 120, -1, "arriba", true);
+        }
+      }
+    }
+
+    if (waitSwitchId > 0 && $gameSwitches) $gameSwitches.setValue(waitSwitchId, true);
+
+    const dict = $gameVariables.value(tableVarId) || {};
+    const data = dict[nodeId] || {};
+    const finalHp = data.c_hp || 0;
+    if (finalHp < 1) {
+      if (window.ONYX_SKILL_DEBUG) console.log("[Skill] ProcessHit: nodo caído (c_hp=" + finalHp + "), set_node_off");
+      window.onyxSetNodeOff(nodeId, tableVarId);
+    }
+  };
+
+  /**
+   * Despacha al endpoint indicado leyendo Var 100 (cmd), 89 (nodeId), 91 (damage).
+   * Reemplaza el bloque condicional del CE [SKILL] Node Endpoint.
+   * Uso en evento: onyxNodeEndpointFromVars();
+   */
+  window.onyxNodeEndpointFromVars = function() {
+    const cmd = $gameVariables.value(100);
+    const nodeId = $gameVariables.value(89);
+    const damage = $gameVariables.value(91);
+    const tableVarId = 1000;
+    if (cmd === "get_node_info") {
+      window.onyxGetNodeInfo(nodeId, tableVarId);
+    } else if (cmd === "set_node_hp") {
+      window.onyxSetNodeHp(nodeId, damage, tableVarId);
+    } else if (cmd === "get_current_node_hp") {
+      window.onyxGetCurrentNodeHp(nodeId, tableVarId);
+    } else if (cmd === "set_node_off") {
+      window.onyxSetNodeOff(nodeId, tableVarId);
+    }
+  };
+
   window.onyxFindPartyToolsBySkill = function(skillId) {
     skillId = Number(skillId) || 0;
 

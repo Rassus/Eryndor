@@ -83,6 +83,13 @@
     has_doble_reward: false,
     doble_reward_chance_base: 15,
 
+    // Troncos extra por cada 1 HP de daño (chance %)
+    tree_extra_log_chance_base: 15,
+
+    // Hacha: base para hit y crit (pociones u otros efectos suman bonus)
+    wood_hit_chance_base: 75,
+    wood_crit_chance_base: 10,
+
     // Recoleccion
     tree_seed_reward_min_lvl_drop: 5,
     tree_root_reward_min_lvl_drop: 25,
@@ -213,6 +220,9 @@
         tree_root_reward_chance: 0,
         tree_crust_reward_chance: 0,
         tree_sap_reward_chance: 0,
+        tree_extra_log_chance: 0,
+        wood_hit_chance: 0,
+        wood_crit_chance: 0,
         buggy_reward_chance: 0,
         buggy_combat_chance: 0,
         combat_evil_tree_chance: 0,
@@ -316,6 +326,30 @@
   // ============================================================
   Onyx.Skill.Tala.constants = function() {
     return JSON.parse(JSON.stringify(C));
+  };
+
+  Onyx.Skill.Tala.getTreeExtraLogChance = function() {
+    var st = ensureStore();
+    if (!st || !st.bonus) return C.tree_extra_log_chance_base || 0;
+    var base = Number(C.tree_extra_log_chance_base) || 0;
+    var bonus = Number(st.bonus.tree_extra_log_chance) || 0;
+    return Math.min(100, Math.max(0, base + bonus));
+  };
+
+  Onyx.Skill.Tala.getWoodHitChance = function() {
+    var st = ensureStore();
+    if (!st || !st.bonus) return C.wood_hit_chance_base || 75;
+    var base = Number(C.wood_hit_chance_base) || 75;
+    var bonus = Number(st.bonus.wood_hit_chance) || 0;
+    return Math.min(100, Math.max(0, base + bonus));
+  };
+
+  Onyx.Skill.Tala.getWoodCritChance = function() {
+    var st = ensureStore();
+    if (!st || !st.bonus) return C.wood_crit_chance_base || 10;
+    var base = Number(C.wood_crit_chance_base) || 10;
+    var bonus = Number(st.bonus.wood_crit_chance) || 0;
+    return Math.min(100, Math.max(0, base + bonus));
   };
 
   Onyx.Skill.Tala.state = function() {
