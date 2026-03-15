@@ -1,7 +1,8 @@
 /*:
- * @plugindesc (Onyx) Permite configurar los máximos de nivel, ítems, oro y parámetros (RPG Maker MV)
+ * @plugindesc (Onyx) v1.0.0.0 - Permite configurar los máximos de nivel, ítems, oro y parámetros (RPG Maker MV)
  * @name Onyx_MaxValues
  * @author Onyx
+ * @version 1.0.0.0
  *
  * @param maxActorLevel
  * @text Máx. nivel (actores)
@@ -78,6 +79,7 @@
 
 (function() {
   "use strict";
+  var ONYX_MAX_VALUES_VERSION = "1.0.0.0";
 
   var PARAMS = PluginManager.parameters("Onyx_MaxValues");
   var MAX_ACTOR_LEVEL    = Math.max(1, parseInt(PARAMS["maxActorLevel"], 10) || 99);

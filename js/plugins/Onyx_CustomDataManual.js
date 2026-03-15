@@ -1,6 +1,7 @@
 /*:
- * @plugindesc (Onyx) Carga manual de JSON custom desde /data/custom/ en $dataCustom.
+ * @plugindesc (Onyx) v1.0.0.0 - Carga manual de JSON custom desde /data/custom/ en $dataCustom.
  * @author Onyx
+ * @version 1.0.0.0
  *
  * @help
  * - Deja tus archivos en: data/custom/
@@ -10,6 +11,8 @@
  */
 
 (() => {
+  const ONYX_CUSTOM_DATA_VERSION = "1.0.0.0";
+
   // ---------------------------------------------------------------------------
   // 1) LISTA MANUAL: agrega aquí tus nuevos archivos
   //    key: nombre con el que lo usarás en $dataCustom[key]
@@ -380,12 +383,12 @@
     }
   };
 
-  window.ONYX_SKILL_DEBUG = window.ONYX_SKILL_DEBUG || true;
+  window.ONYX_SKILL_DEBUG = false;
 
   /**
    * Mejor tool del grupo para el skill: recorre todos los héroes, slot herramienta (9),
    * y devuelve la que tenga mayor daño en ToolLevelList.
-   * @returns {{ damage: number, tool_lvl: number, tool_id: number, name: string }|null}
+   * @returns {{ damage: number, tool_lvl: number, tool_id: number, name: string, actorIndex: number }|null}
    */
   window.getBestPartyToolForSkill = function(skillId) {
     skillId = Number(skillId) || 0;
@@ -413,7 +416,8 @@
               damage: dmg,
               tool_lvl: Number(row.tool_lvl) || 0,
               tool_id: toolId,
-              name: row.name || ""
+              name: row.name || "",
+              actorIndex: m
             };
           }
           break;
@@ -430,10 +434,8 @@
   window.getEquippedToolDamage = function(skillId) {
     const best = window.getBestPartyToolForSkill(skillId);
     if (!best) {
-      if (window.ONYX_SKILL_DEBUG) console.log("[Skill] getEquippedToolDamage: ninguna tool válida en el grupo, damage=1");
       return 1;
     }
-    if (window.ONYX_SKILL_DEBUG) console.log("[Skill] getEquippedToolDamage: tool_id=" + best.tool_id + ", damage=" + best.damage + " (" + best.name + ") [mejor del grupo]");
     return best.damage;
   };
 
@@ -452,7 +454,6 @@
       : 15;
     const rolls = Math.max(0, Math.floor(Number(damage) || 0));
     let given = 0;
-    const results = [];
     for (let i = 0; i < rolls; i++) {
       const r = Math.random() * 100;
       const won = r < chance;
@@ -460,10 +461,96 @@
         $gameParty.gainItem(item, 1);
         given++;
       }
-      if (window.ONYX_SKILL_DEBUG) results.push("roll" + (i + 1) + "=" + r.toFixed(2) + "% " + (won ? "OK" : "no"));
     }
-    if (window.ONYX_SKILL_DEBUG) console.log("[Skill] giveTreeExtraLogs: damage=" + damage + ", rolls=" + rolls + " (cada 1 HP), chance=" + chance + "%, given=" + given, results.length ? results : "");
     return { given: given, totalRolls: rolls };
+  };
+
+  /**
+   * Break Hatchet: en golpe crítico puede romperse el hacha (chance de SkillTala).
+   * Si se rompe: todo el equipo sufre daño = 10% de su vida máxima cada uno (puede matar),
+   * se pierde la mejor hacha del grupo (quien la llevaba equipada).
+   * Llamar solo cuando Var 59 === 1 (crítico). skillId 1 = tala.
+   * @param {number} [skillId=1]
+   * @returns {{ broke: boolean, toolName?: string }}
+   */
+  window.onyxProcessHatchetBreak = function(skillId) {
+    skillId = Number(skillId) || 1;
+    const hitType = $gameVariables.value(59);
+    if (hitType !== 1) return { broke: false };
+
+    const chance = (window.Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.getWoodHatchetBreakChance)
+      ? Onyx.Skill.Tala.getWoodHatchetBreakChance()
+      : 0.00025;
+    if (Math.random() >= chance) return { broke: false };
+
+    const best = window.getBestPartyToolForSkill && window.getBestPartyToolForSkill(skillId);
+    if (!best) return { broke: false };
+
+    const members = $gameParty.members();
+    for (let i = 0; i < members.length; i++) {
+      const actor = members[i];
+      if (!actor || !actor.mhp) continue;
+      const dmg = Math.max(1, Math.floor(actor.mhp * 0.1));
+      actor.gainHp(-dmg);
+    }
+
+    const actorWithAxe = members[best.actorIndex];
+    // Desequipar slot 9 sin devolver el ítem a la party (changeEquip(null) haría gainItem del viejo)
+    if (actorWithAxe && actorWithAxe._equips && actorWithAxe._equips[9]) {
+      actorWithAxe._equips[9].setObject(null);
+      if (actorWithAxe.refresh) actorWithAxe.refresh();
+    }
+    const armor = $dataArmors && $dataArmors[best.tool_id];
+    if (armor) $gameParty.loseItem(armor, 1, true);
+
+    $gameSystem._onyxLastBrokenToolId = best.tool_id;
+    if (!Array.isArray($gameSystem._onyxBrokenToolIds)) $gameSystem._onyxBrokenToolIds = [];
+    $gameSystem._onyxBrokenToolIds.push(best.tool_id);
+    const rewardItemId = 601;
+    const rewardItem = $dataItems && $dataItems[rewardItemId];
+    if (rewardItem) $gameParty.gainItem(rewardItem, 1);
+
+    if (window.Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.state) {
+      const st = Onyx.Skill.Tala.state();
+      if (st && st.stats && typeof st.stats.hatchets_broken === "number") st.stats.hatchets_broken++;
+    }
+    return { broke: true, toolName: best.name || ("Hacha #" + best.tool_id) };
+  };
+
+  /**
+   * Lista de hachas rotas (IDs de armadura). Se usa para saber qué reparar.
+   * @returns {number[]} IDs de herramientas rotas (ej. [101, 110, 101] = 2 bronce, 1 celestita)
+   */
+  window.onyxGetBrokenToolIds = function() {
+    if (!Array.isArray($gameSystem._onyxBrokenToolIds)) $gameSystem._onyxBrokenToolIds = [];
+    return $gameSystem._onyxBrokenToolIds.slice();
+  };
+
+  /**
+   * Cuántas hachas rotas hay de un tipo.
+   * @param {number} toolId - ID del ítem/armadura (ej. 101 = Hacha Bronce)
+   * @returns {number}
+   */
+  window.onyxCountBrokenTool = function(toolId) {
+    var list = $gameSystem._onyxBrokenToolIds;
+    if (!Array.isArray(list)) return 0;
+    return list.filter(function(id) { return id === Number(toolId); }).length;
+  };
+
+  /**
+   * Reparar una hacha rota: quita un id de la lista. Llamar cuando el jugador paga/repara.
+   * Así se distingue "reparar hacha de bronce" vs "reparar hacha de celestita".
+   * @param {number} toolId - ID de la armadura a reparar (ej. 101)
+   * @returns {boolean} true si había al menos una rota de ese tipo y se quitó
+   */
+  window.onyxRepairBrokenTool = function(toolId) {
+    if (!Array.isArray($gameSystem._onyxBrokenToolIds)) $gameSystem._onyxBrokenToolIds = [];
+    var list = $gameSystem._onyxBrokenToolIds;
+    var id = Number(toolId);
+    var idx = list.indexOf(id);
+    if (idx < 0) return false;
+    list.splice(idx, 1);
+    return true;
   };
 
   /**
@@ -484,7 +571,6 @@
     $gameVariables.setValue(outVars.noLvl, noLvl);
     $gameVariables.setValue(outVars.maId, maId);
     $gameVariables.setValue(outVars.cHp, cHp);
-    if (window.ONYX_SKILL_DEBUG) console.log("[Skill] get_node_info: nodeId=" + nodeId + ", no_lvl=" + noLvl + ", ma_id=" + maId + ", c_hp=" + cHp);
   };
 
   /**
@@ -503,7 +589,6 @@
     data.c_hp = prev - dmg;
     dict[nodeId] = data;
     $gameVariables.setValue(tableVarId, dict);
-    if (window.ONYX_SKILL_DEBUG) console.log("[Skill] set_node_hp: nodeId=" + nodeId + ", c_hp " + prev + " - " + dmg + " = " + data.c_hp);
   };
 
   /**
@@ -562,7 +647,6 @@
       ? Onyx.Skill.Tala.getWoodHitChance() : 75;
     const final = Math.min(100, Math.max(0, hitBase + buff));
     $gameVariables.setValue(40, final);
-    if (window.ONYX_SKILL_DEBUG) console.log("[Skill] HitBuffCalculator: tool_lvl=" + toolLvl + ", node_tool_lvl=" + nodeToolLvl + ", buff=" + buff + ", hitBase=" + hitBase + " -> Var40=" + final);
   };
 
   /**
@@ -577,22 +661,18 @@
     $gameVariables.setValue(20, roll);
     let hitType = 3; // miss
 
-    if (window.ONYX_SKILL_DEBUG) console.log("[Skill] HitChance roll1: hitChance=" + hitChance + ", roll=" + roll + " -> " + (hitChance > roll ? "HIT" : "MISS"));
-
     if (hitChance > roll) {
       roll = Math.floor(Math.random() * 100) + 1;
       $gameVariables.setValue(20, roll);
       const critChance = (Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.getWoodCritChance)
         ? Onyx.Skill.Tala.getWoodCritChance() : 10;
       if (critChance > roll) {
-        if (window.ONYX_SKILL_DEBUG) console.log("[Skill] HitChance roll2 (crit): critChance=" + critChance + ", roll=" + roll + " -> CRITICO (59=1)");
         hitType = 1;
         if (showMessages && typeof showFloatingMessage === "function") {
           const eid = eventId != null ? eventId : $gameVariables.value(4);
           showFloatingMessage("Critico", 40, eid, "arriba", true);
         }
       } else {
-        if (window.ONYX_SKILL_DEBUG) console.log("[Skill] HitChance roll2 (crit): critChance=" + critChance + ", roll=" + roll + " -> SLASH (59=2)");
         hitType = 2;
         if (showMessages && typeof showFloatingMessage === "function") {
           const eid = eventId != null ? eventId : $gameVariables.value(4);
@@ -636,7 +716,7 @@
     window.onyxGetNodeInfo(nodeId, tableVarId);
     window.onyxHitBuffCalculator();
     const hitType = window.onyxHitChance(showHitMessages, eventId);
-
+    console.log("[ProcessHit] HitType: " + hitType);
     if (hitType === 1 || hitType === 2) {
       const target = eventId && $gameMap ? $gameMap.event(eventId) : $gamePlayer;
       if (target) target.requestAnimation(slashAnimId);
@@ -644,23 +724,35 @@
       const baseDmg = window.getEquippedToolDamage(skillId);
       const dmg = hitType === 1 ? baseDmg * 2 : baseDmg;
       $gameVariables.setValue(91, dmg);
-      if (window.ONYX_SKILL_DEBUG) console.log("[Skill] ProcessHit: hitType=" + hitType + " (" + (hitType === 1 ? "CRIT" : "SLASH") + "), baseDmg=" + baseDmg + ", finalDmg=" + dmg + ", nodeId=" + nodeId);
-      window.onyxSetNodeHp(nodeId, dmg, tableVarId);
-      const table = $gameVariables.value(tableVarId) || {};
-      const nodeData = table[nodeId] || {};
-      const materialId = Number(nodeData.ma_id || 0);
-      const res = window.giveTreeExtraLogs($gameVariables.value(91), materialId);
-      if (res.given > 0 && $dataCustom && $dataCustom.MaterialRewards) {
-        const row = $dataCustom.MaterialRewards.find(function(r) { return r && r.material_id === materialId; });
-        const name = row ? row.item_name : "Tronco";
-        if (typeof showFloatingMessage === "function") showFloatingMessage("!Has obtenido " + name + " x" + res.given, 120);
+
+      // Rotura de hacha ANTES de troncos: si se rompe, no se obtiene ningún tronco ni exp de este golpe
+      var breakRes = { broke: false };
+      var isCrit = hitType === 1;
+      if (isCrit && typeof window.onyxProcessHatchetBreak === "function") {
+        breakRes = window.onyxProcessHatchetBreak(skillId);
+        if (breakRes.broke && typeof showFloatingMessage === "function") {
+          showFloatingMessage("¡El hacha se ha roto! El equipo sufre 10% de su vida máxima.", 120);
+        }
       }
-      if (Onyx && Onyx.Skill && Onyx.Skill.Tala) {
-        $gameVariables.setValue(38, materialId);
-        const result = Onyx.Skill.Tala.addExpFromMaterialVar();
-        if (result && result.leveledUp && $gamePlayer) $gamePlayer.requestAnimation(131);
-        if (result && result.added > 0 && typeof showFloatingMessage === "function") {
-          showFloatingMessage("Exp +" + result.added, 120, -1, "arriba", true);
+      // Solo aplicar daño al nodo y dar recompensas si el hacha NO se rompió
+      if (!breakRes.broke) {
+        window.onyxSetNodeHp(nodeId, dmg, tableVarId);
+        const table = $gameVariables.value(tableVarId) || {};
+        const nodeData = table[nodeId] || {};
+        const materialId = Number(nodeData.ma_id || 0);
+        const res = window.giveTreeExtraLogs($gameVariables.value(91), materialId);
+        if (res.given > 0 && $dataCustom && $dataCustom.MaterialRewards) {
+          const row = $dataCustom.MaterialRewards.find(function(r) { return r && r.material_id === materialId; });
+          const name = row ? row.item_name : "Tronco";
+          if (typeof showFloatingMessage === "function") showFloatingMessage("!Has obtenido " + name + " x" + res.given, 120);
+        }
+        if (Onyx && Onyx.Skill && Onyx.Skill.Tala) {
+          $gameVariables.setValue(38, materialId);
+          const result = Onyx.Skill.Tala.addExpFromMaterialVar();
+          if (result && result.leveledUp && $gamePlayer) $gamePlayer.requestAnimation(131);
+          if (result && result.added > 0 && typeof showFloatingMessage === "function") {
+            showFloatingMessage("Exp +" + result.added, 120, -1, "arriba", true);
+          }
         }
       }
     }
@@ -671,7 +763,6 @@
     const data = dict[nodeId] || {};
     const finalHp = data.c_hp || 0;
     if (finalHp < 1) {
-      if (window.ONYX_SKILL_DEBUG) console.log("[Skill] ProcessHit: nodo caído (c_hp=" + finalHp + "), set_node_off");
       window.onyxSetNodeOff(nodeId, tableVarId);
     }
   };

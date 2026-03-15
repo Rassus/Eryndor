@@ -1,5 +1,7 @@
 # Changelog
 
+- **7d519ea** (2026-03-15) [Fix] Se arregla problema de daño con la herramienta, ahora toma el daño de la mejor herramienta
+
 - **df9c55e** (2026-03-15) [Feat] Limpieza de data
 
 - **** () 

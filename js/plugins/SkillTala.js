@@ -1,7 +1,8 @@
 /*:
- * @plugindesc (Onyx) Skill: Tala - variables, constantes y EXP por tabla (RPG Maker MV)
+ * @plugindesc (Onyx) v1.0.0.0 - Skill: Tala - variables, constantes y EXP por tabla (RPG Maker MV)
  * @name SkillTala
  * @author Onyx
+ * @version 1.0.0.0
  *
  * @param varSkillLevel
  * @text Variable: Nivel de Skill
@@ -53,6 +54,7 @@
 
 (function() {
   "use strict";
+  var SKILL_TALA_VERSION = "1.0.0.0";
 
   // Parámetros del plugin (Variables de juego)
   var PARAMS = PluginManager.parameters("SkillTala");
@@ -123,7 +125,7 @@
     combat_evil_tree_event_base_chance: 0.00025,
 
     // Eventos al talar un arbol
-    break_hatche_base_chance: 0.25,
+    break_hatche_base_chance: 0.025,
     wise_old_tree_base_chance: 0.00065,
     nature_spirit_base_chance: 0.044,
     sap_rain_base_chance: 0.16,
@@ -350,6 +352,16 @@
     var base = Number(C.wood_crit_chance_base) || 10;
     var bonus = Number(st.bonus.wood_crit_chance) || 0;
     return Math.min(100, Math.max(0, base + bonus));
+  };
+
+  /** Probabilidad (0–1) de que el hacha se rompa en un golpe crítico. base 0.025 = 0.025%. bonus: 0-100 = %, o 0-1 = fracción (1 = 100%). */
+  Onyx.Skill.Tala.getWoodHatchetBreakChance = function() {
+    var st = ensureStore();
+    var base = Number(C.break_hatche_base_chance) || 0.025;
+    var rawBonus = (st && st.bonus) ? Number(st.bonus.break_hatche_chance) || 0 : 0;
+    var bonusPercent = (rawBonus > 0 && rawBonus <= 1) ? rawBonus * 100 : rawBonus;
+    var percent = Math.min(100, Math.max(0, base + bonusPercent));
+    return percent / 100;
   };
 
   Onyx.Skill.Tala.state = function() {
