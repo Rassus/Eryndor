@@ -1,6 +1,18 @@
-﻿# Changelog
+# Changelog
+
+- **df9c55e** (2026-03-15) [Feat] Limpieza de data
+
+- **** () 
+
+- **** () 
+
+- **** () 
+
+- **8fb2861** (2026-03-15) [Feat] Se añade logica de drop por vida de nodo
+
+- **8fb2861** (2026-03-15) [Feat] Se añade logica de drop por vida de nodo
 
 - **28883e4** (2026-03-12) [Feat] se añade data a  gitgnore
 
-Entradas aÃ±adidas automÃ¡ticamente en cada commit (hash, fecha, mensaje).
+Entradas añadidas automáticamente en cada commit (hash, fecha, mensaje).
 

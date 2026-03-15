@@ -123,6 +123,9 @@ save
 Game.*
 index.html
 package.json
-data/Map*
-data/CommonEvents.json
-data/System.json
+
+# data: solo versionar data/custom/, ignorar el resto
+data/*
+!data/custom/
+!data/custom/**
+scripts/

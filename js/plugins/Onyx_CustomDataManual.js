@@ -383,31 +383,58 @@
   window.ONYX_SKILL_DEBUG = window.ONYX_SKILL_DEBUG || true;
 
   /**
-   * Retorna el daño del hacha/tool equipada para el skill dado.
-   * Usa ToolLevelList.damage. Retorna 1 si no hay tool o fallo.
+   * Mejor tool del grupo para el skill: recorre todos los héroes, slot herramienta (9),
+   * y devuelve la que tenga mayor daño en ToolLevelList.
+   * @returns {{ damage: number, tool_lvl: number, tool_id: number, name: string }|null}
    */
-  window.getEquippedToolDamage = function(skillId) {
+  window.getBestPartyToolForSkill = function(skillId) {
     skillId = Number(skillId) || 0;
     const toolList = window.$dataCustom && $dataCustom.ToolLevelList;
-    if (!toolList || !toolList.length) return 1;
-    const actor = $gameParty.leader();
-    if (!actor || !actor.equips) return 1;
-    const equips = actor.equips();
-    if (!equips || equips.length <= 9) return 1;
-    const equip = equips[9]; // slot herramienta
-    if (!equip) return 1;
-    const toolId = Number(equip.id) || 0;
-    if (!toolId) return 1;
-    for (let i = 0; i < toolList.length; i++) {
-      const row = toolList[i];
-      if (row && Number(row.tool_id) === toolId && Number(row.skill_id) === skillId) {
-        const dmg = Math.max(1, Number(row.damage) || 1);
-        if (window.ONYX_SKILL_DEBUG) console.log("[Skill] getEquippedToolDamage: tool_id=" + toolId + ", damage=" + dmg + " (" + (row.name || "?") + ")");
-        return dmg;
+    if (!toolList || !toolList.length) return null;
+    const members = $gameParty.members();
+    let best = null;
+    let bestDamage = 0;
+    for (let m = 0; m < members.length; m++) {
+      const actor = members[m];
+      if (!actor || !actor.equips) continue;
+      const equips = actor.equips();
+      if (!equips || equips.length <= 9) continue;
+      const equip = equips[9];
+      if (!equip) continue;
+      const toolId = Number(equip.id) || 0;
+      if (!toolId) continue;
+      for (let i = 0; i < toolList.length; i++) {
+        const row = toolList[i];
+        if (row && Number(row.tool_id) === toolId && Number(row.skill_id) === skillId) {
+          const dmg = Math.max(1, Number(row.damage) || 1);
+          if (dmg > bestDamage) {
+            bestDamage = dmg;
+            best = {
+              damage: dmg,
+              tool_lvl: Number(row.tool_lvl) || 0,
+              tool_id: toolId,
+              name: row.name || ""
+            };
+          }
+          break;
+        }
       }
     }
-    if (window.ONYX_SKILL_DEBUG) console.log("[Skill] getEquippedToolDamage: tool_id=" + toolId + " no encontrada, damage=1");
-    return 1;
+    return best;
+  };
+
+  /**
+   * Retorna el daño de la mejor hacha/tool del grupo para el skill dado.
+   * Usa getBestPartyToolForSkill (máximo daño entre todos los héroes). Retorna 1 si no hay tool válida.
+   */
+  window.getEquippedToolDamage = function(skillId) {
+    const best = window.getBestPartyToolForSkill(skillId);
+    if (!best) {
+      if (window.ONYX_SKILL_DEBUG) console.log("[Skill] getEquippedToolDamage: ninguna tool válida en el grupo, damage=1");
+      return 1;
+    }
+    if (window.ONYX_SKILL_DEBUG) console.log("[Skill] getEquippedToolDamage: tool_id=" + best.tool_id + ", damage=" + best.damage + " (" + best.name + ") [mejor del grupo]");
+    return best.damage;
   };
 
   /**
@@ -520,20 +547,8 @@
     nodeId = nodeId != null ? nodeId : $gameVariables.value(89);
 
     let toolLvl = 0;
-    const actor = $gameParty.leader();
-    const toolList = $dataCustom && $dataCustom.ToolLevelList;
-    if (actor && toolList) {
-      const equips = actor.equips();
-      const equip = equips && equips[9] ? equips[9] : null;
-      const toolId = equip ? Number(equip.id) : 0;
-      for (let i = 0; i < toolList.length; i++) {
-        const row = toolList[i];
-        if (row && Number(row.tool_id) === toolId && Number(row.skill_id) === skillId) {
-          toolLvl = Number(row.tool_lvl) || 0;
-          break;
-        }
-      }
-    }
+    const bestTool = window.getBestPartyToolForSkill && window.getBestPartyToolForSkill(skillId);
+    if (bestTool) toolLvl = bestTool.tool_lvl;
 
     const table = $gameVariables.value(tableVarId) || {};
     const nodeData = table[nodeId] || {};
