@@ -1,66 +1,15 @@
 [
 	null,
-	{"skill_id":1,"lvl":5,"update":"doble_reward_chance", "value":1, "requirements":{"type":}},
-	{"skill_id":1,"lvl":10,"update":"bird_nest_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":15,"update":"bird_nest_egg_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":20,"update":"bird_nest_treasure_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":25,"update":"mushroom_reward_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":30,"update":"tree_seed_reward_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":35,"update":"tree_root_reward_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":40,"update":"tree_crust_reward_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":45,"update":"tree_sap_reward_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":50,"update":"buggy_reward_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":55,"update":"buggy_combat_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":60,"update":"combat_evil_tree_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":65,"update":"break_hatche_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":70,"update":"wise_old_tree_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":75,"update":"nature_spirit_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":80,"update":"sap_rain_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":85,"update":"living_root_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":90,"update":"termites_war_chance", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":95,"update":"trees_cut", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":100,"update":"hatchets_broken", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":105,"update":"nest_drop", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":110,"update":"buggy_combat", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":115,"update":"mushroom_combat", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}},
-	{"skill_id":1,"lvl":120,"update":"termite_war", "value":1, "requirements":{"type":"quest", "key":"complete", "value":1}}
+	{"skill_id":1,"lvl":1,"item_id":101},
+	{"skill_id":1,"lvl":10,"item_id":102},
+	{"skill_id":1,"lvl":20,"item_id":103},
+	{"skill_id":1,"lvl":32,"item_id":104},
+	{"skill_id":1,"lvl":40,"item_id":105},
+	{"skill_id":1,"lvl":52,"item_id":106},
+	{"skill_id":1,"lvl":61,"item_id":107},
+	{"skill_id":1,"lvl":76,"item_id":108},
+	{"skill_id":1,"lvl":85,"item_id":109},
+	{"skill_id":1,"lvl":99,"item_id":110},
+	{"skill_id":1,"lvl":105,"item_id":111},
+	{"skill_id":1,"lvl":112,"item_id":112}
 ]
-{
-	"skill_id": "Number", //1 - N
-	"lvl": "Number", //1 - N
-	"update":"String", 
-	"value":"Float", // +-1 - +-N
-	"requirements":[{
-		"Type":"string", //quest, skill, book, talk, buy
-		"key":"string", //[complete, init, start-up, non start-up],[level,tool,equip,buff],[read, write, unread],[talk, un-talk],[buying, selling, trade, item]
-		"value": "Number" //1 - N
-	}]
-}
-
-//doble_reward_chance: 0,
-//bird_nest_chance: 0,
-//bird_nest_egg_chance: 0,
-//bird_nest_treasure_chance: 0,
-//mushroom_reward_chance: 0,
-//tree_seed_reward_chance: 0,
-//tree_root_reward_chance: 0,
-//tree_crust_reward_chance: 0,
-//tree_sap_reward_chance: 0,
-//buggy_reward_chance: 0,
-//buggy_combat_chance: 0,
-//combat_evil_tree_chance: 0,
-
-//break_hatche_chance: 0,
-//wise_old_tree_chance: 0,
-//nature_spirit_chance: 0,
-//sap_rain_chance: 0,
-//living_root_chance: 0,
-//termites_war_chance: 0
-
-
-//trees_cut: 0,
-//hatchets_broken: 0,
-//nest_drop: 0,
-//buggy_combat: 0,
-//mushroom_combat: 0,
-//termite_war: 0

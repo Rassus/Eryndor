@@ -25,6 +25,7 @@
     { key: "SkillList", file: "SkillList.json" },
     { key: "SkillNodeLevelNeed", file: "SkillNodeLevelNeed.json" },
     { key: "ToolLevelList", file: "ToolLevelList.json" },
+    { key: "SkillUnlocks", file: "SkillUnlocks.json" },
     { key: "ExpTable", file: "ExpTable.json" },
 
     // Ejemplos para futuro:
@@ -971,5 +972,53 @@
   // Helper opcional: verificar si una data específica ya está lista
   window.isCustomDataReady = function(key) {
     return !!window.$dataCustomLoaded[key];
+  };
+
+  // ---------------------------------------------------------------------------
+  // Validación de nivel para equipar herramientas (slot 9): SkillUnlocks.json (skill_id 1)
+  // Si el personaje no tiene nivel de Tala suficiente, no puede equipar esa hacha.
+  // ---------------------------------------------------------------------------
+  const TOOL_SLOT_INDEX = 9;
+  const SKILL_ID_TALA = 1;
+  const MSG_NO_LEVEL_EQUIP = "No tiene el nivel para equipar esa arma.";
+
+  window.onyxGetRequiredLevelForTool = function(itemId) {
+    const list = window.$dataCustom && window.$dataCustom.SkillUnlocks;
+    if (!list || !list.length) return null;
+    const id = Number(itemId);
+    for (let i = 0; i < list.length; i++) {
+      const row = list[i];
+      if (row && Number(row.skill_id) === SKILL_ID_TALA && Number(row.item_id) === id) {
+        return Number(row.lvl) || 0;
+      }
+    }
+    return null;
+  };
+
+  const _Game_BattlerBase_canEquip = Game_BattlerBase.prototype.canEquip;
+  Game_BattlerBase.prototype.canEquip = function(item) {
+    if (!_Game_BattlerBase_canEquip.call(this, item)) return false;
+    if (!item || !DataManager.isArmor(item)) return true;
+    const requiredLvl = window.onyxGetRequiredLevelForTool(item.id);
+    if (requiredLvl === null) return true;
+    const talaState = window.Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.state;
+    const talaLvl = talaState ? (talaState().lvl || 1) : 1;
+    return talaLvl >= requiredLvl;
+  };
+
+  const _Game_Actor_changeEquip = Game_Actor.prototype.changeEquip;
+  Game_Actor.prototype.changeEquip = function(slotId, item) {
+    if (slotId === TOOL_SLOT_INDEX && item) {
+      const requiredLvl = window.onyxGetRequiredLevelForTool(item.id);
+      if (requiredLvl !== null) {
+        const talaState = window.Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.state;
+        const talaLvl = talaState ? (talaState().lvl || 1) : 1;
+        if (talaLvl < requiredLvl) {
+          if ($gameMessage) $gameMessage.add(MSG_NO_LEVEL_EQUIP);
+          return;
+        }
+      }
+    }
+    _Game_Actor_changeEquip.call(this, slotId, item);
   };
 })();
