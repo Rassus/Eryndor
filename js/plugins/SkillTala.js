@@ -77,12 +77,11 @@
     NAME: "Tala",
 
     // Valores Base de la Skill
-    doble_reward_min_lvl: 5,
-    bird_nest_reward_min_lvl: 5,
+    doble_reward_min_lvl: 1,
+    bird_nest_reward_min_lvl: 1,
     bird_nest_egg_reward_min_lvl: 35,
     bird_nest_treasure_reward_min_lvl: 70,
 
-    has_doble_reward: false,
     doble_reward_chance_base: 15,
 
     // Troncos extra por cada 1 HP de daño (chance %)
