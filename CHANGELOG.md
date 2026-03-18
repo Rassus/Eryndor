@@ -1,5 +1,9 @@
 # Changelog
 
+- **Onyx_SkillsScene** Escena "Habilidades" en menú: lista desde SkillList + detalle (Tala integrada).
+
+- **b30df34** (2026-03-17) [Test] Guardar
+
 - **f60c7c6** (2026-03-16) [Feature] Se agrega validacion para evitar que se equipe un hacha que no pertenece a su nivel
 
 - **9f2e61c** (2026-03-15) [Feat] Se añade la logica de que se rompa el hacha

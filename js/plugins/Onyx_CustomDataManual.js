@@ -92,7 +92,18 @@
     const row = $dataCustom.MaterialRewards.find(r => r && r.material_id === materialId);
     if (!row) return false;
 
-    const chance = Number(row.chance || 0);
+    var chance = Number(row.chance);
+    if (row.chance === undefined || row.chance === null) {
+      if (materialId === 13 && window.Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.getBirdNestChance) {
+        chance = Onyx.Skill.Tala.getBirdNestChance();
+      } else if (materialId === 14 && window.Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.getBirdNestEggChance) {
+        chance = Onyx.Skill.Tala.getBirdNestEggChance();
+      } else if (materialId === 15 && window.Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.getBirdNestTreasureChance) {
+        chance = Onyx.Skill.Tala.getBirdNestTreasureChance();
+      } else {
+        chance = 0;
+      }
+    }
     if (chance <= 0) return false;
 
     // Roll decimal 0..100 (permite chances ultra bajos)

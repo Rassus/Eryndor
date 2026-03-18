@@ -1,6 +1,6 @@
 [
 	null,
-	{"skill_id":1,"skill_name":"Tala","skill_min_lvl":1, "skill_max_level":120},
+	{"skill_id":1,"skill_name":"Tala","skill_min_lvl":1, "skill_max_level":120, "icon_normal":304, "icon_99":305, "icon_max_lvl":306, "icon_max_exp":307},
 	{"skill_id":2,"skill_name":"Mineria","skill_min_lvl":1, "skill_max_level":150},
 	{"skill_id":3,"skill_name":"Pesca","skill_min_lvl":1, "skill_max_level":99},
 	{"skill_id":4,"skill_name":"Recolección","skill_min_lvl":1, "skill_max_level":255},

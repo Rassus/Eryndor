@@ -56,6 +56,17 @@
   "use strict";
   var SKILL_TALA_VERSION = "1.0.0.0";
 
+  // Tope GLOBAL de EXP total (no se puede acumular más que esto, independiente de nivel/skill)
+  var ONYX_GLOBAL_MAX_TOTAL_EXP_STR = "2289796205681772328910848";
+  var ONYX_GLOBAL_MAX_TOTAL_EXP = Number(ONYX_GLOBAL_MAX_TOTAL_EXP_STR);
+
+  function clampTotalExp(n) {
+    var x = Number(n) || 0;
+    if (x < 0) x = 0;
+    if (isFinite(ONYX_GLOBAL_MAX_TOTAL_EXP) && x > ONYX_GLOBAL_MAX_TOTAL_EXP) x = ONYX_GLOBAL_MAX_TOTAL_EXP;
+    return x;
+  }
+
   // Parámetros del plugin (Variables de juego)
   var PARAMS = PluginManager.parameters("SkillTala");
   var VAR_SKILL_LEVEL = Number(PARAMS["varSkillLevel"] || 21);
@@ -81,6 +92,10 @@
     bird_nest_reward_min_lvl: 1,
     bird_nest_egg_reward_min_lvl: 35,
     bird_nest_treasure_reward_min_lvl: 70,
+
+    bird_nest_reward_base_chance: 8.5,
+    bird_nest_egg_reward_base_chance: 0.75,
+    bird_nest_treasure_reward_base_chance: 0.000026,
 
     doble_reward_chance_base: 15,
 
@@ -247,6 +262,8 @@
       }
 
     };
+    // Asegurar clamp del tope global de EXP
+    $gameSystem._onyxSkills[C.ID].skill_total_exp = clampTotalExp($gameSystem._onyxSkills[C.ID].skill_total_exp);
     return $gameSystem._onyxSkills[C.ID];
   }
 
@@ -353,6 +370,37 @@
     return Math.min(100, Math.max(0, base + bonus));
   };
 
+  /** Chance % nido vacío. Solo aplica si nivel >= bird_nest_reward_min_lvl (1). */
+  Onyx.Skill.Tala.getBirdNestChance = function() {
+    var st = ensureStore();
+    var lvl = (st && st.skill_lvl) ? Math.max(1, Number(st.skill_lvl) || 1) : 1;
+    if (lvl < (C.bird_nest_reward_min_lvl || 1)) return 0;
+    var base = Number(C.bird_nest_reward_base_chance) || 8.5;
+    var bonus = (st && st.bonus) ? Number(st.bonus.bird_nest_chance) || 0 : 0;
+    return Math.min(100, Math.max(0, base + bonus));
+  };
+
+  /** Chance % nido con huevo. Solo aplica si nivel >= bird_nest_egg_reward_min_lvl (35). */
+  Onyx.Skill.Tala.getBirdNestEggChance = function() {
+    var st = ensureStore();
+    var lvl = (st && st.skill_lvl) ? Math.max(1, Number(st.skill_lvl) || 1) : 1;
+    if (lvl < (C.bird_nest_egg_reward_min_lvl || 35)) return 0;
+    var base = Number(C.bird_nest_egg_reward_base_chance) || 0.75;
+    var bonus = (st && st.bonus) ? Number(st.bonus.bird_nest_egg_chance) || 0 : 0;
+    return Math.min(100, Math.max(0, base + bonus));
+  };
+
+  /** Chance % nido con tesoro. Solo aplica si nivel >= bird_nest_treasure_reward_min_lvl (70). */
+  Onyx.Skill.Tala.getBirdNestTreasureChance = function() {
+    var st = ensureStore();
+    var lvl = (st && st.skill_lvl) ? Math.max(1, Number(st.skill_lvl) || 1) : 1;
+    if (lvl < (C.bird_nest_treasure_reward_min_lvl || 70)) return 0;
+    var base = Number(C.bird_nest_treasure_reward_base_chance) || 0.000026;
+    var bonus = (st && st.bonus) ? Number(st.bonus.bird_nest_treasure_chance) || 0 : 0;
+    var percent = base + bonus;
+    return Math.max(0, percent);
+  };
+
   /** Probabilidad (0–1) de que el hacha se rompa en un golpe crítico. base 0.025 = 0.025%. bonus: 0-100 = %, o 0-1 = fracción (1 = 100%). */
   Onyx.Skill.Tala.getWoodHatchetBreakChance = function() {
     var st = ensureStore();
@@ -372,7 +420,8 @@
     }
 
     var lvl = Math.max(1, Number(st.skill_lvl) || 1);
-    var total = Math.max(0, Number(st.skill_total_exp) || 0);
+    var total = clampTotalExp(st.skill_total_exp);
+    st.skill_total_exp = total;
 
     // asegurar coherencia por si tocaste exp manual
     lvl = recalcLevelFromTotalExp(total, lvl);
@@ -409,7 +458,10 @@
     var cap = getCap();
     var beforeLvl = Math.max(1, Number(st.skill_lvl) || 1);
 
-    st.skill_total_exp = Math.max(0, Number(st.skill_total_exp) || 0) + add;
+    var beforeTotal = clampTotalExp(st.skill_total_exp);
+    var afterTotal = clampTotalExp(beforeTotal + add);
+    st.skill_total_exp = afterTotal;
+    var addedEffective = Math.max(0, afterTotal - beforeTotal);
 
     // recalcular nivel
     var afterLvl = recalcLevelFromTotalExp(st.skill_total_exp, beforeLvl);
@@ -420,7 +472,7 @@
     var levelUps = Math.max(0, afterLvl - beforeLvl);
     return {
       ok: true,
-      added: add,
+      added: addedEffective,
       levelUps: levelUps,
       leveledUp: levelUps > 0,
       state: Onyx.Skill.Tala.state()
@@ -467,7 +519,7 @@
 
     st.skill_lvl = lvl;
     // dejamos la exp total al mínimo del lvl (y no inventamos números)
-    st.skill_total_exp = Number(minTotal) || 0;
+    st.skill_total_exp = clampTotalExp(Number(minTotal) || 0);
     syncVariablesToGame();
     return true;
   };
