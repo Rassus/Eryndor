@@ -533,7 +533,68 @@
     return true;
   };
 
+  Onyx.Skill.Tala.isActive = function() {
+    if (window.Onyx && Onyx.SkillsActive && Onyx.SkillsActive.isActive) {
+      return Onyx.SkillsActive.isActive(C.ID);
+    }
+    return true;
+  };
+
+  Onyx.Skill.Tala.getEffectiveBonusValues = function() {
+    var out = {};
+    var st = ensureStore();
+    if (!st || !st.bonus) return out;
+    var base = {
+      doble_reward_chance: C.doble_reward_chance_base || 0,
+      bird_nest_chance: C.bird_nest_reward_base_chance || 0,
+      bird_nest_egg_chance: C.bird_nest_egg_reward_base_chance || 0,
+      bird_nest_treasure_chance: C.bird_nest_treasure_reward_base_chance || 0,
+      mushroom_reward_chance: C.mushroom_reward_base_chance || 0,
+      tree_seed_reward_chance: C.tree_seed_reward_base_chance || 0,
+      tree_root_reward_chance: C.tree_root_reward_base_chance || 0,
+      tree_crust_reward_chance: C.tree_crust_reward_base_chance || 0,
+      tree_sap_reward_chance: C.tree_sap_reward_base_chance || 0,
+      tree_extra_log_chance: C.tree_extra_log_chance_base || 0,
+      wood_hit_chance: C.wood_hit_chance_base || 75,
+      wood_crit_chance: C.wood_crit_chance_base || 10,
+      buggy_reward_chance: C.buggy_reward_base_chance || 0,
+      buggy_combat_chance: C.buggy_combat_base_chance || 0,
+      combat_evil_tree_chance: C.combat_evil_tree_event_base_chance || 0,
+      break_hatche_chance: (C.break_hatche_base_chance || 0) * 100,
+      wise_old_tree_chance: (C.wise_old_tree_base_chance || 0) * 100,
+      nature_spirit_chance: (C.nature_spirit_base_chance || 0) * 100,
+      sap_rain_chance: (C.sap_rain_base_chance || 0) * 100,
+      living_root_chance: (C.living_root_base_chance || 0) * 100,
+      termites_war_chance: (C.termites_war_base_chance || 0) * 100
+    };
+    var labels = {
+      doble_reward_chance: "Doble recompensa", bird_nest_chance: "Nido",
+      bird_nest_egg_chance: "Nido huevo", bird_nest_treasure_chance: "Nido tesoro",
+      mushroom_reward_chance: "Hongos", tree_seed_reward_chance: "Semillas",
+      tree_root_reward_chance: "Raíces", tree_crust_reward_chance: "Corteza",
+      tree_sap_reward_chance: "Savia", tree_extra_log_chance: "Troncos extra",
+      wood_hit_chance: "Precisión", wood_crit_chance: "Crítico",
+      buggy_reward_chance: "Insectos", buggy_combat_chance: "Combate insectos",
+      combat_evil_tree_chance: "Árbol maldito", break_hatche_chance: "Romper hacha",
+      wise_old_tree_chance: "Árbol ancestral", nature_spirit_chance: "Espíritu naturaleza",
+      sap_rain_chance: "Lluvia savia", living_root_chance: "Raíz viviente",
+      termites_war_chance: "Guerra termitas"
+    };
+    for (var k in base) {
+      var bonus = Number(st.bonus[k]) || 0;
+      if (k.indexOf("break_") === 0 || k.indexOf("wise_") === 0 || k.indexOf("nature_") === 0 ||
+          k.indexOf("sap_rain") === 0 || k.indexOf("living_") === 0 || k.indexOf("termites_") === 0) {
+        bonus = (bonus > 0 && bonus <= 1) ? bonus * 100 : bonus;
+      }
+      out[k] = { label: labels[k] || k, value: base[k] + bonus };
+    }
+    return out;
+  };
+
   Onyx.Skill.Tala.init = function() {
+    if (window.Onyx && Onyx.SkillsActive && Onyx.SkillsActive.activate) {
+      Onyx.SkillsActive.activate(C.ID);
+    }
     var skill_list = window.$dataCustom && window.$dataCustom.SkillList;
     var max_lvl = 0;
     if (!skill_list) {

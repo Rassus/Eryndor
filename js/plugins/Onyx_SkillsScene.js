@@ -102,6 +102,13 @@
 
 
 
+  function isSkillActive(skillId) {
+    if (window.Onyx && Onyx.SkillsActive && Onyx.SkillsActive.isActive) {
+      return Onyx.SkillsActive.isActive(Number(skillId));
+    }
+    return false;
+  }
+
   function skillListRows() {
 
     var list = window.$dataCustom && window.$dataCustom.SkillList;
@@ -114,7 +121,7 @@
 
       var row = list[i];
 
-      if (row && row.skill_id != null) out.push(row);
+      if (row && row.skill_id != null && isSkillActive(row.skill_id)) out.push(row);
 
     }
 
@@ -481,6 +488,70 @@
         skillCap: st.cap,
 
         playerLvl: st.lvl,
+
+        totalExp: total,
+
+        nextLevelExp: nextLevelExp
+
+      };
+
+    }
+
+    if (id === 4 && window.Onyx && Onyx.Skill && Onyx.Skill.Recoleccion && Onyx.Skill.Recoleccion.state) {
+
+      var st = Onyx.Skill.Recoleccion.state();
+
+      var total = st.totalExp || 0;
+
+      var lvl = st.lvl;
+
+      var cap = st.cap;
+
+      var nextLv = lvl + 1;
+
+      var nextTotal = st.nextLevelTotalExp;
+
+      if (nextTotal == null && lvl < cap) nextTotal = expTotalForLevelFromTable(nextLv);
+
+      var nextLevelExp = lvl < cap && nextTotal != null ? nextTotal : null;
+
+      var lines = [
+
+        { label: "Nivel", text: String(lvl) + " / " + String(cap) },
+
+        { label: "Exp: ", text: String(total) + "/" + String(nextTotal) }
+
+      ];
+
+      if (lvl < cap && nextTotal != null) {
+
+        lines.push({ label: "Siguiente nivel", text: Math.max(0, nextTotal - total) + " EXP" });
+
+      } else if (lvl >= cap) {
+
+        lines.push({ label: "Siguiente nivel", text: "— (nivel máximo alcanzado)" });
+
+      }
+
+      return {
+
+        learned: Onyx.Skill.Recoleccion.isActive ? Onyx.Skill.Recoleccion.isActive() : true,
+
+        name: name,
+
+        lines: lines,
+
+        minLvl: minLvl,
+
+        maxLvl: maxLvl,
+
+        listSubtext: "Nv. " + st.lvl,
+
+        currentLvl: st.lvl,
+
+        skillCap: st.cap,
+
+        playerLvl: st.lvl,
         totalExp: total,
         nextLevelExp: nextLevelExp
 
@@ -584,9 +655,11 @@
     this._listWindow.setHandler("cancel", this.popScene.bind(this));
 
     this.addWindow(this._helpWindow);
-
     this.addWindow(this._listWindow);
-
+    if (window.OnyxWindowEditor) {
+      window.OnyxWindowEditor.registerWindow(this._helpWindow, "skills_help");
+      window.OnyxWindowEditor.registerWindow(this._listWindow, "skills_list");
+    }
     this._listWindow.activate();
 
     var ri = Window_OnyxSkillsList.restoreIndex();
@@ -794,7 +867,6 @@
     var d = this._skillRow ? getSkillDetail(this._skillRow) : { name: "?" };
 
     help.setText(d.name + "  Cancel: volver");
-    // Centrar texto del help (sin paréntesis).
     help.refresh = function() {
       this.contents.clear();
       var text = this._text || "";
@@ -803,29 +875,26 @@
     help.refresh();
 
     var wy = help.height;
-
     var rest = Graphics.boxHeight - wy;
 
     var hTop = Math.max(Math.floor(rest * 0.42), 220);
-
     if (hTop > rest - 120) hTop = Math.max(rest - 120, Math.floor(rest / 3));
-
     var hBot = rest - hTop;
 
     this._summaryWindow = new Window_OnyxSkillSummary(0, wy, Graphics.boxWidth, hTop, this._skillRow);
-
     this._unlockWindow = new Window_OnyxSkillUnlocks(0, wy + hTop, Graphics.boxWidth, hBot, this._skillRow);
 
     this._unlockWindow.setHandler("cancel", this.popScene.bind(this));
 
     this.addWindow(help);
-
     this.addWindow(this._summaryWindow);
-
     this.addWindow(this._unlockWindow);
-
+    if (window.OnyxWindowEditor) {
+      window.OnyxWindowEditor.registerWindow(help, "skill_detail_help");
+      window.OnyxWindowEditor.registerWindow(this._summaryWindow, "skill_detail_summary");
+      window.OnyxWindowEditor.registerWindow(this._unlockWindow, "skill_detail_unlocks");
+    }
     this._unlockWindow.activate();
-
     if (this._unlockWindow.maxItems() > 0) this._unlockWindow.select(0);
 
   };
@@ -833,97 +902,50 @@
 
 
   function Window_OnyxSkillSummary(x, y, width, height, skillRow) {
-
     this._skillRow = skillRow;
-
     Window_Base.prototype.initialize.call(this, x, y, width, height);
-
     this.refresh();
-
   }
 
-
-
   Window_OnyxSkillSummary.prototype = Object.create(Window_Base.prototype);
-
   Window_OnyxSkillSummary.prototype.constructor = Window_OnyxSkillSummary;
 
-
-
   Window_OnyxSkillSummary.prototype.refresh = function() {
-
     this.contents.clear();
-
     if (!this._skillRow) {
-
       this.drawText("Sin datos.", 12, 12, this.contentsWidth() - 24);
-
       return;
-
     }
-
     var detail = getSkillDetail(this._skillRow);
-
     var y0 = 8;
-
     var lh = this.lineHeight();
-
     var ix = pickSkillIconIndex(this._skillRow, detail);
-
     var tx = 12;
-
     if (ix >= 0) {
-
       this.drawIcon(ix, 12, y0);
-
       tx = 12 + Window_Base._iconWidth + 10;
-
     }
-
     this.resetTextColor();
-
     this.contents.fontSize = this.standardFontSize() + 2;
-
     this.drawText(detail.name, tx, y0 + 2, this.contentsWidth() - tx - 12);
-
     this.contents.fontSize = this.standardFontSize();
-
     var y1 = y0 + Math.max(Window_Base._iconHeight, lh + 6);
-
     this.resetTextColor();
-
-
     y1 += lh + 2;
-
     var lines = detail.lines || [];
-
     var fs = this.contents.fontSize;
-
     this.contents.fontSize = Math.max(16, fs - 2);
-
     var lineStep = this.lineHeight() + 1;
-
     var maxY = this.contents.height - 6;
-
     for (var i = 0; i < lines.length && y1 <= maxY - lineStep; i++) {
-
       var L = lines[i];
-
       var full = String(L.label) + ": " + String(L.text);
-
       this.resetTextColor();
-
       this.drawText(full, 12, y1, this.contentsWidth() - 20);
-
       y1 += lineStep;
-
     }
-
     this.contents.fontSize = fs;
-
   };
-
-
 
   function Window_OnyxSkillUnlocks(x, y, width, height, skillRow) {
 
@@ -945,8 +967,6 @@
 
   Window_OnyxSkillUnlocks.prototype.constructor = Window_OnyxSkillUnlocks;
 
-
-
   Window_OnyxSkillUnlocks.prototype.maxItems = function() {
 
     return this._unlockList.length;
@@ -961,7 +981,35 @@
 
   };
 
+  Window_OnyxSkillUnlocks.prototype.contentsHeight = function() {
+    var minH = this.height - this.standardPadding() * 2;
+    var fullH = Math.max(1, this.maxItems()) * this.itemHeight();
+    return Math.max(minH, fullH);
+  };
 
+  Window_OnyxSkillUnlocks.prototype.itemRect = function(index) {
+    var rect = new Rectangle();
+    var maxCols = this.maxCols();
+    rect.width = this.itemWidth();
+    rect.height = this.itemHeight();
+    rect.x = index % maxCols * (rect.width + this.spacing());
+    rect.y = Math.floor(index / maxCols) * rect.height;
+    return rect;
+  };
+
+  Window_OnyxSkillUnlocks.prototype.update = function() {
+    Window_Selectable.prototype.update.call(this);
+    this.origin.x = this._scrollX || 0;
+    this.origin.y = this._scrollY || 0;
+  };
+
+  Window_OnyxSkillUnlocks.prototype.setTopRow = function(row) {
+    var scrollY = row.clamp(0, this.maxTopRow()) * this.itemHeight();
+    if (this._scrollY !== scrollY) {
+      this._scrollY = scrollY;
+      this.updateCursor();
+    }
+  };
 
   Window_OnyxSkillUnlocks.prototype.refresh = function() {
 
@@ -975,7 +1023,9 @@
 
     this.createContents();
 
-    this.drawAllItems();
+    for (var i = 0; i < this.maxItems(); i++) this.drawItem(i);
+
+    if (this.maxItems() > 0) this.select(this.index() >= 0 ? this.index() : 0);
 
   };
 
@@ -1021,8 +1071,6 @@
     this.changePaintOpacity(true);
 
   };
-
-
 
   // ---------------------------------------------------------------------------
 

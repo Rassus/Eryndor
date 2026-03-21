@@ -87,8 +87,14 @@
  * - Si un stack llega a 99 y queda sobrante, usa otro slot si existe.
  * - Cada slot tiene un id (0..27) y guarda { kind, id, amount }.
  *
+ * Nota en el ítem (Database): <max_qty:N> — máximo por pila para ese ítem (sustituye al 99 global
+ * del parámetro maxStack solo para ese objeto). Ej.: <max_qty:500>
+ *
  * Nota: Este plugin redefine Game_Party gainItem/loseItem/numItems/allItems
  * para que el resto del juego (menús/tienda/eventos) consulte el inventario por slots.
+ *
+ * Tienda: Scene_Shop.maxBuy usa espacio real (slots vacíos + hueco en pilas del mismo ítem),
+ * no el límite global 99 por tipo del motor, para poder comprar de nuevo tras llenar un stack.
  */
 
 (function() {
@@ -143,6 +149,48 @@
     return null;
   }
 
+  var ABS_MAX_STACK_FROM_NOTE = 999999999;
+
+  function parseMaxQtyFromNote(note) {
+    var m = String(note || "").match(/<max_qty:\s*(\d+)\s*>/i);
+    if (!m) return null;
+    var n = Math.floor(Number(m[1]));
+    if (isNaN(n) || n < 1) return null;
+    return Math.min(ABS_MAX_STACK_FROM_NOTE, n);
+  }
+
+  /** Tope por pila: nota <max_qty:N> o parámetro maxStack del plugin. */
+  function maxStackForItem(obj) {
+    if (!obj || !isDbItem(obj)) return 1;
+    var tagged = parseMaxQtyFromNote(obj.note);
+    if (tagged != null) return Math.max(1, tagged);
+    return MAX_STACK;
+  }
+
+  /** Formato abreviado para cantidades en UI (mismo criterio que el banco: k, M, B, T, C, Q). */
+  function formatStackDisplayNumber(n) {
+    n = Math.max(0, Math.floor(Number(n) || 0));
+    if (n < 10000) return { text: String(n), tier: "white" };
+    if (n < 10000000) return { text: String(Math.floor(n / 1000)) + "k", tier: "white" };
+    if (n < 1000000000) return { text: String(Math.min(999, Math.floor(n / 1000000))) + "M", tier: "green" };
+    if (n < 1000000000000) return { text: String(Math.min(999, Math.floor(n / 1000000000))) + "B", tier: "green" };
+    if (n < 1e15) return { text: String(Math.min(999, Math.floor(n / 1e12))) + "T", tier: "yellow" };
+    if (n < 1e18) return { text: String(Math.min(999, Math.floor(n / 1e15))) + "C", tier: "yellow" };
+    return { text: String(Math.min(999, Math.floor(n / 1e18))) + "Q", tier: "yellow" };
+  }
+
+  function applyStackDisplayColor(win, tier) {
+    if (tier === "green") win.changeTextColor(win.textColor(6));
+    else if (tier === "yellow") win.changeTextColor(win.textColor(17));
+    else win.resetTextColor();
+  }
+
+  /** Cantidad legible con separador de miles (punto), sin abreviar k/M/B. */
+  function formatQuantityThousands(n) {
+    n = Math.max(0, Math.floor(Number(n) || 0));
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
   function slotEmpty(s) {
     return !s || !s.kind || !s.id || !s.amount;
   }
@@ -171,7 +219,7 @@
   }
 
   function maxPerSlot(obj) {
-    return isStackable(obj) ? MAX_STACK : 1;
+    return isStackable(obj) ? maxStackForItem(obj) : 1;
   }
 
   function sumAmount(party, obj) {
@@ -208,7 +256,7 @@
       for (var i = 0; i < SLOT_COUNT && left > 0; i++) {
         var s = party._onyxInvSlots[i];
         if (!s || s.kind !== k || Number(s.id) !== id) continue;
-        var cap = MAX_STACK - (Number(s.amount) || 0);
+        var cap = maxStackForItem(obj) - (Number(s.amount) || 0);
         if (cap <= 0) continue;
         var add = Math.min(cap, left);
         s.amount = (Number(s.amount) || 0) + add;
@@ -276,6 +324,10 @@
   window.OnyxInv = window.OnyxInv || {};
   window.OnyxInv.slotCount = function() { return SLOT_COUNT; };
   window.OnyxInv.maxStack = function() { return MAX_STACK; };
+  window.OnyxInv.maxStackForItem = maxStackForItem;
+  window.OnyxInv.formatStackDisplay = formatStackDisplayNumber;
+  window.OnyxInv.applyStackDisplayColor = applyStackDisplayColor;
+  window.OnyxInv.formatQuantityThousands = formatQuantityThousands;
   window.OnyxInv.slots = function() { normalizeSlots($gameParty); return $gameParty._onyxInvSlots; };
   window.OnyxInv.swapSlots = function(a, b) {
     normalizeSlots($gameParty);
@@ -370,10 +422,18 @@
     this.addWindow(this._itemHeaderWindow);
     this.addWindow(this._tabsWindow);
     this.addWindow(this._contentWindow);
-
-    // Ventana oro (parte inferior izquierda)
+    if (window.OnyxWindowEditor) {
+      window.OnyxWindowEditor.registerWindow(this._helpWindow, "inv_help");
+      window.OnyxWindowEditor.registerWindow(this._slotsWindow, "inv_slots");
+      window.OnyxWindowEditor.registerWindow(this._itemHeaderWindow, "inv_header");
+      window.OnyxWindowEditor.registerWindow(this._tabsWindow, "inv_tabs");
+      window.OnyxWindowEditor.registerWindow(this._contentWindow, "inv_content");
+    }
     this._goldWindow = new Window_OnyxInvGold(0, wy + slotsH, leftW, goldH);
     this.addWindow(this._goldWindow);
+    if (window.OnyxWindowEditor) {
+      window.OnyxWindowEditor.registerWindow(this._goldWindow, "inv_gold");
+    }
 
     this._slotsWindow.activate();
     var sel = 0;
@@ -400,7 +460,9 @@
     var obj = slotToObject(s);
     var qty = Number(s.amount) || 0;
     var name = obj && obj.name ? obj.name : "este item";
-    if (s.kind === "item" && qty > 1) name = name + " x" + qty;
+    if (s.kind === "item" && qty > 1) {
+      name = name + " x" + formatStackDisplayNumber(qty).text;
+    }
 
     if (this._invDeleteLoading) {
       try { this.removeChild(this._invDeleteLoading); } catch (e) {}
@@ -732,11 +794,13 @@
       if (s.kind === "item") showQty = true;
       else if (amt > 1) showQty = true;
       if (showQty) {
-        // Número más pequeño (MV tiene lineHeight fijo, así que posicionamos manual)
         this.contents.fontSize = 10;
-        var qtyY = iy + 18; // esquina inferior derecha dentro del icono
+        var qtyY = iy + 18;
         var qtyX = ix;
-        this.drawText(String(amt), qtyX, qtyY, Window_Base._iconWidth, "right");
+        var fmt = formatStackDisplayNumber(amt);
+        applyStackDisplayColor(this, fmt.tier);
+        this.drawText(fmt.text, qtyX, qtyY, Window_Base._iconWidth, "right");
+        this.resetTextColor();
         this.contents.fontSize = this.standardFontSize();
       }
     }
@@ -864,6 +928,13 @@
     this.contents.fontSize = this.standardFontSize() + 6;
     this.drawText(name, 12, 0, this.contentsWidth() - 24, "center");
     this.contents.fontSize = this.standardFontSize();
+    if (this._item && DataManager.isItem(this._item) && this._qty > 0) {
+      this.contents.fontSize = Math.max(10, this.standardFontSize() - 2);
+      this.changeTextColor(this.normalColor());
+      this.drawText("x" + formatQuantityThousands(this._qty), 12, this.lineHeight() + 2, this.contentsWidth() - 24, "center");
+      this.resetTextColor();
+      this.contents.fontSize = this.standardFontSize();
+    }
   };
 
   function Window_OnyxInvTabs(x, y, width, height) {
@@ -918,13 +989,13 @@
     ctx.rect(rect.x, rect.y, rect.width, rect.height);
     ctx.clip();
 
-    // Letra un poco más pequeña que la normal.
-    var fs = Math.max(10, this.standardFontSize() - 4);
+    // Usar el mismo tamaño de letra que las pestañas normales.
+    var fs = this.standardFontSize();
     this.contents.fontSize = fs;
 
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.font = fs + "px " + this.standardFontFace();
+    ctx.font = fs + "px " + this.contents.fontFace;
     ctx.strokeStyle = "#000000";
     ctx.fillStyle = "#FFD400";
     ctx.lineWidth = 1;
@@ -1173,7 +1244,7 @@
     var k = kindOf(item);
     if (!k) return _Game_Party_maxItems.call(this, item);
     // por diseño: max stack por slot, no max total del inventario
-    return isStackable(item) ? MAX_STACK : 1;
+    return isStackable(item) ? maxStackForItem(item) : 1;
   };
 
   var _Game_Party_hasMaxItems = Game_Party.prototype.hasMaxItems;
@@ -1186,12 +1257,12 @@
     if (!isStackable(item)) {
       return firstEmptySlotIndex(this) < 0;
     }
-    // si hay stack con espacio o slot vacío, no está al máximo "global"
     var id = Number(item.id) || 0;
+    var cap = maxStackForItem(item);
     for (var i = 0; i < SLOT_COUNT; i++) {
       var s = this._onyxInvSlots[i];
       if (!s) return false;
-      if (s.kind === "item" && Number(s.id) === id && (Number(s.amount) || 0) < MAX_STACK) return false;
+      if (s.kind === "item" && Number(s.id) === id && (Number(s.amount) || 0) < cap) return false;
     }
     return true;
   };
@@ -1249,6 +1320,50 @@
     var k = kindOf(item);
     if (!k) return _Game_Party_loseItem.call(this, item, amount, includeEquip);
     this.gainItem(item, -amount, includeEquip);
+  };
+
+  // ---------------------------------------------------------------------------
+  // Tienda: el motor usa maxItems - numItems (tope global 99); con slots hace falta
+  // sumar huecos en pilas del mismo ítem + slots vacíos * 99.
+  // ---------------------------------------------------------------------------
+  function partyMaxBuyItemCount(party, item) {
+    if (!party || !item) return 0;
+    var k = kindOf(item);
+    normalizeSlots(party);
+    if (!k) {
+      return Math.max(0, party.maxItems(item) - party.numItems(item));
+    }
+    if (k === "weapon" || k === "armor") {
+      var emptyEq = 0;
+      for (var ei = 0; ei < SLOT_COUNT; ei++) {
+        if (!party._onyxInvSlots[ei]) emptyEq++;
+      }
+      return emptyEq;
+    }
+    if (k === "item") {
+      var iid = Number(item.id) || 0;
+      var capBuy = maxStackForItem(item);
+      var space = 0;
+      for (var j = 0; j < SLOT_COUNT; j++) {
+        var s = party._onyxInvSlots[j];
+        if (!s) space += capBuy;
+        else if (s.kind === "item" && Number(s.id) === iid) {
+          space += Math.max(0, capBuy - (Number(s.amount) || 0));
+        }
+      }
+      return space;
+    }
+    return 0;
+  }
+
+  var _Scene_Shop_maxBuy = Scene_Shop.prototype.maxBuy;
+  Scene_Shop.prototype.maxBuy = function() {
+    var max = partyMaxBuyItemCount($gameParty, this._item);
+    var price = this.buyingPrice();
+    if (price > 0) {
+      return Math.min(max, Math.floor(this.money() / price));
+    }
+    return max;
   };
 
 })();
