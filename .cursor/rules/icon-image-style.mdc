@@ -1,0 +1,24 @@
+---
+description: Guia de estilo para crear iconos pixel art RPG (items y recursos)
+alwaysApply: true
+---
+
+# Regla de estilo para iconos (imagenes)
+
+Cuando pidas crear iconos para este proyecto, usa este estilo base:
+
+- Pixel art limpio para inventario/UI (no ilustracion semirrealista).
+- Tamano pequeno y legible, pensado para lectura inmediata en interfaz.
+- Silueta simple y clara; evitar ruido visual y detalles excesivos.
+- Sombreado por bloques con pocos tonos por color.
+- Alto contraste interno para que destaque sobre fondos variados.
+- Paleta controlada por familia de elemento (ejemplo: cian/turquesa para cristal/energia).
+- Brillos especulares puntuales para reforzar material magico.
+- Fondo transparente y recorte limpio, listo para uso en `img/icons`.
+
+Checklist rapido antes de entregar:
+
+- El icono se entiende en tamano pequeno.
+- La forma principal se distingue sin depender del color.
+- No hay banding ni dithering excesivo.
+- Mantiene coherencia con el estilo RPG clasico de iconos de item.

@@ -1,0 +1,210 @@
+[
+  null,
+  {
+    "fish_id": 1,
+    "name": "Pececillo plateado",
+    "output_type": "item",
+    "output_id": 121,
+    "output_count": 1,
+    "difficulty": 1,
+    "exp": 8
+  },
+  {
+    "fish_id": 2,
+    "name": "Gobio de arroyo",
+    "output_type": "item",
+    "output_id": 124,
+    "output_count": 1,
+    "difficulty": 1,
+    "exp": 9
+  },
+  {
+    "fish_id": 3,
+    "name": "Sardina de mar",
+    "output_type": "item",
+    "output_id": 127,
+    "output_count": 1,
+    "difficulty": 2,
+    "exp": 11
+  },
+  {
+    "fish_id": 4,
+    "name": "Arenque plateado",
+    "output_type": "item",
+    "output_id": 130,
+    "output_count": 1,
+    "difficulty": 2,
+    "exp": 12
+  },
+  {
+    "fish_id": 5,
+    "name": "Lubina comun",
+    "output_type": "item",
+    "output_id": 133,
+    "output_count": 1,
+    "difficulty": 2,
+    "exp": 14
+  },
+  {
+    "fish_id": 6,
+    "name": "Corvina gris",
+    "output_type": "item",
+    "output_id": 136,
+    "output_count": 1,
+    "difficulty": 2,
+    "exp": 15
+  },
+  {
+    "fish_id": 7,
+    "name": "Dorada costera",
+    "output_type": "item",
+    "output_id": 139,
+    "output_count": 1,
+    "difficulty": 2,
+    "exp": 17
+  },
+  {
+    "fish_id": 8,
+    "name": "Robalo del estuario",
+    "output_type": "item",
+    "output_id": 142,
+    "output_count": 1,
+    "difficulty": 2,
+    "exp": 18
+  },
+  {
+    "fish_id": 9,
+    "name": "Lucio del pantano",
+    "output_type": "item",
+    "output_id": 145,
+    "output_count": 1,
+    "difficulty": 3,
+    "exp": 20
+  },
+  {
+    "fish_id": 10,
+    "name": "Salmon rosa",
+    "output_type": "item",
+    "output_id": 148,
+    "output_count": 1,
+    "difficulty": 3,
+    "exp": 22
+  },
+  {
+    "fish_id": 11,
+    "name": "Perca gigante",
+    "output_type": "item",
+    "output_id": 151,
+    "output_count": 1,
+    "difficulty": 3,
+    "exp": 24
+  },
+  {
+    "fish_id": 12,
+    "name": "Siluro del fango",
+    "output_type": "item",
+    "output_id": 154,
+    "output_count": 1,
+    "difficulty": 3,
+    "exp": 26
+  },
+  {
+    "fish_id": 13,
+    "name": "Mero negro",
+    "output_type": "item",
+    "output_id": 157,
+    "output_count": 1,
+    "difficulty": 3,
+    "exp": 28
+  },
+  {
+    "fish_id": 14,
+    "name": "Carpa imperial",
+    "output_type": "item",
+    "output_id": 160,
+    "output_count": 1,
+    "difficulty": 3,
+    "exp": 32
+  },
+  {
+    "fish_id": 15,
+    "name": "Cangrejo de rio",
+    "output_type": "item",
+    "output_id": 163,
+    "output_count": 1,
+    "difficulty": 3,
+    "exp": 20
+  },
+  {
+    "fish_id": 16,
+    "name": "Langosta espinosa",
+    "output_type": "item",
+    "output_id": 166,
+    "output_count": 1,
+    "difficulty": 3,
+    "exp": 23
+  },
+  {
+    "fish_id": 17,
+    "name": "Camaron de estuario",
+    "output_type": "item",
+    "output_id": 169,
+    "output_count": 1,
+    "difficulty": 3,
+    "exp": 19
+  },
+  {
+    "fish_id": 18,
+    "name": "Centollo joven",
+    "output_type": "item",
+    "output_id": 172,
+    "output_count": 1,
+    "difficulty": 3,
+    "exp": 26
+  },
+  {
+    "fish_id": 19,
+    "name": "Cangrejo ermitano",
+    "output_type": "item",
+    "output_id": 175,
+    "output_count": 1,
+    "difficulty": 3,
+    "exp": 18
+  },
+  {
+    "fish_id": 20,
+    "name": "Bogavante pequeno",
+    "output_type": "item",
+    "output_id": 178,
+    "output_count": 1,
+    "difficulty": 3,
+    "exp": 27
+  },
+  {
+    "fish_id": 21,
+    "name": "Tiburon gris",
+    "output_type": "item",
+    "output_id": 181,
+    "output_count": 1,
+    "difficulty": 4,
+    "exp": 55
+  },
+  {
+    "fish_id": 22,
+    "name": "Orca (cria)",
+    "output_type": "item",
+    "output_id": 184,
+    "output_count": 1,
+    "difficulty": 4,
+    "exp": 85
+  },
+  {
+    "fish_id": 23,
+    "name": "Ballena piloto",
+    "output_type": "item",
+    "output_id": 187,
+    "output_count": 1,
+    "difficulty": 5,
+    "exp": 100
+  }
+]

@@ -1,0 +1,10089 @@
+{
+  "config": {
+    "min_enemy_id": 1,
+    "max_enemy_id": 2000
+  },
+  "enemies": [
+    {
+      "enemy_id": 1,
+      "name": "[1] Rata Pequeña",
+      "drops": [
+        {
+          "type": "item",
+          "data_id": 2,
+          "name": "Huesos",
+          "min": 1,
+          "max": 3,
+          "chance_raw": 1500000,
+          "chance_pct": 15.0,
+          "condition": "None"
+        },
+        {
+          "type": "item",
+          "data_id": 200,
+          "name": "Cola de Rata",
+          "min": 1,
+          "max": 1,
+          "chance_raw": 800000,
+          "chance_pct": 8.0,
+          "condition": "None"
+        },
+        {
+          "type": "item",
+          "data_id": 201,
+          "name": "Colmillos de Rata",
+          "min": 1,
+          "max": 1,
+          "chance_raw": 600000,
+          "chance_pct": 6.0,
+          "condition": "Butchering"
+        },
+        {
+          "type": "item",
+          "data_id": 202,
+          "name": "Pelaje de Rata",
+          "min": 1,
+          "max": 2,
+          "chance_raw": 1200000,
+          "chance_pct": 12.0,
+          "condition": "Slayer"
+        },
+        {
+          "type": "item",
+          "data_id": 203,
+          "name": "Piel de Rata",
+          "min": 1,
+          "max": 1,
+          "chance_raw": 400000,
+          "chance_pct": 4.0,
+          "condition": "Butchering"
+        },
+        {
+          "type": "item",
+          "data_id": 204,
+          "name": "Garras de Rata",
+          "min": 1,
+          "max": 1,
+          "chance_raw": 800000,
+          "chance_pct": 8.0,
+          "condition": "Slayer"
+        },
+        {
+          "type": "item",
+          "data_id": 501,
+          "name": "Mineral de Cobre",
+          "min": 1,
+          "max": 1,
+          "chance_raw": 300000,
+          "chance_pct": 3.0,
+          "condition": "None"
+        },
+        {
+          "type": "item",
+          "data_id": 540,
+          "name": "Hierba Vitalia",
+          "min": 1,
+          "max": 1,
+          "chance_raw": 2000000,
+          "chance_pct": 20.0,
+          "condition": "None"
+        }
+      ]
+    },
+    {
+      "enemy_id": 2,
+      "name": "[1] Cangrejo Bebe",
+      "drops": []
+    },
+    {
+      "enemy_id": 3,
+      "name": "[1] Hongo Tierno",
+      "drops": []
+    },
+    {
+      "enemy_id": 4,
+      "name": "[2] Limo Comun",
+      "drops": []
+    },
+    {
+      "enemy_id": 5,
+      "name": "[2] Cangrejo Comun",
+      "drops": []
+    },
+    {
+      "enemy_id": 6,
+      "name": "[3] Abeja Pequeña",
+      "drops": []
+    },
+    {
+      "enemy_id": 7,
+      "name": "[3] Avispon Comun",
+      "drops": []
+    },
+    {
+      "enemy_id": 8,
+      "name": "[4] Rata Furiosa",
+      "drops": []
+    },
+    {
+      "enemy_id": 9,
+      "name": "[5] Oruga Toxica",
+      "drops": []
+    },
+    {
+      "enemy_id": 10,
+      "name": "[6] Murciélago",
+      "drops": []
+    },
+    {
+      "enemy_id": 11,
+      "name": "[6] Maritoxica",
+      "drops": []
+    },
+    {
+      "enemy_id": 12,
+      "name": "[6] Zancudo Escarlata",
+      "drops": []
+    },
+    {
+      "enemy_id": 13,
+      "name": "[7] Avispon Venenoso",
+      "drops": []
+    },
+    {
+      "enemy_id": 14,
+      "name": "[7] Oruga Rabiosa",
+      "drops": []
+    },
+    {
+      "enemy_id": 15,
+      "name": "[8] Cangrejo Comun Azul",
+      "drops": []
+    },
+    {
+      "enemy_id": 16,
+      "name": "[8] Limo Venenoso",
+      "drops": []
+    },
+    {
+      "enemy_id": 17,
+      "name": "[8] Araña Media",
+      "drops": []
+    },
+    {
+      "enemy_id": 18,
+      "name": "[9] Pupa Toxica",
+      "drops": []
+    },
+    {
+      "enemy_id": 19,
+      "name": "[10] Reina Araña",
+      "drops": []
+    },
+    {
+      "enemy_id": 20,
+      "name": "[11] Ku-pi",
+      "drops": []
+    },
+    {
+      "enemy_id": 21,
+      "name": "[11] Diablillo Suave",
+      "drops": []
+    },
+    {
+      "enemy_id": 22,
+      "name": "[12] Rata Muy Furiosa",
+      "drops": []
+    },
+    {
+      "enemy_id": 23,
+      "name": "[12] Cangrejo Piedra",
+      "drops": []
+    },
+    {
+      "enemy_id": 24,
+      "name": "[13] Araña Venenosa",
+      "drops": []
+    },
+    {
+      "enemy_id": 25,
+      "name": "[13] Murciélago Manipulador",
+      "drops": []
+    },
+    {
+      "enemy_id": 26,
+      "name": "[13] Hada Verde",
+      "drops": []
+    },
+    {
+      "enemy_id": 27,
+      "name": "[14] Soldado Corrupto",
+      "drops": []
+    },
+    {
+      "enemy_id": 28,
+      "name": "[14] Maritoxica LSD",
+      "drops": []
+    },
+    {
+      "enemy_id": 29,
+      "name": "[15] Rata Zarza",
+      "drops": []
+    },
+    {
+      "enemy_id": 30,
+      "name": "[16] Mimic Comun",
+      "drops": []
+    },
+    {
+      "enemy_id": 31,
+      "name": "[16] Lobo de Musgo Pequeño",
+      "drops": []
+    },
+    {
+      "enemy_id": 32,
+      "name": "[16] Gallo Mutante",
+      "drops": []
+    },
+    {
+      "enemy_id": 33,
+      "name": "[17] Hongospin",
+      "drops": []
+    },
+    {
+      "enemy_id": 34,
+      "name": "[18] AB-ispon Fiero",
+      "drops": []
+    },
+    {
+      "enemy_id": 35,
+      "name": "[18] AC-ispon Mortal",
+      "drops": []
+    },
+    {
+      "enemy_id": 36,
+      "name": "[20] Serpiente Carrucel",
+      "drops": []
+    },
+    {
+      "enemy_id": 37,
+      "name": "[20] Escorpion Pinzagrande",
+      "drops": []
+    },
+    {
+      "enemy_id": 38,
+      "name": "[22] Fanatico Loco",
+      "drops": []
+    },
+    {
+      "enemy_id": 39,
+      "name": "[23] Limo Furioso",
+      "drops": []
+    },
+    {
+      "enemy_id": 40,
+      "name": "[23] Murciélago Oscuro",
+      "drops": []
+    },
+    {
+      "enemy_id": 41,
+      "name": "[24] Mimic Grande",
+      "drops": []
+    },
+    {
+      "enemy_id": 42,
+      "name": "[24] Ku-pi - Ku-po",
+      "drops": []
+    },
+    {
+      "enemy_id": 43,
+      "name": "[25] Espiritu de Tierra",
+      "drops": []
+    },
+    {
+      "enemy_id": 44,
+      "name": "[26] Zombie Guerrero",
+      "drops": []
+    },
+    {
+      "enemy_id": 45,
+      "name": "[27] Hongosbronw",
+      "drops": []
+    },
+    {
+      "enemy_id": 46,
+      "name": "[27] Gallo Mutante",
+      "drops": []
+    },
+    {
+      "enemy_id": 47,
+      "name": "[28] PLuppets",
+      "drops": []
+    },
+    {
+      "enemy_id": 48,
+      "name": "[29] Esqueleto Bailarin",
+      "drops": []
+    },
+    {
+      "enemy_id": 49,
+      "name": "[30] Ligatork",
+      "drops": []
+    },
+    {
+      "enemy_id": 50,
+      "name": "[31] Hada de Cueva",
+      "drops": []
+    },
+    {
+      "enemy_id": 51,
+      "name": "[32] Asesino",
+      "drops": []
+    },
+    {
+      "enemy_id": 52,
+      "name": "[33] Fanatico Demente",
+      "drops": []
+    },
+    {
+      "enemy_id": 53,
+      "name": "[33] Espiritu de Viento",
+      "drops": []
+    },
+    {
+      "enemy_id": 54,
+      "name": "[33] Gigante de Hierro",
+      "drops": []
+    },
+    {
+      "enemy_id": 55,
+      "name": "[35] Escorpion Malandroso",
+      "drops": []
+    },
+    {
+      "enemy_id": 56,
+      "name": "[36] Espiritu de Fuego",
+      "drops": []
+    },
+    {
+      "enemy_id": 57,
+      "name": "[36] Orco Minero",
+      "drops": []
+    },
+    {
+      "enemy_id": 58,
+      "name": "[37] Araña Furiosa Gigante",
+      "drops": []
+    },
+    {
+      "enemy_id": 59,
+      "name": "[38] Licantropo",
+      "drops": []
+    },
+    {
+      "enemy_id": 60,
+      "name": "[39] Esqueleto Furioso",
+      "drops": []
+    },
+    {
+      "enemy_id": 61,
+      "name": "[40] Lamia",
+      "drops": []
+    },
+    {
+      "enemy_id": 62,
+      "name": "[40] Esqueleto Rata",
+      "drops": []
+    },
+    {
+      "enemy_id": 63,
+      "name": "[41] Esqueleto Aficionado",
+      "drops": []
+    },
+    {
+      "enemy_id": 64,
+      "name": "[42] Esqueleto Guerrero",
+      "drops": []
+    },
+    {
+      "enemy_id": 65,
+      "name": "[42] Esqueleto Arquero",
+      "drops": []
+    },
+    {
+      "enemy_id": 66,
+      "name": "[43] Esqueleto Arquero Furioso",
+      "drops": []
+    },
+    {
+      "enemy_id": 67,
+      "name": "[43] Esqueleto Aficionado Furioso",
+      "drops": []
+    },
+    {
+      "enemy_id": 68,
+      "name": "[43] Gargola de Piedra",
+      "drops": []
+    },
+    {
+      "enemy_id": 69,
+      "name": "[44] Esqueleto General",
+      "drops": []
+    },
+    {
+      "enemy_id": 70,
+      "name": "[44] Esqueleto Rata Feroz",
+      "drops": []
+    },
+    {
+      "enemy_id": 71,
+      "name": "[46] Esqueleto Alquimista",
+      "drops": []
+    },
+    {
+      "enemy_id": 72,
+      "name": "[48] Murcielago de Raiz",
+      "drops": []
+    },
+    {
+      "enemy_id": 73,
+      "name": "[50] Esqueleto Demonio",
+      "drops": []
+    },
+    {
+      "enemy_id": 74,
+      "name": "[50] Dark Lord",
+      "drops": []
+    },
+    {
+      "enemy_id": 75,
+      "name": "[50] Garuda",
+      "drops": []
+    },
+    {
+      "enemy_id": 76,
+      "name": "[55] Gazer Helado",
+      "drops": []
+    },
+    {
+      "enemy_id": 77,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 78,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 79,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 80,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 81,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 82,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 83,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 84,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 85,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 86,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 87,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 88,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 89,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 90,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 91,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 92,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 93,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 94,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 95,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 96,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 97,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 98,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 99,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 100,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 101,
+      "name": "[67] Minotauro",
+      "drops": []
+    },
+    {
+      "enemy_id": 102,
+      "name": "[148] Angel",
+      "drops": []
+    },
+    {
+      "enemy_id": 103,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 104,
+      "name": "[250] Bahemoth",
+      "drops": []
+    },
+    {
+      "enemy_id": 105,
+      "name": "[85] Cerbero",
+      "drops": []
+    },
+    {
+      "enemy_id": 106,
+      "name": "[110] Quimera",
+      "drops": []
+    },
+    {
+      "enemy_id": 107,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 108,
+      "name": "[450] Muerte",
+      "drops": []
+    },
+    {
+      "enemy_id": 109,
+      "name": "[96] Demonio Comun",
+      "drops": []
+    },
+    {
+      "enemy_id": 110,
+      "name": "[400] Dragon Verde",
+      "drops": []
+    },
+    {
+      "enemy_id": 111,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 112,
+      "name": "[125] Dios de la Maldad",
+      "drops": []
+    },
+    {
+      "enemy_id": 113,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 114,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 115,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 116,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 117,
+      "name": "[75] Gazer",
+      "drops": []
+    },
+    {
+      "enemy_id": 118,
+      "name": "[59] General Geminis",
+      "drops": []
+    },
+    {
+      "enemy_id": 119,
+      "name": "[59] Comandante Acuario",
+      "drops": []
+    },
+    {
+      "enemy_id": 120,
+      "name": "[80] Fantasma",
+      "drops": []
+    },
+    {
+      "enemy_id": 121,
+      "name": "[600] Dios",
+      "drops": []
+    },
+    {
+      "enemy_id": 122,
+      "name": "[400] Cellestial",
+      "drops": []
+    },
+    {
+      "enemy_id": 123,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 124,
+      "name": "[66] Medusa Hada Comun",
+      "drops": []
+    },
+    {
+      "enemy_id": 125,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 126,
+      "name": "[96] Disociado Runico",
+      "drops": []
+    },
+    {
+      "enemy_id": 127,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 128,
+      "name": "[136] Ogro Azul",
+      "drops": []
+    },
+    {
+      "enemy_id": 129,
+      "name": "[88] Planta Conciente",
+      "drops": []
+    },
+    {
+      "enemy_id": 130,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 131,
+      "name": "[72] Tirubon",
+      "drops": []
+    },
+    {
+      "enemy_id": 132,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 133,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 134,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 135,
+      "name": "[80] Sucubus Seductora",
+      "drops": []
+    },
+    {
+      "enemy_id": 136,
+      "name": "[65] Vampiro",
+      "drops": []
+    },
+    {
+      "enemy_id": 137,
+      "name": "[62] Espiritu de Agua",
+      "drops": []
+    },
+    {
+      "enemy_id": 138,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 139,
+      "name": "[110] Wisp",
+      "drops": []
+    },
+    {
+      "enemy_id": 140,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 141,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 142,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 143,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 144,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 145,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 146,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 147,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 148,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 149,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 150,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 151,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 152,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 153,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 154,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 155,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 156,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 157,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 158,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 159,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 160,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 161,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 162,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 163,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 164,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 165,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 166,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 167,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 168,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 169,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 170,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 171,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 172,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 173,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 174,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 175,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 176,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 177,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 178,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 179,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 180,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 181,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 182,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 183,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 184,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 185,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 186,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 187,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 188,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 189,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 190,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 191,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 192,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 193,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 194,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 195,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 196,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 197,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 198,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 199,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 200,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 201,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 202,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 203,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 204,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 205,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 206,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 207,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 208,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 209,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 210,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 211,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 212,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 213,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 214,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 215,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 216,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 217,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 218,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 219,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 220,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 221,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 222,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 223,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 224,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 225,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 226,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 227,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 228,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 229,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 230,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 231,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 232,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 233,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 234,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 235,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 236,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 237,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 238,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 239,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 240,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 241,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 242,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 243,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 244,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 245,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 246,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 247,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 248,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 249,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 250,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 251,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 252,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 253,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 254,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 255,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 256,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 257,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 258,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 259,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 260,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 261,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 262,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 263,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 264,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 265,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 266,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 267,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 268,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 269,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 270,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 271,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 272,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 273,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 274,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 275,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 276,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 277,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 278,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 279,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 280,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 281,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 282,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 283,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 284,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 285,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 286,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 287,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 288,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 289,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 290,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 291,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 292,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 293,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 294,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 295,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 296,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 297,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 298,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 299,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 300,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 301,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 302,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 303,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 304,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 305,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 306,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 307,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 308,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 309,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 310,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 311,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 312,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 313,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 314,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 315,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 316,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 317,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 318,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 319,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 320,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 321,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 322,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 323,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 324,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 325,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 326,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 327,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 328,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 329,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 330,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 331,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 332,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 333,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 334,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 335,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 336,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 337,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 338,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 339,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 340,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 341,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 342,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 343,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 344,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 345,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 346,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 347,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 348,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 349,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 350,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 351,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 352,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 353,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 354,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 355,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 356,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 357,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 358,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 359,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 360,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 361,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 362,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 363,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 364,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 365,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 366,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 367,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 368,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 369,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 370,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 371,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 372,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 373,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 374,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 375,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 376,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 377,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 378,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 379,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 380,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 381,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 382,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 383,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 384,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 385,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 386,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 387,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 388,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 389,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 390,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 391,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 392,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 393,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 394,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 395,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 396,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 397,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 398,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 399,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 400,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 401,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 402,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 403,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 404,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 405,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 406,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 407,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 408,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 409,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 410,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 411,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 412,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 413,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 414,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 415,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 416,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 417,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 418,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 419,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 420,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 421,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 422,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 423,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 424,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 425,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 426,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 427,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 428,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 429,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 430,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 431,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 432,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 433,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 434,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 435,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 436,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 437,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 438,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 439,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 440,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 441,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 442,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 443,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 444,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 445,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 446,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 447,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 448,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 449,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 450,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 451,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 452,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 453,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 454,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 455,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 456,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 457,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 458,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 459,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 460,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 461,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 462,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 463,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 464,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 465,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 466,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 467,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 468,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 469,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 470,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 471,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 472,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 473,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 474,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 475,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 476,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 477,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 478,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 479,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 480,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 481,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 482,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 483,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 484,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 485,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 486,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 487,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 488,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 489,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 490,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 491,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 492,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 493,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 494,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 495,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 496,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 497,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 498,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 499,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 500,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 501,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 502,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 503,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 504,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 505,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 506,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 507,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 508,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 509,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 510,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 511,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 512,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 513,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 514,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 515,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 516,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 517,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 518,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 519,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 520,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 521,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 522,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 523,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 524,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 525,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 526,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 527,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 528,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 529,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 530,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 531,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 532,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 533,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 534,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 535,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 536,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 537,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 538,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 539,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 540,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 541,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 542,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 543,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 544,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 545,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 546,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 547,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 548,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 549,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 550,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 551,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 552,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 553,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 554,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 555,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 556,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 557,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 558,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 559,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 560,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 561,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 562,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 563,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 564,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 565,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 566,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 567,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 568,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 569,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 570,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 571,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 572,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 573,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 574,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 575,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 576,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 577,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 578,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 579,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 580,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 581,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 582,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 583,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 584,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 585,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 586,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 587,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 588,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 589,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 590,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 591,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 592,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 593,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 594,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 595,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 596,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 597,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 598,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 599,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 600,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 601,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 602,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 603,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 604,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 605,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 606,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 607,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 608,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 609,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 610,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 611,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 612,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 613,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 614,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 615,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 616,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 617,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 618,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 619,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 620,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 621,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 622,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 623,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 624,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 625,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 626,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 627,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 628,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 629,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 630,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 631,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 632,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 633,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 634,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 635,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 636,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 637,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 638,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 639,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 640,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 641,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 642,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 643,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 644,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 645,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 646,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 647,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 648,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 649,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 650,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 651,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 652,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 653,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 654,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 655,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 656,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 657,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 658,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 659,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 660,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 661,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 662,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 663,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 664,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 665,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 666,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 667,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 668,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 669,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 670,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 671,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 672,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 673,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 674,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 675,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 676,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 677,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 678,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 679,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 680,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 681,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 682,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 683,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 684,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 685,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 686,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 687,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 688,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 689,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 690,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 691,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 692,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 693,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 694,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 695,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 696,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 697,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 698,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 699,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 700,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 701,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 702,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 703,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 704,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 705,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 706,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 707,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 708,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 709,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 710,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 711,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 712,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 713,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 714,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 715,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 716,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 717,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 718,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 719,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 720,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 721,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 722,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 723,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 724,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 725,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 726,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 727,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 728,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 729,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 730,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 731,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 732,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 733,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 734,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 735,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 736,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 737,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 738,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 739,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 740,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 741,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 742,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 743,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 744,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 745,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 746,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 747,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 748,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 749,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 750,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 751,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 752,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 753,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 754,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 755,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 756,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 757,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 758,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 759,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 760,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 761,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 762,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 763,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 764,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 765,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 766,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 767,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 768,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 769,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 770,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 771,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 772,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 773,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 774,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 775,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 776,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 777,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 778,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 779,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 780,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 781,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 782,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 783,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 784,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 785,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 786,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 787,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 788,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 789,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 790,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 791,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 792,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 793,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 794,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 795,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 796,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 797,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 798,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 799,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 800,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 801,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 802,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 803,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 804,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 805,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 806,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 807,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 808,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 809,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 810,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 811,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 812,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 813,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 814,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 815,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 816,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 817,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 818,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 819,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 820,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 821,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 822,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 823,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 824,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 825,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 826,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 827,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 828,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 829,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 830,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 831,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 832,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 833,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 834,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 835,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 836,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 837,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 838,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 839,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 840,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 841,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 842,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 843,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 844,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 845,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 846,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 847,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 848,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 849,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 850,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 851,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 852,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 853,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 854,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 855,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 856,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 857,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 858,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 859,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 860,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 861,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 862,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 863,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 864,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 865,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 866,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 867,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 868,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 869,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 870,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 871,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 872,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 873,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 874,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 875,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 876,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 877,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 878,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 879,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 880,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 881,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 882,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 883,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 884,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 885,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 886,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 887,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 888,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 889,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 890,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 891,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 892,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 893,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 894,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 895,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 896,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 897,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 898,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 899,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 900,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 901,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 902,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 903,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 904,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 905,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 906,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 907,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 908,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 909,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 910,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 911,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 912,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 913,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 914,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 915,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 916,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 917,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 918,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 919,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 920,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 921,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 922,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 923,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 924,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 925,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 926,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 927,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 928,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 929,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 930,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 931,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 932,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 933,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 934,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 935,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 936,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 937,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 938,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 939,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 940,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 941,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 942,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 943,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 944,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 945,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 946,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 947,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 948,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 949,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 950,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 951,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 952,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 953,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 954,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 955,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 956,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 957,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 958,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 959,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 960,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 961,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 962,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 963,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 964,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 965,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 966,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 967,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 968,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 969,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 970,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 971,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 972,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 973,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 974,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 975,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 976,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 977,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 978,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 979,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 980,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 981,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 982,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 983,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 984,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 985,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 986,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 987,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 988,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 989,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 990,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 991,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 992,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 993,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 994,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 995,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 996,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 997,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 998,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 999,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1000,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1001,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1002,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1003,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1004,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1005,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1006,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1007,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1008,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1009,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1010,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1011,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1012,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1013,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1014,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1015,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1016,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1017,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1018,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1019,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1020,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1021,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1022,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1023,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1024,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1025,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1026,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1027,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1028,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1029,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1030,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1031,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1032,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1033,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1034,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1035,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1036,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1037,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1038,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1039,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1040,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1041,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1042,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1043,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1044,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1045,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1046,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1047,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1048,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1049,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1050,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1051,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1052,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1053,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1054,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1055,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1056,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1057,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1058,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1059,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1060,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1061,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1062,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1063,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1064,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1065,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1066,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1067,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1068,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1069,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1070,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1071,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1072,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1073,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1074,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1075,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1076,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1077,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1078,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1079,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1080,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1081,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1082,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1083,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1084,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1085,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1086,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1087,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1088,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1089,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1090,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1091,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1092,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1093,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1094,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1095,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1096,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1097,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1098,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1099,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1100,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1101,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1102,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1103,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1104,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1105,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1106,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1107,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1108,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1109,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1110,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1111,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1112,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1113,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1114,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1115,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1116,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1117,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1118,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1119,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1120,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1121,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1122,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1123,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1124,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1125,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1126,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1127,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1128,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1129,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1130,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1131,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1132,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1133,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1134,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1135,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1136,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1137,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1138,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1139,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1140,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1141,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1142,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1143,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1144,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1145,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1146,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1147,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1148,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1149,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1150,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1151,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1152,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1153,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1154,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1155,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1156,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1157,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1158,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1159,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1160,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1161,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1162,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1163,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1164,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1165,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1166,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1167,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1168,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1169,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1170,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1171,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1172,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1173,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1174,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1175,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1176,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1177,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1178,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1179,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1180,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1181,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1182,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1183,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1184,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1185,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1186,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1187,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1188,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1189,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1190,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1191,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1192,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1193,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1194,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1195,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1196,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1197,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1198,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1199,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1200,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1201,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1202,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1203,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1204,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1205,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1206,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1207,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1208,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1209,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1210,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1211,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1212,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1213,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1214,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1215,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1216,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1217,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1218,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1219,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1220,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1221,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1222,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1223,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1224,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1225,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1226,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1227,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1228,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1229,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1230,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1231,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1232,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1233,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1234,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1235,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1236,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1237,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1238,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1239,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1240,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1241,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1242,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1243,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1244,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1245,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1246,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1247,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1248,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1249,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1250,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1251,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1252,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1253,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1254,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1255,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1256,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1257,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1258,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1259,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1260,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1261,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1262,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1263,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1264,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1265,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1266,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1267,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1268,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1269,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1270,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1271,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1272,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1273,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1274,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1275,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1276,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1277,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1278,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1279,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1280,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1281,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1282,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1283,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1284,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1285,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1286,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1287,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1288,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1289,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1290,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1291,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1292,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1293,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1294,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1295,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1296,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1297,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1298,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1299,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1300,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1301,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1302,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1303,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1304,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1305,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1306,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1307,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1308,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1309,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1310,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1311,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1312,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1313,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1314,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1315,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1316,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1317,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1318,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1319,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1320,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1321,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1322,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1323,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1324,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1325,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1326,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1327,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1328,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1329,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1330,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1331,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1332,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1333,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1334,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1335,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1336,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1337,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1338,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1339,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1340,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1341,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1342,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1343,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1344,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1345,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1346,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1347,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1348,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1349,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1350,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1351,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1352,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1353,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1354,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1355,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1356,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1357,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1358,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1359,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1360,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1361,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1362,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1363,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1364,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1365,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1366,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1367,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1368,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1369,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1370,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1371,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1372,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1373,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1374,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1375,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1376,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1377,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1378,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1379,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1380,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1381,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1382,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1383,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1384,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1385,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1386,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1387,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1388,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1389,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1390,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1391,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1392,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1393,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1394,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1395,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1396,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1397,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1398,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1399,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1400,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1401,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1402,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1403,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1404,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1405,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1406,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1407,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1408,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1409,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1410,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1411,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1412,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1413,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1414,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1415,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1416,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1417,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1418,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1419,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1420,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1421,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1422,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1423,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1424,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1425,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1426,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1427,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1428,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1429,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1430,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1431,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1432,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1433,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1434,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1435,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1436,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1437,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1438,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1439,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1440,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1441,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1442,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1443,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1444,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1445,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1446,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1447,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1448,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1449,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1450,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1451,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1452,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1453,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1454,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1455,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1456,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1457,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1458,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1459,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1460,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1461,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1462,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1463,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1464,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1465,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1466,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1467,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1468,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1469,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1470,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1471,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1472,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1473,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1474,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1475,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1476,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1477,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1478,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1479,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1480,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1481,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1482,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1483,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1484,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1485,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1486,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1487,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1488,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1489,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1490,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1491,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1492,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1493,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1494,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1495,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1496,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1497,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1498,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1499,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1500,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1501,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1502,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1503,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1504,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1505,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1506,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1507,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1508,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1509,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1510,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1511,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1512,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1513,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1514,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1515,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1516,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1517,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1518,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1519,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1520,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1521,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1522,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1523,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1524,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1525,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1526,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1527,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1528,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1529,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1530,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1531,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1532,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1533,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1534,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1535,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1536,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1537,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1538,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1539,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1540,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1541,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1542,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1543,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1544,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1545,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1546,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1547,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1548,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1549,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1550,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1551,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1552,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1553,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1554,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1555,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1556,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1557,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1558,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1559,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1560,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1561,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1562,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1563,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1564,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1565,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1566,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1567,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1568,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1569,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1570,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1571,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1572,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1573,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1574,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1575,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1576,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1577,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1578,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1579,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1580,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1581,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1582,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1583,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1584,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1585,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1586,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1587,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1588,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1589,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1590,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1591,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1592,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1593,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1594,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1595,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1596,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1597,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1598,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1599,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1600,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1601,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1602,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1603,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1604,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1605,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1606,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1607,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1608,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1609,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1610,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1611,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1612,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1613,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1614,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1615,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1616,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1617,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1618,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1619,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1620,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1621,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1622,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1623,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1624,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1625,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1626,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1627,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1628,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1629,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1630,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1631,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1632,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1633,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1634,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1635,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1636,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1637,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1638,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1639,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1640,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1641,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1642,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1643,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1644,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1645,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1646,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1647,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1648,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1649,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1650,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1651,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1652,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1653,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1654,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1655,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1656,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1657,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1658,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1659,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1660,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1661,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1662,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1663,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1664,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1665,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1666,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1667,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1668,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1669,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1670,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1671,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1672,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1673,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1674,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1675,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1676,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1677,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1678,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1679,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1680,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1681,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1682,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1683,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1684,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1685,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1686,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1687,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1688,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1689,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1690,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1691,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1692,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1693,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1694,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1695,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1696,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1697,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1698,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1699,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1700,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1701,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1702,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1703,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1704,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1705,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1706,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1707,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1708,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1709,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1710,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1711,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1712,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1713,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1714,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1715,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1716,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1717,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1718,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1719,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1720,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1721,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1722,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1723,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1724,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1725,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1726,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1727,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1728,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1729,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1730,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1731,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1732,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1733,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1734,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1735,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1736,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1737,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1738,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1739,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1740,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1741,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1742,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1743,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1744,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1745,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1746,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1747,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1748,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1749,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1750,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1751,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1752,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1753,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1754,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1755,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1756,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1757,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1758,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1759,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1760,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1761,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1762,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1763,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1764,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1765,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1766,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1767,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1768,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1769,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1770,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1771,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1772,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1773,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1774,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1775,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1776,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1777,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1778,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1779,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1780,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1781,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1782,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1783,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1784,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1785,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1786,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1787,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1788,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1789,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1790,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1791,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1792,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1793,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1794,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1795,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1796,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1797,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1798,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1799,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1800,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1801,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1802,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1803,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1804,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1805,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1806,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1807,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1808,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1809,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1810,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1811,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1812,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1813,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1814,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1815,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1816,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1817,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1818,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1819,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1820,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1821,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1822,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1823,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1824,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1825,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1826,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1827,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1828,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1829,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1830,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1831,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1832,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1833,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1834,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1835,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1836,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1837,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1838,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1839,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1840,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1841,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1842,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1843,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1844,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1845,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1846,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1847,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1848,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1849,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1850,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1851,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1852,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1853,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1854,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1855,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1856,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1857,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1858,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1859,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1860,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1861,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1862,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1863,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1864,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1865,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1866,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1867,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1868,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1869,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1870,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1871,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1872,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1873,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1874,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1875,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1876,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1877,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1878,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1879,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1880,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1881,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1882,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1883,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1884,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1885,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1886,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1887,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1888,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1889,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1890,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1891,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1892,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1893,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1894,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1895,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1896,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1897,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1898,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1899,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1900,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1901,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1902,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1903,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1904,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1905,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1906,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1907,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1908,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1909,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1910,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1911,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1912,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1913,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1914,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1915,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1916,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1917,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1918,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1919,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1920,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1921,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1922,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1923,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1924,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1925,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1926,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1927,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1928,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1929,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1930,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1931,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1932,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1933,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1934,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1935,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1936,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1937,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1938,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1939,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1940,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1941,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1942,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1943,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1944,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1945,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1946,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1947,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1948,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1949,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1950,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1951,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1952,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1953,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1954,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1955,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1956,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1957,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1958,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1959,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1960,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1961,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1962,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1963,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1964,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1965,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1966,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1967,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1968,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1969,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1970,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1971,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1972,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1973,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1974,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1975,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1976,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1977,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1978,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1979,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1980,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1981,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1982,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1983,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1984,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1985,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1986,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1987,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1988,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1989,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1990,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1991,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1992,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1993,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1994,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1995,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1996,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1997,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1998,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 1999,
+      "name": "",
+      "drops": []
+    },
+    {
+      "enemy_id": 2000,
+      "name": "",
+      "drops": []
+    }
+  ]
+}

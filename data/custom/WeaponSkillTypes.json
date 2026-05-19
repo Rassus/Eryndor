@@ -1,0 +1,68 @@
+[
+  null,
+  {
+    "wtype_id": 0,
+    "wtype_name": "(sin tipo / placeholder)",
+    "combat_type": "melee"
+  },
+  {
+    "wtype_id": 1,
+    "wtype_name": "Cuchillo",
+    "combat_type": "melee"
+  },
+  {
+    "wtype_id": 2,
+    "wtype_name": "Espada",
+    "combat_type": "melee"
+  },
+  {
+    "wtype_id": 3,
+    "wtype_name": "Mangual",
+    "combat_type": "melee"
+  },
+  {
+    "wtype_id": 4,
+    "wtype_name": "Hacha",
+    "combat_type": "melee"
+  },
+  {
+    "wtype_id": 5,
+    "wtype_name": "Látigo",
+    "combat_type": "melee"
+  },
+  {
+    "wtype_id": 6,
+    "wtype_name": "Vara",
+    "combat_type": "melee"
+  },
+  {
+    "wtype_id": 7,
+    "wtype_name": "Arco",
+    "combat_type": "range"
+  },
+  {
+    "wtype_id": 8,
+    "wtype_name": "Ballesta",
+    "combat_type": "range"
+  },
+  {
+    "wtype_id": 9,
+    "wtype_name": "Pistola",
+    "combat_type": "range"
+  },
+  {
+    "wtype_id": 10,
+    "wtype_name": "Garra",
+    "combat_type": "melee"
+  },
+  {
+    "wtype_id": 11,
+    "wtype_name": "Guante",
+    "combat_type": "melee"
+  },
+  {
+    "wtype_id": 12,
+    "wtype_name": "Lanza",
+    "combat_type": "melee"
+  }
+]

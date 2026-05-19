@@ -1,12 +1,12 @@
 [
 	null,
 	{"skill_id":1,"skill_name":"Tala","skill_min_lvl":1, "skill_max_level":120, "icon_normal":304, "icon_99":305, "icon_max_lvl":306, "icon_max_exp":307},
-	{"skill_id":2,"skill_name":"Mineria","skill_min_lvl":1, "skill_max_level":150},
-	{"skill_id":3,"skill_name":"Pesca","skill_min_lvl":1, "skill_max_level":99},
-	{"skill_id":4,"skill_name":"Recolección","skill_min_lvl":1, "skill_max_level":255},
-	{"skill_id":5,"skill_name":"Herreria","skill_min_lvl":1, "skill_max_level":120},
-	{"skill_id":6,"skill_name":"Mele","skill_min_lvl":1, "skill_max_level":99},
-	{"skill_id":7,"skill_name":"Rango","skill_min_lvl":1, "skill_max_level":99},
-	{"skill_id":8,"skill_name":"Magia","skill_min_lvl":1, "skill_max_level":99},
-	{"skill_id":9,"skill_name":"Defensa","skill_min_lvl":1, "skill_max_level":99}
+	{"skill_id":2,"skill_name":"Mineria","skill_min_lvl":1, "skill_max_level":150, "icon_normal":312, "icon_99":313, "icon_max_lvl":314, "icon_max_exp":315},
+	{"skill_id":3,"skill_name":"Pesca","skill_min_lvl":1, "skill_max_level":99, "icon_normal":316, "icon_99":317, "icon_max_lvl":318, "icon_max_exp":319},
+	{"skill_id":4,"skill_name":"Recolección","skill_min_lvl":1, "skill_max_level":155, "icon_normal":308, "icon_99":309, "icon_max_lvl":310, "icon_max_exp":311},
+	{"skill_id":5,"skill_name":"Herreria","skill_min_lvl":1, "skill_max_level":120, "icon_normal":324, "icon_99":325, "icon_max_lvl":326, "icon_max_exp":327},
+	{"skill_id":6,"skill_name":"Mele","skill_min_lvl":1, "skill_max_level":99, "icon_normal":320, "icon_99":321, "icon_max_lvl":322, "icon_max_exp":323},
+	{"skill_id":7,"skill_name":"Rango","skill_min_lvl":1, "skill_max_level":99, "icon_normal":328, "icon_99":329, "icon_max_lvl":330, "icon_max_exp":331},
+	{"skill_id":8,"skill_name":"Magia","skill_min_lvl":1, "skill_max_level":99, "icon_normal":332, "icon_99":333, "icon_max_lvl":334, "icon_max_exp":335},
+	{"skill_id":9,"skill_name":"Defensa","skill_min_lvl":1, "skill_max_level":99, "icon_normal":336, "icon_99":337, "icon_max_lvl":338, "icon_max_exp":339}
 ]

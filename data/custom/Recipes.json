@@ -1,0 +1,482 @@
+{
+  "recipes": [
+    {
+      "recipe_id": 2,
+      "recipe_name": "Receta: Flecha de Huesos (100%)",
+      "output_type": "armor",
+      "output_id": 1999,
+      "output_name": "Flecha de Hueso",
+      "recipe_type": "inventario",
+      "chance": 100,
+      "output_count": 15,
+      "exp": 10,
+      "skill_id": 5,
+      "skill_level": 1,
+      "has_been_learned": true,
+      "input_material": [
+        {
+          "type": "item",
+          "data_id": 27,
+          "name": "Astil de Pino",
+          "count": 15
+        },
+        {
+          "type": "item",
+          "data_id": 603,
+          "name": "Pluma",
+          "count": 15
+        },
+        {
+          "type": "item",
+          "data_id": 2,
+          "name": "Huesos",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "recipe_id": 1,
+      "recipe_name": "Receta: Espada de Bronce (100%)",
+      "output_type": "weapon",
+      "output_id": 7,
+      "output_name": "Espada de Bronce",
+      "recipe_type": "mesa crafteo",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 60,
+      "skill_id": 5,
+      "nivel": 1,
+      "has_been_learned": false,
+      "input_material": [
+        {
+          "type": "item",
+          "data_id": 512,
+          "name": "Lingote de Bronce",
+          "count": 3
+        },
+        {
+          "type": "item",
+          "data_id": 35,
+          "name": "Guarda",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "data_id": 36,
+          "name": "Empuñadura",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "recipe_id": 3,
+      "recipe_name": "Receta: Espada de Hueso (100%)",
+      "output_type": "weapon",
+      "output_id": 8,
+      "output_name": "Espada de Hueso",
+      "recipe_type": "mesa crafteo",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 40,
+      "skill_id": 5,
+      "skill_level": 1,
+      "has_been_learned": true,
+      "input_material": [
+        {
+          "type": "item",
+          "data_id": 2,
+          "name": "Huesos",
+          "count": 6
+        },
+        {
+          "type": "item",
+          "data_id": 35,
+          "name": "Guarda",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "data_id": 36,
+          "name": "Empuñadura",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "recipe_id": 4,
+      "recipe_name": "Receta: Espada de Cobre (100%)",
+      "output_type": "weapon",
+      "output_id": 6,
+      "output_name": "Espada de Cobre",
+      "recipe_type": "mesa crafteo",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 10,
+      "skill_id": 5,
+      "nivel": 1,
+      "has_been_learned": false,
+      "input_material": [
+        {
+          "type": "item",
+          "data_id": 501,
+          "name": "Mineral de Cobre",
+          "count": 4
+        },
+        {
+          "type": "item",
+          "data_id": 36,
+          "name": "Empuñadura",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "data_id": 35,
+          "name": "Guarda",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "recipe_id": 5,
+      "recipe_name": "Receta: Filo de Bronce (100%)",
+      "output_type": "item",
+      "output_id": 37,
+      "output_name": "Filo de Bronce",
+      "recipe_type": "yunque",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 20,
+      "skill_id": 5,
+      "skill_level": 1,
+      "has_been_learned": false,
+      "input_material": [
+        {
+          "type": "item",
+          "data_id": 512,
+          "name": "Lingote de Bronce",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "recipe_id": 6,
+      "recipe_name": "Receta: Lingote de Bronce (100%)",
+      "output_type": "item",
+      "output_id": 512,
+      "output_name": "Lingote de Bronce",
+      "recipe_type": "forja",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 8,
+      "skill_id": 5,
+      "skill_level": 1,
+      "has_been_learned": false,
+      "input_material": [
+        {
+          "type": "item",
+          "data_id": 501,
+          "name": "Mineral de Cobre",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "data_id": 502,
+          "name": "Mineral de Estaño",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "recipe_id": 7,
+      "recipe_name": "Receta: Lingote de Hierro (100%)",
+      "output_type": "item",
+      "output_id": 513,
+      "output_name": "Lingote de Hierro",
+      "recipe_type": "forja",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 15,
+      "skill_id": 5,
+      "nivel": 15,
+      "has_been_learned": false,
+      "input_material": [
+        {
+          "type": "item",
+          "data_id": 503,
+          "name": "Mineral de Hierro",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "recipe_id": 8,
+      "recipe_name": "Receta: Lingote de Acero (100%)",
+      "output_type": "item",
+      "output_id": 514,
+      "output_name": "Lingote de Acero",
+      "recipe_type": "forja",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 22,
+      "skill_id": 5,
+      "nivel": 30,
+      "has_been_learned": false,
+      "input_material": [
+        {
+          "type": "item",
+          "data_id": 503,
+          "name": "Mineral de Hierro",
+          "count": 2
+        },
+        {
+          "type": "item",
+          "data_id": 504,
+          "name": "Carbon Mineral",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "recipe_id": 9,
+      "recipe_name": "Receta: Lingote de Mithril (100%)",
+      "output_type": "item",
+      "output_id": 515,
+      "output_name": "Lingote de Mithril",
+      "recipe_type": "forja",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 32,
+      "skill_id": 5,
+      "nivel": 52,
+      "has_been_learned": false,
+      "input_material": [
+        {
+          "type": "item",
+          "data_id": 507,
+          "name": "Mineral de Mithril",
+          "count": 2
+        },
+        {
+          "type": "item",
+          "data_id": 504,
+          "name": "Carbon Mineral",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "recipe_id": 10,
+      "recipe_name": "Receta: Lingote de Addy (100%)",
+      "output_type": "item",
+      "output_id": 516,
+      "output_name": "Lingote de Addy",
+      "recipe_type": "forja",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 40,
+      "skill_id": 5,
+      "nivel": 61,
+      "has_been_learned": false,
+      "input_material": [
+        {
+          "type": "item",
+          "data_id": 508,
+          "name": "Mineral de Addamantio",
+          "count": 2
+        },
+        {
+          "type": "item",
+          "data_id": 504,
+          "name": "Carbon Mineral",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "recipe_id": 11,
+      "recipe_name": "Receta: Lingote de Runite (100%)",
+      "output_type": "item",
+      "output_id": 517,
+      "output_name": "Lingote de Runite",
+      "recipe_type": "forja",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 55,
+      "skill_id": 5,
+      "nivel": 76,
+      "has_been_learned": false,
+      "input_material": [
+        {
+          "type": "item",
+          "data_id": 509,
+          "name": "Mineral de Rune",
+          "count": 2
+        },
+        {
+          "type": "item",
+          "data_id": 504,
+          "name": "Carbon Mineral",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "recipe_id": 12,
+      "recipe_name": "Receta: Lingote de Obsidiana (100%)",
+      "output_type": "item",
+      "output_id": 518,
+      "output_name": "Lingote de Obsidiana",
+      "recipe_type": "forja",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 62,
+      "skill_id": 5,
+      "nivel": 88,
+      "has_been_learned": false,
+      "input_material": [
+        {
+          "type": "item",
+          "data_id": 510,
+          "name": "Mineral de Obsidiana",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "recipe_id": 13,
+      "recipe_name": "Receta: Lingote de Obrite (100%)",
+      "output_type": "item",
+      "output_id": 519,
+      "output_name": "Lingote de Obrite",
+      "recipe_type": "forja",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 72,
+      "skill_id": 5,
+      "nivel": 96,
+      "has_been_learned": false,
+      "input_material": [
+        {
+          "type": "item",
+          "data_id": 509,
+          "name": "Mineral de Rune",
+          "count": 6
+        },
+        {
+          "type": "item",
+          "data_id": 510,
+          "name": "Mineral de Obsidiana",
+          "count": 2
+        },
+        {
+          "type": "item",
+          "data_id": 504,
+          "name": "Carbon Mineral",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "recipe_id": 14,
+      "recipe_name": "Receta: Lingote de Onyx (100%)",
+      "output_type": "item",
+      "output_id": 520,
+      "output_name": "Lingote de Onyx",
+      "recipe_type": "forja",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 90,
+      "skill_id": 5,
+      "nivel": 110,
+      "has_been_learned": false,
+      "input_material": [
+        {
+          "type": "item",
+          "data_id": 511,
+          "name": "Mineral de Onyx",
+          "count": 1
+        },
+        {
+          "type": "item",
+          "data_id": 504,
+          "name": "Carbon Mineral",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "recipe_id": 15,
+      "recipe_name": "Receta: Lingote de Celestita (100%)",
+      "output_type": "item",
+      "output_id": 521,
+      "output_name": "Lingote de Celestita",
+      "recipe_type": "forja",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 108,
+      "skill_id": 5,
+      "nivel": 116,
+      "has_been_learned": false,
+      "input_material": []
+    },
+    {
+      "recipe_id": 16,
+      "recipe_name": "Receta: Lingote de Oro (100%)",
+      "output_type": "item",
+      "output_id": 522,
+      "output_name": "Lingote de Oro",
+      "recipe_type": "forja",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 27,
+      "skill_id": 5,
+      "nivel": 40,
+      "has_been_learned": false,
+      "input_material": [
+        {
+          "type": "item",
+          "data_id": 506,
+          "name": "Mineral de Oro",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "recipe_id": 17,
+      "recipe_name": "Receta: Lingote de Plata (100%)",
+      "output_type": "item",
+      "output_id": 523,
+      "output_name": "Lingote de Plata",
+      "recipe_type": "forja",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 15,
+      "skill_id": 5,
+      "nivel": 20,
+      "has_been_learned": false,
+      "input_material": [
+        {
+          "type": "item",
+          "data_id": 505,
+          "name": "Mineral de Plata",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "recipe_id": 18,
+      "recipe_name": "Receta: Filo de Bronce (100%)",
+      "output_type": "item",
+      "output_id": 37,
+      "output_name": "Filo de Bronce",
+      "recipe_type": "yunque",
+      "chance": 100.0,
+      "output_count": 1,
+      "exp": 20,
+      "skill_id": 5,
+      "nivel": 1,
+      "has_been_learned": false,
+      "input_material": []
+    }
+  ]
+}

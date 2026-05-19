@@ -82,13 +82,13 @@
  * Reglas:
  * - Inventario siempre tiene 28 slots (configurable pero pensado fijo).
  * - Items (DataManager.isItem) apilan hasta 99 por slot.
- * - Armas y armaduras NO apilan (1 por slot).
+ * - Armas y armaduras NO apilan salvo nota <max_stack:N> (entonces apilan hasta N).
  * - Si inventario está lleno, no se guardan más ítems.
  * - Si un stack llega a 99 y queda sobrante, usa otro slot si existe.
  * - Cada slot tiene un id (0..27) y guarda { kind, id, amount }.
  *
- * Nota en el ítem (Database): <max_qty:N> — máximo por pila para ese ítem (sustituye al 99 global
- * del parámetro maxStack solo para ese objeto). Ej.: <max_qty:500>
+ * Nota en ítem: <max_qty:N> — tope por pila (sustituye al 99 global). Ej.: <max_qty:500>
+ * Nota en arma/armadura: <max_stack:N> — permite apilar hasta N; sin nota, 1 por slot.
  *
  * Nota: Este plugin redefine Game_Party gainItem/loseItem/numItems/allItems
  * para que el resto del juego (menús/tienda/eventos) consulte el inventario por slots.
@@ -159,12 +159,28 @@
     return Math.min(ABS_MAX_STACK_FROM_NOTE, n);
   }
 
-  /** Tope por pila: nota <max_qty:N> o parámetro maxStack del plugin. */
+  function parseMaxStackFromNote(note) {
+    var m = String(note || "").match(/<max_stack:\s*(\d+)\s*>/i);
+    if (!m) return null;
+    var n = Math.floor(Number(m[1]));
+    if (isNaN(n) || n < 1) return null;
+    return Math.min(ABS_MAX_STACK_FROM_NOTE, n);
+  }
+
+  /** Tope por pila: ítem <max_qty> o global; arma/armadura <max_stack> o 1. */
   function maxStackForItem(obj) {
-    if (!obj || !isDbItem(obj)) return 1;
-    var tagged = parseMaxQtyFromNote(obj.note);
-    if (tagged != null) return Math.max(1, tagged);
-    return MAX_STACK;
+    if (!obj) return 1;
+    if (isDbItem(obj)) {
+      var taggedQty = parseMaxQtyFromNote(obj.note);
+      if (taggedQty != null) return Math.max(1, taggedQty);
+      return MAX_STACK;
+    }
+    if (isDbWeapon(obj) || isDbArmor(obj)) {
+      var taggedStack = parseMaxStackFromNote(obj.note);
+      if (taggedStack != null) return Math.max(1, taggedStack);
+      return 1;
+    }
+    return 1;
   }
 
   /** Formato abreviado para cantidades en UI (mismo criterio que el banco: k, M, B, T, C, Q). */
@@ -195,6 +211,36 @@
     return !s || !s.kind || !s.id || !s.amount;
   }
 
+  function migrateLegacyContainers(party) {
+    if (!party || party._onyxInvLegacyMigrated) return;
+    party._onyxInvLegacyMigrated = true;
+    var id, n, obj;
+    if (party._items) {
+      for (id in party._items) {
+        n = party._items[id];
+        obj = $dataItems[id];
+        if (n > 0 && obj) addToSlots(party, obj, n);
+      }
+    }
+    if (party._weapons) {
+      for (id in party._weapons) {
+        n = party._weapons[id];
+        obj = $dataWeapons[id];
+        if (n > 0 && obj) addToSlots(party, obj, n);
+      }
+    }
+    if (party._armors) {
+      for (id in party._armors) {
+        n = party._armors[id];
+        obj = $dataArmors[id];
+        if (n > 0 && obj) addToSlots(party, obj, n);
+      }
+    }
+    party._items = {};
+    party._weapons = {};
+    party._armors = {};
+  }
+
   function normalizeSlots(party) {
     if (!party._onyxInvSlots || !Array.isArray(party._onyxInvSlots)) {
       party._onyxInvSlots = [];
@@ -212,10 +258,15 @@
       if (!s) continue;
       if (!s.kind || !s.id || !s.amount || s.amount <= 0) party._onyxInvSlots[k] = null;
     }
+    migrateLegacyContainers(party);
   }
 
   function isStackable(obj) {
-    return isDbItem(obj);
+    if (isDbItem(obj)) return true;
+    if (isDbWeapon(obj) || isDbArmor(obj)) {
+      return parseMaxStackFromNote(obj.note) != null;
+    }
+    return false;
   }
 
   function maxPerSlot(obj) {
@@ -298,6 +349,35 @@
     }
 
     return Math.max(0, Math.floor(Number(amount) || 0) - left);
+  }
+
+  /** Unidades que aún caben en inventario (pilas parciales + slots vacíos). */
+  function partyFreeCapacityForItem(party, item) {
+    if (!party || !item) return 0;
+    var k = kindOf(item);
+    normalizeSlots(party);
+    if (!k) {
+      return Math.max(0, party.maxItems(item) - party.numItems(item));
+    }
+    if (isStackable(item)) {
+      var id = Number(item.id) || 0;
+      var cap = maxStackForItem(item);
+      var space = 0;
+      var j, s;
+      for (j = 0; j < SLOT_COUNT; j++) {
+        s = party._onyxInvSlots[j];
+        if (!s) space += cap;
+        else if (s.kind === k && Number(s.id) === id) {
+          space += Math.max(0, cap - (Number(s.amount) || 0));
+        }
+      }
+      return space;
+    }
+    var empty = 0;
+    for (var ei = 0; ei < SLOT_COUNT; ei++) {
+      if (!party._onyxInvSlots[ei]) empty++;
+    }
+    return empty;
   }
 
   function uniqueObjectsFromSlots(party, kindFilter) {
@@ -789,9 +869,10 @@
       this.drawIcon(obj.iconIndex, ix, iy);
       var amt = Number(s.amount) || 0;
       // Mostrar cantidad en la esquina inferior derecha del ICONO (no del slot)
-      // Items: mostramos siempre (incluye x1). Armas/armaduras: solo si > 1 (por seguridad).
+      // Items y pilas con max_stack/max_qty: siempre cantidad. Resto de equipo: solo si > 1.
       var showQty = false;
       if (s.kind === "item") showQty = true;
+      else if (obj && isStackable(obj)) showQty = amt > 0;
       else if (amt > 1) showQty = true;
       if (showQty) {
         this.contents.fontSize = 10;
@@ -928,7 +1009,7 @@
     this.contents.fontSize = this.standardFontSize() + 6;
     this.drawText(name, 12, 0, this.contentsWidth() - 24, "center");
     this.contents.fontSize = this.standardFontSize();
-    if (this._item && DataManager.isItem(this._item) && this._qty > 0) {
+    if (this._item && this._qty > 0 && (DataManager.isItem(this._item) || isStackable(this._item))) {
       this.contents.fontSize = Math.max(10, this.standardFontSize() - 2);
       this.changeTextColor(this.normalColor());
       this.drawText("x" + formatQuantityThousands(this._qty), 12, this.lineHeight() + 2, this.contentsWidth() - 24, "center");
@@ -1251,20 +1332,9 @@
   Game_Party.prototype.hasMaxItems = function(item) {
     var k = kindOf(item);
     if (!k) return _Game_Party_hasMaxItems.call(this, item);
-    // max por slot no impide tener más stacks; aquí interpretamos "tiene max" como "no hay espacio para sumar 1"
     normalizeSlots(this);
     if (!item) return false;
-    if (!isStackable(item)) {
-      return firstEmptySlotIndex(this) < 0;
-    }
-    var id = Number(item.id) || 0;
-    var cap = maxStackForItem(item);
-    for (var i = 0; i < SLOT_COUNT; i++) {
-      var s = this._onyxInvSlots[i];
-      if (!s) return false;
-      if (s.kind === "item" && Number(s.id) === id && (Number(s.amount) || 0) < cap) return false;
-    }
-    return true;
+    return partyFreeCapacityForItem(this, item) <= 0;
   };
 
   var _Game_Party_allItems = Game_Party.prototype.allItems;
@@ -1323,42 +1393,13 @@
   };
 
   // ---------------------------------------------------------------------------
-  // Tienda: el motor usa maxItems - numItems (tope global 99); con slots hace falta
-  // sumar huecos en pilas del mismo ítem + slots vacíos * 99.
+  // Tienda: cantidad comprable = espacio real en pilas + slots vacíos (no solo nº de huecos).
   // ---------------------------------------------------------------------------
-  function partyMaxBuyItemCount(party, item) {
-    if (!party || !item) return 0;
-    var k = kindOf(item);
-    normalizeSlots(party);
-    if (!k) {
-      return Math.max(0, party.maxItems(item) - party.numItems(item));
-    }
-    if (k === "weapon" || k === "armor") {
-      var emptyEq = 0;
-      for (var ei = 0; ei < SLOT_COUNT; ei++) {
-        if (!party._onyxInvSlots[ei]) emptyEq++;
-      }
-      return emptyEq;
-    }
-    if (k === "item") {
-      var iid = Number(item.id) || 0;
-      var capBuy = maxStackForItem(item);
-      var space = 0;
-      for (var j = 0; j < SLOT_COUNT; j++) {
-        var s = party._onyxInvSlots[j];
-        if (!s) space += capBuy;
-        else if (s.kind === "item" && Number(s.id) === iid) {
-          space += Math.max(0, capBuy - (Number(s.amount) || 0));
-        }
-      }
-      return space;
-    }
-    return 0;
-  }
+  window.OnyxInv.freeCapacityForItem = partyFreeCapacityForItem;
 
   var _Scene_Shop_maxBuy = Scene_Shop.prototype.maxBuy;
   Scene_Shop.prototype.maxBuy = function() {
-    var max = partyMaxBuyItemCount($gameParty, this._item);
+    var max = partyFreeCapacityForItem($gameParty, this._item);
     var price = this.buyingPrice();
     if (price > 0) {
       return Math.min(max, Math.floor(this.money() / price));

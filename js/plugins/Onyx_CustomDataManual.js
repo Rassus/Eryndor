@@ -27,9 +27,12 @@
     { key: "ToolLevelList", file: "ToolLevelList.json" },
     { key: "SkillUnlocks", file: "SkillUnlocks.json" },
     { key: "ExpTable", file: "ExpTable.json" },
+    { key: "Recipes", file: "Recipes.json" },
+    { key: "FishingFish", file: "FishingFish.json" },
+    { key: "FishingBanks", file: "FishingBanks.json" },
+    { key: "WeaponSkillTypes", file: "WeaponSkillTypes.json" },
 
     // Ejemplos para futuro:
-    // { key: "Recipes", file: "Recipes.json" },
     // { key: "SkillCore", file: "SkillCore.json" },
     // { key: "NpcRelations", file: "NpcRelations.json" },
   ];
@@ -37,6 +40,40 @@
   const FOLDER = "data/custom";
   window.$dataCustom = window.$dataCustom || {};
   window.$dataCustomLoaded = window.$dataCustomLoaded || {}; // flags por key
+
+  // Stub temprano: eventos pueden evaluar Onyx.Skill.Mineria.isActive() antes de que cargue SkillMineria.js
+  window.Onyx = window.Onyx || {};
+  window.Onyx.Skill = window.Onyx.Skill || {};
+  if (!window.Onyx.Skill.Mineria) {
+    window.Onyx.Skill.Mineria = {
+      isActive: function() {
+        if (window.Onyx && Onyx.SkillsActive && Onyx.SkillsActive.isActive) {
+          return Onyx.SkillsActive.isActive(2);
+        }
+        return true;
+      }
+    };
+  }
+  if (!window.Onyx.Skill.Herreria) {
+    window.Onyx.Skill.Herreria = {
+      isActive: function() {
+        if (window.Onyx && Onyx.SkillsActive && Onyx.SkillsActive.isActive) {
+          return Onyx.SkillsActive.isActive(5);
+        }
+        return true;
+      }
+    };
+  }
+  if (!window.Onyx.Skill.Pesca) {
+    window.Onyx.Skill.Pesca = {
+      isActive: function() {
+        if (window.Onyx && Onyx.SkillsActive && Onyx.SkillsActive.isActive) {
+          return Onyx.SkillsActive.isActive(3);
+        }
+        return true;
+      }
+    };
+  }
 
   function loadCustomJson(key, relPath) {
     const xhr = new XMLHttpRequest();
@@ -399,16 +436,18 @@
 
   /**
    * Mejor tool del grupo para el skill: recorre todos los héroes, slot herramienta (9),
-   * y devuelve la que tenga mayor daño en ToolLevelList.
-   * @returns {{ damage: number, tool_lvl: number, tool_id: number, name: string, actorIndex: number }|null}
+   * y devuelve la que tenga mayor daño (Tala) o mayor velocidad (Recolección) en ToolLevelList.
+   * Para skill 4 (Recolección) usa "speed"; para el resto usa "damage".
+   * @returns {{ damage: number, speed: number, tool_lvl: number, tool_id: number, name: string, actorIndex: number }|null}
    */
   window.getBestPartyToolForSkill = function(skillId) {
     skillId = Number(skillId) || 0;
     const toolList = window.$dataCustom && $dataCustom.ToolLevelList;
     if (!toolList || !toolList.length) return null;
+    const useSpeed = (skillId === 4);
     const members = $gameParty.members();
     let best = null;
-    let bestDamage = 0;
+    let bestValue = 0;
     for (let m = 0; m < members.length; m++) {
       const actor = members[m];
       if (!actor || !actor.equips) continue;
@@ -421,11 +460,19 @@
       for (let i = 0; i < toolList.length; i++) {
         const row = toolList[i];
         if (row && Number(row.tool_id) === toolId && Number(row.skill_id) === skillId) {
-          const dmg = Math.max(1, Number(row.damage) || 1);
-          if (dmg > bestDamage) {
-            bestDamage = dmg;
+          let val;
+          let dmg = Math.max(1, Number(row.damage) || 1);
+          let spd = Math.max(0.5, Number(row.speed) || (useSpeed ? 1 : 0));
+          if (useSpeed) {
+            val = spd;
+          } else {
+            val = dmg;
+          }
+          if (val > bestValue) {
+            bestValue = val;
             best = {
               damage: dmg,
+              speed: spd,
               tool_lvl: Number(row.tool_lvl) || 0,
               tool_id: toolId,
               name: row.name || "",
@@ -445,10 +492,19 @@
    */
   window.getEquippedToolDamage = function(skillId) {
     const best = window.getBestPartyToolForSkill(skillId);
-    if (!best) {
-      return 1;
-    }
+    if (!best) return 1;
     return best.damage;
+  };
+
+  /**
+   * Retorna la velocidad de la mejor herramienta del grupo para el skill dado.
+   * Para Recolección (skill 4): mayor velocidad = menos tiempo para llenar la barra.
+   * Retorna 1 si no hay tool válida.
+   */
+  window.getEquippedToolSpeed = function(skillId) {
+    const best = window.getBestPartyToolForSkill(skillId);
+    if (!best) return 1;
+    return best.speed || 1;
   };
 
   /**
@@ -470,6 +526,33 @@
       const r = Math.random() * 100;
       const won = r < chance;
       if (won) {
+        $gameParty.gainItem(item, 1);
+        given++;
+      }
+    }
+    return { given: given, totalRolls: rolls };
+  };
+
+  /**
+   * Mineral extra por punto de daño (paridad con giveTreeExtraLogs / SkillMineria).
+   */
+  window.giveMiningOreChunks = function(damage, materialId) {
+    if (!window.$dataCustom || !$dataCustom.MaterialRewards) return { given: 0, totalRolls: 0 };
+    const row = $dataCustom.MaterialRewards.find(r => r && r.material_id === materialId);
+    if (!row) return { given: 0, totalRolls: 0 };
+    const item = $dataItems[Number(row.item_id)];
+    if (!item) return { given: 0, totalRolls: 0 };
+    const chance = (window.Onyx && Onyx.Skill && Onyx.Skill.Mineria && Onyx.Skill.Mineria.getOreExtraChance)
+      ? Onyx.Skill.Mineria.getOreExtraChance()
+      : 15;
+    let rolls = Math.max(0, Math.floor(Number(damage) || 0));
+    if (rolls > 0 && window.Onyx && Onyx.Skill && Onyx.Skill.Mineria && Onyx.Skill.Mineria.hasTripleOre && Onyx.Skill.Mineria.hasTripleOre()) {
+      rolls *= 3;
+    }
+    let given = 0;
+    for (let i = 0; i < rolls; i++) {
+      const r = Math.random() * 100;
+      if (r < chance) {
         $gameParty.gainItem(item, 1);
         given++;
       }
@@ -518,7 +601,7 @@
     $gameSystem._onyxLastBrokenToolId = best.tool_id;
     if (!Array.isArray($gameSystem._onyxBrokenToolIds)) $gameSystem._onyxBrokenToolIds = [];
     $gameSystem._onyxBrokenToolIds.push(best.tool_id);
-    const rewardItemId = 601;
+    const rewardItemId = 2000;
     const rewardItem = $dataItems && $dataItems[rewardItemId];
     if (rewardItem) $gameParty.gainItem(rewardItem, 1);
 
@@ -527,6 +610,52 @@
       if (st && st.stats && typeof st.stats.hatchets_broken === "number") st.stats.hatchets_broken++;
     }
     return { broke: true, toolName: best.name || ("Hacha #" + best.tool_id) };
+  };
+
+  /**
+   * Romper pico en crítico (skill 2 / Minería). Paridad con onyxProcessHatchetBreak.
+   */
+  window.onyxProcessPickaxeBreak = function(skillId) {
+    skillId = Number(skillId) || 2;
+    const hitType = $gameVariables.value(59);
+    if (hitType !== 1) return { broke: false };
+
+    const chance = (window.Onyx && Onyx.Skill && Onyx.Skill.Mineria && Onyx.Skill.Mineria.getPickaxeBreakChance)
+      ? Onyx.Skill.Mineria.getPickaxeBreakChance()
+      : 0.00025;
+    if (Math.random() >= chance) return { broke: false };
+
+    const best = window.getBestPartyToolForSkill && window.getBestPartyToolForSkill(skillId);
+    if (!best) return { broke: false };
+
+    const members = $gameParty.members();
+    for (let i = 0; i < members.length; i++) {
+      const actor = members[i];
+      if (!actor || !actor.mhp) continue;
+      const dmg = Math.max(1, Math.floor(actor.mhp * 0.1));
+      actor.gainHp(-dmg);
+    }
+
+    const actorWithPick = members[best.actorIndex];
+    if (actorWithPick && actorWithPick._equips && actorWithPick._equips[9]) {
+      actorWithPick._equips[9].setObject(null);
+      if (actorWithPick.refresh) actorWithPick.refresh();
+    }
+    const armor = $dataArmors && $dataArmors[best.tool_id];
+    if (armor) $gameParty.loseItem(armor, 1, true);
+
+    $gameSystem._onyxLastBrokenToolId = best.tool_id;
+    if (!Array.isArray($gameSystem._onyxBrokenToolIds)) $gameSystem._onyxBrokenToolIds = [];
+    $gameSystem._onyxBrokenToolIds.push(best.tool_id);
+    const rewardItemId = 2000;
+    const rewardItem = $dataItems && $dataItems[rewardItemId];
+    if (rewardItem) $gameParty.gainItem(rewardItem, 1);
+
+    if (window.Onyx && Onyx.Skill && Onyx.Skill.Mineria && Onyx.Skill.Mineria.state) {
+      const stStore = $gameSystem._onyxSkills && $gameSystem._onyxSkills[2];
+      if (stStore && stStore.stats && typeof stStore.stats.pickaxes_broken === "number") stStore.stats.pickaxes_broken++;
+    }
+    return { broke: true, toolName: best.name || ("Pico #" + best.tool_id) };
   };
 
   /**
@@ -655,8 +784,12 @@
     if (toolLvl === nodeToolLvl) buff = -3;
     else if (toolLvl > nodeToolLvl) buff = (toolLvl - nodeToolLvl) * 3;
 
-    const hitBase = (Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.getWoodHitChance)
-      ? Onyx.Skill.Tala.getWoodHitChance() : 75;
+    let hitBase = 75;
+    if (skillId === 2 && window.Onyx && Onyx.Skill && Onyx.Skill.Mineria && Onyx.Skill.Mineria.getMiningHitChance) {
+      hitBase = Onyx.Skill.Mineria.getMiningHitChance();
+    } else if (window.Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.getWoodHitChance) {
+      hitBase = Onyx.Skill.Tala.getWoodHitChance();
+    }
     const final = Math.min(100, Math.max(0, hitBase + buff));
     $gameVariables.setValue(40, final);
   };
@@ -667,7 +800,9 @@
    * Var 59: 1=crit, 2=slash, 3=miss.
    * @returns {number} 59 value
    */
-  window.onyxHitChance = function(showMessages, eventId) {
+  window.onyxHitChance = function(showMessages, eventId, skillIdForCrit) {
+    var sid = Number(skillIdForCrit);
+    if (!sid) sid = 1;
     const hitChance = Number($gameVariables.value(40)) || 0;
     let roll = Math.floor(Math.random() * 100) + 1;
     $gameVariables.setValue(20, roll);
@@ -676,8 +811,12 @@
     if (hitChance > roll) {
       roll = Math.floor(Math.random() * 100) + 1;
       $gameVariables.setValue(20, roll);
-      const critChance = (Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.getWoodCritChance)
-        ? Onyx.Skill.Tala.getWoodCritChance() : 10;
+      let critChance = 10;
+      if (sid === 2 && Onyx && Onyx.Skill && Onyx.Skill.Mineria && Onyx.Skill.Mineria.getMiningCritChance) {
+        critChance = Onyx.Skill.Mineria.getMiningCritChance();
+      } else if (Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.getWoodCritChance) {
+        critChance = Onyx.Skill.Tala.getWoodCritChance();
+      }
       if (critChance > roll) {
         hitType = 1;
         if (showMessages && typeof showFloatingMessage === "function") {
@@ -726,8 +865,8 @@
     const showHitMessages = opts.showHitMessages !== false;
 
     window.onyxGetNodeInfo(nodeId, tableVarId);
-    window.onyxHitBuffCalculator();
-    const hitType = window.onyxHitChance(showHitMessages, eventId);
+    window.onyxHitBuffCalculator(skillId, nodeId, tableVarId);
+    const hitType = window.onyxHitChance(showHitMessages, eventId, skillId);
     console.log("[ProcessHit] HitType: " + hitType);
     if (hitType === 1 || hitType === 2) {
       const target = eventId && $gameMap ? $gameMap.event(eventId) : $gamePlayer;
@@ -780,6 +919,81 @@
   };
 
   /**
+   * Golpe de minería (skill 2). Misma tubería que onyxProcessWoodcuttingHit: buff, hit/crit, daño, extras, EXP.
+   */
+  window.onyxProcessMiningHit = function(opts) {
+    opts = opts || {};
+    const skillId = Number(opts.skillId) || 2;
+    const nodeId = opts.nodeId != null ? opts.nodeId : $gameVariables.value(89);
+    const tableVarId = Number(opts.tableVarId) || 1002;
+    const slashAnimId = Number(opts.slashAnimId) || 127;
+    const waitSwitchId = Number(opts.waitSwitchId) || 21;
+    const eventId = opts.eventId != null ? opts.eventId : $gameVariables.value(4);
+    const showHitMessages = opts.showHitMessages !== false;
+
+    window.onyxGetNodeInfo(nodeId, tableVarId);
+    window.onyxHitBuffCalculator(skillId, nodeId, tableVarId);
+    const hitType = window.onyxHitChance(showHitMessages, eventId, skillId);
+    if (hitType === 1 || hitType === 2) {
+      const target = eventId && $gameMap ? $gameMap.event(eventId) : $gamePlayer;
+      if (target) target.requestAnimation(slashAnimId);
+      $gameVariables.setValue(59, hitType);
+      const baseDmg = window.getEquippedToolDamage(skillId);
+      const dmg = hitType === 1 ? baseDmg * 2 : baseDmg;
+      $gameVariables.setValue(91, dmg);
+
+      var breakRes = { broke: false };
+      var isCrit = hitType === 1;
+      if (isCrit && typeof window.onyxProcessPickaxeBreak === "function") {
+        breakRes = window.onyxProcessPickaxeBreak(skillId);
+        if (breakRes.broke && typeof showFloatingMessage === "function") {
+          showFloatingMessage("¡El pico se ha roto! El equipo sufre 10% de su vida máxima.", 120);
+        }
+      }
+      if (!breakRes.broke) {
+        const preserveNode = window.Onyx && Onyx.Skill && Onyx.Skill.Mineria && Onyx.Skill.Mineria.hasPreserveMiningNode && Onyx.Skill.Mineria.hasPreserveMiningNode();
+        if (!preserveNode) {
+          window.onyxSetNodeHp(nodeId, dmg, tableVarId);
+        }
+        const table = $gameVariables.value(tableVarId) || {};
+        const nodeData = table[nodeId] || {};
+        const materialId = Number(nodeData.ma_id || 0);
+        const res = window.giveMiningOreChunks($gameVariables.value(91), materialId);
+        if (res.given > 0 && $dataCustom && $dataCustom.MaterialRewards) {
+          const row = $dataCustom.MaterialRewards.find(function(r) { return r && r.material_id === materialId; });
+          const name = row ? row.item_name : "Mineral";
+          if (typeof showFloatingMessage === "function") showFloatingMessage("!Has obtenido " + name + " x" + res.given, 120);
+        }
+        if (Onyx && Onyx.Skill && Onyx.Skill.Mineria && Onyx.Skill.Mineria.tryRollGemDrop) {
+          const gemItemId = Onyx.Skill.Mineria.tryRollGemDrop();
+          if (gemItemId > 0 && typeof showFloatingMessage === "function") {
+            const gemItem = $dataItems && $dataItems[gemItemId];
+            const gemName = gemItem ? gemItem.name : "Gema";
+            showFloatingMessage("!Has encontrado " + gemName + " x1", 120);
+          }
+        }
+        if (Onyx && Onyx.Skill && Onyx.Skill.Mineria) {
+          $gameVariables.setValue(38, materialId);
+          const result = Onyx.Skill.Mineria.addExpFromMaterialVar();
+          if (result && result.leveledUp && $gamePlayer) $gamePlayer.requestAnimation(131);
+          if (result && result.added > 0 && typeof showFloatingMessage === "function") {
+            showFloatingMessage("Exp +" + result.added, 120, -1, "arriba", true);
+          }
+        }
+      }
+    }
+
+    if (waitSwitchId > 0 && $gameSwitches) $gameSwitches.setValue(waitSwitchId, true);
+
+    const dict = $gameVariables.value(tableVarId) || {};
+    const data = dict[nodeId] || {};
+    const finalHp = data.c_hp || 0;
+    if (finalHp < 1) {
+      window.onyxSetNodeOff(nodeId, tableVarId);
+    }
+  };
+
+  /**
    * Despacha al endpoint indicado leyendo Var 100 (cmd), 89 (nodeId), 91 (damage).
    * Reemplaza el bloque condicional del CE [SKILL] Node Endpoint.
    * Uso en evento: onyxNodeEndpointFromVars();
@@ -797,6 +1011,37 @@
       window.onyxGetCurrentNodeHp(nodeId, tableVarId);
     } else if (cmd === "set_node_off") {
       window.onyxSetNodeOff(nodeId, tableVarId);
+    }
+  };
+
+  /** Nivel actual desde $gameSystem._onyxSkills (si la variable RPG aún no está sincronizada). */
+  window.onyxSkillLevelFromSystem = function(skillId) {
+    skillId = Number(skillId) || 0;
+    if (!skillId || !window.Onyx || !Onyx.Skill) return 0;
+    var api = {
+      1: Onyx.Skill.Tala,
+      2: Onyx.Skill.Mineria,
+      3: Onyx.Skill.Pesca,
+      4: Onyx.Skill.Recoleccion,
+      5: Onyx.Skill.Herreria
+    }[skillId];
+    if (!api || !api.state) return 0;
+    try {
+      var st = api.state();
+      return st && st.lvl != null ? Math.max(0, Number(st.lvl) || 0) : 0;
+    } catch (e) {
+      return 0;
+    }
+  };
+
+  /** Escribe en outVarId el array de tool_id equipados (slot 9) para skillId o variable 33. */
+  window.onyxSetPartyToolIdsVar = function(skillIdOrVarId, outVarId) {
+    var skillId = Number(skillIdOrVarId) || 0;
+    if (!skillId && $gameVariables && Number(skillIdOrVarId) > 0) {
+      skillId = Number($gameVariables.value(skillIdOrVarId)) || 0;
+    }
+    if ($gameVariables && Number(outVarId) > 0) {
+      $gameVariables.setValue(outVarId, window.onyxFindPartyToolsBySkill(skillId));
     }
   };
 
@@ -844,8 +1089,29 @@
       }
       if (!exists) result.push(toolId);
     }
-
+    if (typeof $gameTemp !== "undefined" && $gameTemp) {
+      $gameTemp._onyxLastNodeTableVarId = window.onyxNodeTableVarIdForSkillId
+        ? window.onyxNodeTableVarIdForSkillId(skillId)
+        : 1000;
+    }
     return result;
+  };
+
+  /**
+   * Variable RPG (número) donde está el objeto-tabla de nodos según skill_id.
+   * Tala 1 → 1000, Recolección 4 → 1001, Minería 2 → 1002, Pesca 3 → 1003.
+   */
+  window.onyxNodeTableVarIdForSkillId = function(skillId) {
+    var id = Number(skillId) || 0;
+    if (id === 2) return 1002;
+    if (id === 3) return 1003;
+    if (id === 4) return 1001;
+    return 1000;
+  };
+
+  /** Igual que onyxNodeTableVarIdForSkillId pero lee skill activa en variable de juego 33. */
+  window.onyxNodeTableVarIdFromVar33 = function() {
+    return window.onyxNodeTableVarIdForSkillId($gameVariables.value(33));
   };
 
   // Retorna true si alguna tool del listado (varToolIds) tiene tool_lvl >= node.tool_lvl del nodo actual.
@@ -856,26 +1122,40 @@
     tableVarId = Number(tableVarId) || 0;
     nodeId = Number(nodeId) || 0;
   
-    if (!tableVarId || !nodeId) return false;
-    if (!toolIds || !toolIds.length) return false;
+    if (!tableVarId || !nodeId) {
+      return false;
+    }
+    if (!toolIds || !toolIds.length) {
+      return false;
+    }
   
     var table = null;
     if ($gameVariables) table = $gameVariables.value(tableVarId);
-    if (!table) return false;
+    if (!table) {
+      return false;
+    }
   
     var node = table[nodeId];
-    if (!node) return false;
-    if (!node.active) return false;
+    if (!node) {
+      return false;
+    }
+    if (!node.active) {
+      return false;
+    }
   
     var need = Number(node.tool_lvl) || 0;
     var skillId = Number($gameVariables.value(33)) || 0;
-    if (!skillId) return false;
+    if (!skillId) {
+      return false;
+    }
   
     var toolList = null;
     if (window.$dataCustom && $dataCustom.ToolLevelList) {
       toolList = $dataCustom.ToolLevelList;
     }
-    if (!toolList || !toolList.length) return false;
+    if (!toolList || !toolList.length) {
+      return false;
+    }
   
     var best = 0;
     var i, j, id, row, lvl;
@@ -902,17 +1182,32 @@
       }
     }
   
-    return best >= need;
+    var allowed = best >= need;
+    return allowed;
   };
 
 
   // Setea outVarId (ej 62) a 1/0 usando:
-  // - tableVarId: 1000
-  // - nodeIdVarId: 89
-  // - toolIdsVarId: 39 (array)
-  // - outVarId: 62
+  // - tableVarId: id de variable RPG cuyo *valor* es el objeto tabla de nodos (ej 1000 tala, 1002 minería)
+  // - nodeIdVarId: id de variable con el id del nodo (ej 4)
+  // - toolIdsVarId: id de variable cuyo valor es el array de tool_id (ej 39)
+  // - outVarId: variable de salida 1/0 (ej 62)
+  //
+  // Si en el evento tenías un placeholder "tableVarId" sin declarar, usa una de:
+  //   onyxSetToolCanUseVar(1002, 4, 39, 62)
+  //   onyxSetToolCanUseVar($gameVariables.value(89), 4, 39, 62)   // si la var 89 guarda 1000/1002
+  //   onyxSetToolCanUseVarFromTableVarHolder(89, 4, 39, 62)       // equivalente a la línea anterior
+  window.onyxSetToolCanUseVarFromTableVarHolder = function(tableVarIdHolderVarId, nodeIdVarId, toolIdsVarId, outVarId) {
+    var holder = Number(tableVarIdHolderVarId) || 0;
+    var tableVarId = Number($gameVariables.value(holder)) || 0;
+    window.onyxSetToolCanUseVar(tableVarId, nodeIdVarId, toolIdsVarId, outVarId);
+  };
+
   window.onyxSetToolCanUseVar = function(tableVarId, nodeIdVarId, toolIdsVarId, outVarId) {
     tableVarId = Number(tableVarId) || 0;
+    if (typeof $gameTemp !== "undefined" && $gameTemp && tableVarId) {
+      $gameTemp._onyxLastNodeTableVarId = tableVarId;
+    }
     nodeIdVarId = Number(nodeIdVarId) || 0;
     toolIdsVarId = Number(toolIdsVarId) || 0;
     outVarId = Number(outVarId) || 0;
@@ -921,6 +1216,10 @@
 
     var nodeId = $gameVariables.value(nodeIdVarId);
     var toolIds = $gameVariables.value(toolIdsVarId);
+    if (!toolIds || !toolIds.length) {
+      var skillId = Number($gameVariables.value(33)) || 0;
+      toolIds = window.onyxFindPartyToolsBySkill(skillId);
+    }
 
     var ok = window.onyxCanUseToolsOnNode(tableVarId, nodeId, toolIds);
 
@@ -930,12 +1229,24 @@
 
   // Setea la variable outVarId (ej 61) si el skill level cumple el requerido del nodo según SkillNodeLevelNeed.
   // Params:
-  //  - tableVarId: variable con tabla de nodos (ej 1000)
-  //  - nodeIdVarId: variable con current_node_id (ej 89)
-  //  - skillLvlVarId: variable con el nivel del skill (ej 21 para wood-level)
+  //  - tableVarId: id de variable RPG con el objeto tabla (ej 1000 / 1002)
+  //  - nodeIdVarId: variable con current_node_id (ej 4)
+  //  - skillLvlVarId: variable con el nivel del skill (ej 21 tala, 46 minería)
   //  - outVarId: variable de salida (ej 61 node-can-harvest)
+  //
+  // Si el id de la tabla está guardado en otra variable (ej 89 → 1002):
+  //   onyxSetNodeCanHarvestVarFromTableVarHolder(89, 4, 22, 61)
+  window.onyxSetNodeCanHarvestVarFromTableVarHolder = function(tableVarIdHolderVarId, nodeIdVarId, skillLvlVarId, outVarId) {
+    var holder = Number(tableVarIdHolderVarId) || 0;
+    var tableVarId = Number($gameVariables.value(holder)) || 0;
+    window.onyxSetNodeCanHarvestVar(tableVarId, nodeIdVarId, skillLvlVarId, outVarId);
+  };
+
   window.onyxSetNodeCanHarvestVar = function(tableVarId, nodeIdVarId, skillLvlVarId, outVarId) {
     tableVarId = Number(tableVarId) || 0;
+    if (typeof $gameTemp !== "undefined" && $gameTemp && tableVarId) {
+      $gameTemp._onyxLastNodeTableVarId = tableVarId;
+    }
     nodeIdVarId = Number(nodeIdVarId) || 0;
     skillLvlVarId = Number(skillLvlVarId) || 0;
     outVarId = Number(outVarId) || 0;
@@ -954,8 +1265,12 @@
     if (!node || !node.active) return;
 
     var skillId = Number($gameVariables.value(33)) || 0;
-    var nodeLvl = Number(node.no_lvl) || 0;
+    var nodeLvl = Number(node.node_lvl) || Number(node.no_lvl) || 0;
     var skillLvl = Number($gameVariables.value(skillLvlVarId)) || 0;
+    if (!skillLvl && skillId && window.onyxSkillLevelFromSystem) {
+      skillLvl = window.onyxSkillLevelFromSystem(skillId);
+      if (skillLvl > 0 && skillLvlVarId) $gameVariables.setValue(skillLvlVarId, skillLvl);
+    }
 
     if (!skillId || !nodeLvl) return;
 
@@ -986,20 +1301,45 @@
   };
 
   // ---------------------------------------------------------------------------
-  // Validación de nivel para equipar herramientas (slot 9): SkillUnlocks.json (skill_id 1)
-  // Si el personaje no tiene nivel de Tala suficiente, no puede equipar esa hacha.
+  // Validación de nivel para equipar herramientas (slot 9): SkillUnlocks + ToolLevelList
+  // skill_id viene de la fila de ToolLevelList que coincide con tool_id (ítem).
   // ---------------------------------------------------------------------------
   const TOOL_SLOT_INDEX = 9;
-  const SKILL_ID_TALA = 1;
   const MSG_NO_LEVEL_EQUIP = "No tiene el nivel para equipar esa arma.";
+
+  window.onyxGetToolSkillIdForItem = function(itemId) {
+    const id = Number(itemId);
+    if (!id) return null;
+    const toolList = window.$dataCustom && window.$dataCustom.ToolLevelList;
+    if (!toolList || !toolList.length) return null;
+    for (let i = 0; i < toolList.length; i++) {
+      const row = toolList[i];
+      if (row && Number(row.tool_id) === id) return Number(row.skill_id) || null;
+    }
+    return null;
+  };
+
+  window.onyxGetSkillLevelForToolSkill = function(skillId) {
+    const sid = Number(skillId);
+    if (sid === 1 && window.Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.state)
+      return Onyx.Skill.Tala.state().lvl || 1;
+    if (sid === 2 && window.Onyx && Onyx.Skill && Onyx.Skill.Mineria && Onyx.Skill.Mineria.state)
+      return Onyx.Skill.Mineria.state().lvl || 1;
+    if (sid === 4 && window.Onyx && Onyx.Skill && Onyx.Skill.Recoleccion && Onyx.Skill.Recoleccion.state)
+      return Onyx.Skill.Recoleccion.state().lvl || 1;
+    return 1;
+  };
 
   window.onyxGetRequiredLevelForTool = function(itemId) {
     const list = window.$dataCustom && window.$dataCustom.SkillUnlocks;
     if (!list || !list.length) return null;
     const id = Number(itemId);
+    if (!id) return null;
+    const skillId = window.onyxGetToolSkillIdForItem(id);
+    if (skillId == null) return null;
     for (let i = 0; i < list.length; i++) {
       const row = list[i];
-      if (row && Number(row.skill_id) === SKILL_ID_TALA && Number(row.item_id) === id) {
+      if (row && Number(row.skill_id) === skillId && Number(row.item_id) === id) {
         return Number(row.lvl) || 0;
       }
     }
@@ -1012,9 +1352,9 @@
     if (!item || !DataManager.isArmor(item)) return true;
     const requiredLvl = window.onyxGetRequiredLevelForTool(item.id);
     if (requiredLvl === null) return true;
-    const talaState = window.Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.state;
-    const talaLvl = talaState ? (talaState().lvl || 1) : 1;
-    return talaLvl >= requiredLvl;
+    const sid = window.onyxGetToolSkillIdForItem(item.id);
+    if (sid == null) return true;
+    return window.onyxGetSkillLevelForToolSkill(sid) >= requiredLvl;
   };
 
   const _Game_Actor_changeEquip = Game_Actor.prototype.changeEquip;
@@ -1022,9 +1362,9 @@
     if (slotId === TOOL_SLOT_INDEX && item) {
       const requiredLvl = window.onyxGetRequiredLevelForTool(item.id);
       if (requiredLvl !== null) {
-        const talaState = window.Onyx && Onyx.Skill && Onyx.Skill.Tala && Onyx.Skill.Tala.state;
-        const talaLvl = talaState ? (talaState().lvl || 1) : 1;
-        if (talaLvl < requiredLvl) {
+        const sid = window.onyxGetToolSkillIdForItem(item.id);
+        const cur = sid != null ? window.onyxGetSkillLevelForToolSkill(sid) : 1;
+        if (cur < requiredLvl) {
           if ($gameMessage) $gameMessage.add(MSG_NO_LEVEL_EQUIP);
           return;
         }
@@ -1032,4 +1372,28 @@
     }
     _Game_Actor_changeEquip.call(this, slotId, item);
   };
+
+  // Cada comando "Script" (355) hace eval en un scope nuevo: `var tableVarId` de un bloque no existe en el siguiente.
+  // Envolvemos el eval con (function(tableVarId){ ... })(tid) para que los scripts posteriores vean tableVarId.
+  // tid: último id tras onyxFindPartyToolsBySkill / onyxSetToolCanUseVar, o mapeo desde variable 33.
+  if (!Game_Interpreter.prototype.command355._onyxTableVarIdInject) {
+    Game_Interpreter.prototype.command355._onyxTableVarIdInject = true;
+    Game_Interpreter.prototype.command355 = function() {
+      var script = this.currentCommand().parameters[0] + "\n";
+      while (this.nextEventCode() === 655) {
+        this._index++;
+        script += this.currentCommand().parameters[0] + "\n";
+      }
+      var tid = 1000;
+      if (typeof $gameTemp !== "undefined" && $gameTemp && $gameTemp._onyxLastNodeTableVarId != null) {
+        tid = Number($gameTemp._onyxLastNodeTableVarId) || 1000;
+      } else if (window.onyxNodeTableVarIdFromVar33) {
+        tid = window.onyxNodeTableVarIdFromVar33();
+      }
+      (function(tableVarId) {
+        eval(script);
+      })(tid);
+      return true;
+    };
+  }
 })();

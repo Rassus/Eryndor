@@ -1,5 +1,7 @@
 # Changelog
 
+- **7295198** (2026-03-21) [Feat] Se añade inventario y banco
+
 - **e5adf78** (2026-03-18) [Feat] Se agregan el inventario y las habilidades
 
 - **Onyx_SkillsScene** Escena "Habilidades" en menú: lista desde SkillList + detalle (Tala integrada).

@@ -1490,6 +1490,29 @@
   // API para mejorar (slot extras) => incrementar max por tipo
   // ---------------------------------------------------------------------------
   window.OnyxBank = window.OnyxBank || {};
+  window.OnyxBank.addItemStack = function(itemId, amount) {
+    return bankAdd("item", Number(itemId) || 0, amount);
+  };
+  window.OnyxBank.removeItemStack = function(itemId, amount) {
+    return bankRemove("item", Number(itemId) || 0, amount);
+  };
+  window.OnyxBank.getItemAmount = function(itemId) {
+    return bankGetAmount("item", Number(itemId) || 0);
+  };
+  window.OnyxBank.canAddItemStack = function(itemId, amount) {
+    var id = Number(itemId) || 0;
+    var amt = Math.max(0, Math.floor(Number(amount) || 0));
+    if (amt <= 0) return 0;
+    var maxPerType = bankMaxPerType();
+    var current = bankGetAmount("item", id);
+    var capLeft = maxPerType - current;
+    if (capLeft <= 0 && findBankSlotIndex("item", id) < 0 && firstEmptyBankSlotIndex() < 0) return 0;
+    if (capLeft <= 0 && findBankSlotIndex("item", id) < 0) return 0;
+    return Math.min(amt, capLeft > 0 ? capLeft : maxPerType);
+  };
+  window.OnyxBank.hasEmptyItemSlot = function() {
+    return firstEmptyBankSlotIndex() >= 0;
+  };
   window.OnyxBank.increaseMaxBankItems = function(delta) {
     if (!$gameSystem) return;
     delta = Math.floor(Number(delta) || 0);

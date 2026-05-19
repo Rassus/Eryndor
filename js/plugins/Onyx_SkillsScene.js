@@ -359,6 +359,42 @@
 
 
 
+  function buildOnyxSkillExpDetail(row, api, name, minLvl, maxLvl) {
+    if (!api || !api.state) return null;
+    var st = api.state();
+    var total = st.totalExp || 0;
+    var lvl = st.lvl;
+    var cap = st.cap;
+    var nextLv = lvl + 1;
+    var nextTotal = st.nextLevelTotalExp;
+    if (nextTotal == null && lvl < cap) nextTotal = expTotalForLevelFromTable(nextLv);
+    var nextLevelExp = lvl < cap && nextTotal != null ? nextTotal : null;
+    var curStart = st.curLvlTotal != null ? st.curLvlTotal : (lvl > 1 ? expTotalForLevelFromTable(lvl) : 0);
+    if (curStart == null) curStart = 0;
+    var lines = [
+      { label: "Nivel", text: String(lvl) + " / " + String(cap) },
+      { label: "Exp: ", text: String(total) + "/" + String(nextTotal) }
+    ];
+    if (lvl < cap && nextTotal != null) {
+      lines.push({ label: "Siguiente nivel", text: Math.max(0, nextTotal - total) + " EXP" });
+    } else if (lvl >= cap) {
+      lines.push({ label: "Siguiente nivel", text: "— (nivel máximo alcanzado)" });
+    }
+    return {
+      learned: api.isActive ? api.isActive() : true,
+      name: name,
+      lines: lines,
+      minLvl: minLvl,
+      maxLvl: maxLvl,
+      listSubtext: "Nv. " + st.lvl,
+      currentLvl: st.lvl,
+      skillCap: st.cap,
+      playerLvl: st.lvl,
+      totalExp: total,
+      nextLevelExp: nextLevelExp
+    };
+  }
+
   function getSkillDetail(row) {
 
     var id = Number(row.skill_id);
@@ -497,6 +533,238 @@
 
     }
 
+    if (id === 2 && window.Onyx && Onyx.Skill && Onyx.Skill.Mineria && Onyx.Skill.Mineria.state) {
+
+      var stM = Onyx.Skill.Mineria.state();
+
+      var totalM = stM.totalExp || 0;
+
+      var lvlM = stM.lvl;
+
+      var capM = stM.cap;
+
+      var nextLvM = lvlM + 1;
+
+      var nextTotalM = stM.nextLevelTotalExp;
+
+      if (nextTotalM == null && lvlM < capM) nextTotalM = expTotalForLevelFromTable(nextLvM);
+
+      var nextLevelExpM = null;
+      if (lvlM < capM && nextTotalM != null) nextLevelExpM = nextTotalM;
+
+      var curStartM = stM.curLvlTotal != null ? stM.curLvlTotal : (lvlM > 1 ? expTotalForLevelFromTable(lvlM) : 0);
+
+      if (curStartM == null) curStartM = 0;
+
+      var linesM = [
+
+        { label: "Nivel", text: String(lvlM) + " / " + String(capM) },
+
+        { label: "Exp: ", text: String(totalM) + "/" + String(nextTotalM) }
+
+      ];
+
+      if (lvlM < capM && nextTotalM != null) {
+
+        linesM.push({ label: "Siguiente nivel", text: Math.max(0, nextTotalM - totalM) + " EXP" });
+
+        var segM = Math.max(1, nextTotalM - curStartM);
+
+        var inLvlM = stM.expIntoLevel != null ? stM.expIntoLevel : Math.max(0, totalM - curStartM);
+
+        var needM = Math.max(0, nextTotalM - totalM);
+
+        linesM.push({
+
+          label: "Meta para nivel " + nextLvM,
+
+          text: String(nextTotalM) + " EXP acumulados (total requerido)"
+
+        });
+
+        linesM.push({
+
+          label: "Te faltan para subir",
+
+          text: needM + " EXP" + (needM === 0 ? " (requisito cumplido)" : "")
+
+        });
+
+        linesM.push({ label: "Progreso en nivel " + lvlM, text: inLvlM + " / " + segM + " EXP en este tramo" });
+
+      } else if (lvlM < capM) {
+
+        linesM.push({ label: "Siguiente nivel", text: "Sin dato EXP en tabla para nv. " + nextLvM });
+
+      } else {
+
+        linesM.push({ label: "Siguiente nivel", text: "— (nivel máximo alcanzado)" });
+
+        linesM.push({ label: "Estado", text: "Nivel máximo" });
+
+      }
+
+      if (Onyx.Skill.Mineria.getEffectiveBonusValues) {
+
+        var ebM = Onyx.Skill.Mineria.getEffectiveBonusValues();
+
+        linesM.push({ label: "Bonos", text: "Minería" });
+
+        var km;
+
+        for (km in ebM) {
+
+          if (!ebM.hasOwnProperty(km)) continue;
+
+          var rowM = ebM[km];
+
+          linesM.push({ label: rowM.label || km, text: (Math.round(Number(rowM.value) * 100) / 100) + "" });
+
+        }
+
+      }
+
+      return {
+
+        learned: Onyx.Skill.Mineria.isActive ? Onyx.Skill.Mineria.isActive() : true,
+
+        name: name,
+
+        lines: linesM,
+
+        minLvl: minLvl,
+
+        maxLvl: maxLvl,
+
+        listSubtext: "Nv. " + stM.lvl,
+
+        currentLvl: stM.lvl,
+
+        skillCap: stM.cap,
+
+        playerLvl: stM.lvl,
+
+        totalExp: totalM,
+
+        nextLevelExp: nextLevelExpM
+
+      };
+
+    }
+
+    if (id === 3 && window.Onyx && Onyx.Skill && Onyx.Skill.Pesca && Onyx.Skill.Pesca.state) {
+
+      var stP = Onyx.Skill.Pesca.state();
+
+      var totalP = stP.totalExp || 0;
+
+      var lvlP = stP.lvl;
+
+      var capP = stP.cap;
+
+      var nextLvP = lvlP + 1;
+
+      var nextTotalP = stP.nextLevelTotalExp;
+
+      if (nextTotalP == null && lvlP < capP) nextTotalP = expTotalForLevelFromTable(nextLvP);
+
+      var nextLevelExpP = lvlP < capP && nextTotalP != null ? nextTotalP : null;
+
+      var curStartP = stP.curLvlTotal != null ? stP.curLvlTotal : (lvlP > 1 ? expTotalForLevelFromTable(lvlP) : 0);
+
+      if (curStartP == null) curStartP = 0;
+
+      var linesP = [
+
+        { label: "Nivel", text: String(lvlP) + " / " + String(capP) },
+
+        { label: "Exp: ", text: String(totalP) + "/" + String(nextTotalP) }
+
+      ];
+
+      if (lvlP < capP && nextTotalP != null) {
+
+        linesP.push({ label: "Siguiente nivel", text: Math.max(0, nextTotalP - totalP) + " EXP" });
+
+        var segP = Math.max(1, nextTotalP - curStartP);
+
+        var inLvlP = stP.expIntoLevel != null ? stP.expIntoLevel : Math.max(0, totalP - curStartP);
+
+        var needP = Math.max(0, nextTotalP - totalP);
+
+        linesP.push({
+
+          label: "Meta para nivel " + nextLvP,
+
+          text: String(nextTotalP) + " EXP acumulados (total requerido)"
+
+        });
+
+        linesP.push({
+
+          label: "Te faltan para subir",
+
+          text: needP + " EXP" + (needP === 0 ? " (requisito cumplido)" : "")
+
+        });
+
+        linesP.push({ label: "Progreso en nivel " + lvlP, text: inLvlP + " / " + segP + " EXP en este tramo" });
+
+      } else if (lvlP < capP) {
+
+        linesP.push({ label: "Siguiente nivel", text: "Sin dato EXP en tabla para nv. " + nextLvP });
+
+      } else {
+
+        linesP.push({ label: "Siguiente nivel", text: "— (nivel máximo alcanzado)" });
+
+        linesP.push({ label: "Estado", text: "Nivel máximo" });
+
+      }
+
+      return {
+
+        learned: Onyx.Skill.Pesca.isActive ? Onyx.Skill.Pesca.isActive() : true,
+
+        name: name,
+
+        lines: linesP,
+
+        minLvl: minLvl,
+
+        maxLvl: maxLvl,
+
+        listSubtext: "Nv. " + stP.lvl,
+
+        currentLvl: stP.lvl,
+
+        skillCap: stP.cap,
+
+        playerLvl: stP.lvl,
+
+        totalExp: totalP,
+
+        nextLevelExp: nextLevelExpP
+
+      };
+
+    }
+
+    if (id === 6 && window.Onyx && Onyx.Skill && Onyx.Skill.Mele && Onyx.Skill.Mele.state) {
+      var d6 = buildOnyxSkillExpDetail(row, Onyx.Skill.Mele, name, minLvl, maxLvl);
+      if (d6) return d6;
+    }
+
+    if (id === 7 && window.Onyx && Onyx.Skill && Onyx.Skill.Rango && Onyx.Skill.Rango.state) {
+      var d7 = buildOnyxSkillExpDetail(row, Onyx.Skill.Rango, name, minLvl, maxLvl);
+      if (d7) return d7;
+    }
+
+    if (id === 8 && window.Onyx && Onyx.Skill && Onyx.Skill.Magia && Onyx.Skill.Magia.state) {
+      var d8 = buildOnyxSkillExpDetail(row, Onyx.Skill.Magia, name, minLvl, maxLvl);
+      if (d8) return d8;
+    }
+
     if (id === 4 && window.Onyx && Onyx.Skill && Onyx.Skill.Recoleccion && Onyx.Skill.Recoleccion.state) {
 
       var st = Onyx.Skill.Recoleccion.state();
@@ -533,6 +801,33 @@
 
       }
 
+      if (Onyx.Skill.Recoleccion.getEffectiveBonusValues) {
+        lines.push({ label: "Bonos", text: "probabilidades efectivas" });
+        var eb = Onyx.Skill.Recoleccion.getEffectiveBonusValues();
+        var ebOrder = [
+          "gather_extra_plant_chance",
+          "gather_insect_chance",
+          "gather_seed_chance",
+          "gather_spore_chance",
+          "gather_sprout_chance",
+          "gather_thorn_chance"
+        ];
+        var ei;
+        for (ei = 0; ei < ebOrder.length; ei++) {
+          var bkey = ebOrder[ei];
+          var brow = eb[bkey];
+          if (!brow) continue;
+          var pv = Number(brow.value);
+          if (!isFinite(pv)) pv = 0;
+          lines.push({ label: brow.label || bkey, text: (Math.round(pv * 100) / 100) + " %" });
+        }
+        if (Onyx.Skill.Recoleccion.getThornDamagePercentMhp) {
+          var td = Onyx.Skill.Recoleccion.getThornDamagePercentMhp();
+          if (isFinite(td) && td > 0)
+            lines.push({ label: "Daño espina", text: td + " % PV máx (no mata)" });
+        }
+      }
+
       return {
 
         learned: Onyx.Skill.Recoleccion.isActive ? Onyx.Skill.Recoleccion.isActive() : true,
@@ -554,6 +849,68 @@
         playerLvl: st.lvl,
         totalExp: total,
         nextLevelExp: nextLevelExp
+
+      };
+
+    }
+
+    if (id === 5 && window.Onyx && Onyx.Skill && Onyx.Skill.Herreria && Onyx.Skill.Herreria.state) {
+
+      var stH = Onyx.Skill.Herreria.state();
+
+      var totalH = stH.totalExp || 0;
+
+      var lvlH = stH.lvl;
+
+      var capH = stH.cap;
+
+      var nextLvH = lvlH + 1;
+
+      var nextTotalH = stH.nextLevelTotalExp;
+
+      if (nextTotalH == null && lvlH < capH) nextTotalH = expTotalForLevelFromTable(nextLvH);
+
+      var nextLevelExpH = lvlH < capH && nextTotalH != null ? nextTotalH : null;
+
+      var linesH = [
+
+        { label: "Nivel", text: String(lvlH) + " / " + String(capH) },
+
+        { label: "Exp: ", text: String(totalH) + "/" + String(nextTotalH) }
+
+      ];
+
+      if (lvlH < capH && nextTotalH != null) {
+
+        linesH.push({ label: "Siguiente nivel", text: Math.max(0, nextTotalH - totalH) + " EXP" });
+
+      } else if (lvlH >= capH) {
+
+        linesH.push({ label: "Siguiente nivel", text: "— (nivel máximo alcanzado)" });
+
+      }
+
+      return {
+
+        learned: Onyx.Skill.Herreria.isActive ? Onyx.Skill.Herreria.isActive() : true,
+
+        name: name,
+
+        lines: linesH,
+
+        minLvl: minLvl,
+
+        maxLvl: maxLvl,
+
+        listSubtext: "Nv. " + stH.lvl,
+
+        currentLvl: stH.lvl,
+
+        skillCap: stH.cap,
+
+        playerLvl: stH.lvl,
+        totalExp: totalH,
+        nextLevelExp: nextLevelExpH
 
       };
 

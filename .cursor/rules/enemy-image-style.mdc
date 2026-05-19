@@ -1,0 +1,31 @@
+---
+description: Guia de estilo para generar imagenes de enemigos dark fantasy RPG 2D
+alwaysApply: true
+---
+
+# Regla de estilo para enemigos (imagenes)
+
+Cuando pidas generar imagenes de enemigos para este proyecto, usa este estilo base:
+
+- Estilo fantasia RPG 2D tipo sprite ilustrado (no pixel art).
+- Render semirrealista-pictorico con volumen, sombras suaves y detalles de textura/pelaje.
+- Diseno biologicamente plausible para su habitat; priorizar adaptaciones de supervivencia sobre exageracion gratuita.
+- Paleta oscura (grises/negros) con acentos magicos de alto contraste, preferentemente morados.
+- Iluminacion dramatica con brillos puntuales para reforzar profundidad y amenaza.
+- Fondo transparente y recorte limpio, listo para uso en `img/enemies`.
+- Estetica general: dark fantasy, intimidante, legible en combate.
+
+Principio creativo obligatorio:
+
+- La belleza de la simpleza: no todo debe ser demonio, dragon, golem o jefe magico.
+- En cada bioma, priorizar fauna funcional (animal) y reservar criaturas magicas para casos puntuales.
+- Cualquier mutacion debe tener funcion clara de supervivencia en su entorno (frio, calor, altura, humedad).
+- Diseñar para sobrevivir, no solo para "verse de ese bioma".
+
+Checklist rapido antes de entregar:
+
+- La silueta se reconoce a primera vista.
+- Los acentos de color guian la mirada (ojos, cuernos, garras, marcas).
+- El contraste funciona sobre fondos oscuros y claros.
+- La criatura se integra con el estilo visual de `Cerberus.png`.
+- Se entiende como sobrevive: aislamiento termico, locomocion, dieta y refugio.
